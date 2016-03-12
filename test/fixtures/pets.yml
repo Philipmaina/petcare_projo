@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: pets
+#
+#  id                        :integer          not null, primary key
+#  pettype_id                :integer
+#  petowner_id               :integer
+#  pet_name                  :string
+#  years_pet_lived           :integer
+#  months_pet_lived          :integer
+#  gender                    :string
+#  breed                     :string
+#  size_of_pet               :string
+#  default_pet_pic_file_name :string
+#  alternative_pic_file_name :string
+#  care_handle_instructions  :text
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pettype_id: 
+  petowner_id: 
+  pet_name: MyString
+  years_pet_lived: 1
+  months_pet_lived: 1
+  gender: MyString
+  breed: MyString
+  size_of_pet: MyString
+  default_pet_pic_file_name: MyString
+  alternative_pic_file_name: MyString
+  care_handle_instructions: MyText
+
+two:
+  pettype_id: 
+  petowner_id: 
+  pet_name: MyString
+  years_pet_lived: 1
+  months_pet_lived: 1
+  gender: MyString
+  breed: MyString
+  size_of_pet: MyString
+  default_pet_pic_file_name: MyString
+  alternative_pic_file_name: MyString
+  care_handle_instructions: MyText

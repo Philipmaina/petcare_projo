@@ -1,0 +1,28 @@
+<!-- this file defines consistent structure throughout all pages in the web app -->
+<!-- LAYOUT WRAPS ALL OTHER VIEW TEMPLATES IN THE APPLICATION -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Petcare</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<!-- ~~~~~~~~~~~THIS SECTION DEFINES THE LANDING PAGE HEADER AND PROVIDES SITE IDENTITY THROUGH LOGO  and set of navigational links (introductory stuff). this should appear in all pages hence why we place in the layouts file -->
+	
+	<!-- i've placed this in a partial because modifying the code here can make this file grow really long and dirty so we use partials as a way to break down large templates to smaller sizeable ones -->
+		<%= render 'layouts/header' %>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<%= yield %>
+
+	<!-- ~~~~~this is info listed at the bottom of the page and usually contains technical info like copyrights info, basic info about you and your company(About Us link , Contact Us link , Terms of service ....e.t,c) -->
+	<%= render 'layouts/footer' %>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+
+</body>
+</html>

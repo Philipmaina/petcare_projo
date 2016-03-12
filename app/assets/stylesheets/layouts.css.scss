@@ -1,0 +1,12 @@
+header{
+	height: 40px ;
+	border-bottom: 2px solid black;
+}
+
+footer{
+
+	// sass allows nesting of elements within parent elements
+	table#toptable{
+		width: 100% ;
+	}
+}

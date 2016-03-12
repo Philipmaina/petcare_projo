@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: sittingservices
+#
+#  id                  :integer          not null, primary key
+#  service_name        :string
+#  service_description :text
+#  place_offered       :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_name: MyString
+  service_description: MyText
+  place_offered: MyString
+
+two:
+  service_name: MyString
+  service_description: MyText
+  place_offered: MyString

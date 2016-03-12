@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: junctionofservicesandpetsitters
+#
+#  id                :integer          not null, primary key
+#  petsitter_id      :integer
+#  sittingservice_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  petsitter_id: 
+  sittingservice_id: 
+
+two:
+  petsitter_id: 
+  sittingservice_id: 

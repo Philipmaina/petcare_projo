@@ -1,0 +1,29 @@
+
+
+$errors-background-color: #FFC;
+$errors-text-color: #DC3D3D;
+
+
+
+
+// ------------------form errors-------------------------------------------
+// _______1) error of highlighting the fields_____________________________
+// THIS IS IN CASE THERE ARE VALIDATION ERRORS AND ONE IS REDISPLAING THE FORM - IT HELPS HIGHLIGHT THE FIELDS WITH ERRORS BY PUTTING THE ERROR FIELD LABELS A KIND OF RED COLOR AND THE BACKGROUND COLOR OF THE FIELDS THEMSELVES IN A CREAM COLOR
+// REMEMBER RAILS IS ABLE TO AUTOMATICALLY WRAP THE FIELDS THAT HAVE VALIDATION ERRORS WITH A DIV WITH A CLASS OF field_with_errors , SO ALL WE DO IS TAKE ADVANTAGE OF THAT AND ADD SOME STYLING TO THAT DIV
+div.field_with_errors {
+    display: inline;
+    label {
+      color: $errors-text-color;
+    }
+    input, textarea, select {
+      background: $errors-background-color;
+    }
+  }
+
+// ______2)error of displaying error messages at the top of form______
+
+section#topheader_form_errors{
+	
+}
+
+ // ----------------------------------------------------------------------

@@ -1,0 +1,49 @@
+				
+
+<div class="form-group">
+	<%= f.label :first_name , "First Name"  %>
+	<%= f.text_field :first_name , class:"form-control" , autofocus: true %>
+</div>
+
+<div class="form-group">
+	<%= f.label :surname , "Surname"  %>
+	<%= f.text_field :surname , class:"form-control" %>
+</div>
+
+<div class="form-group">
+	<%= f.label :other_names , "Other Names"  %>
+	<%= f.text_field :other_names , class:"form-control" %>
+</div>
+
+<div class="form-group">
+	<%= f.label :contact_line_one , "Contact Number"  %>
+	<%= f.text_field :contact_line_one , class:"form-control" %>
+</div>
+
+<div class="form-group">
+	<%= f.label :personal_email , "Personal email"  %>
+	<%= f.text_field :personal_email , class:"form-control" %>
+</div>
+
+<div class="form-group">
+		<%= f.label :ResidentialArea , "Residential Area"  %>
+		<%= f.select :ResidentialArea_id , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location') , {} , class:"form-control" %>
+
+
+		<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->
+
+		<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper within select helper helps in generating the option tags themselves but generates those option tags from a collection of objects from a certain model say ResidentialArea which is what we want -->
+
+		<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper takes as first argument collection of objects from a model then second argument is the name of the attribute of the object which will give the value of the option tag and the third argument is the name of the attribute of the object which will give the name/text of the option tag to be seen by user -->
+
+		<!-- the fourth parameter of the select tag not the option tags within is what will allow us to use the BOOTSTRAP CLASS for form controls -->
+		
+</div>
+
+
+<p class="text-right">
+	<%= f.button :submit, class:"btn btn-success" do %>
+		Save and Continue <span class="glyphicon glyphicon-chevron-right"></span> 
+	<% end %>
+</p>
+<!-- we write out Next then we borrow an icon from bootstrap which shows right arrow for next  -->
