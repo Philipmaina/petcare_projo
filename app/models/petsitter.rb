@@ -29,6 +29,7 @@ class Petsitter < ActiveRecord::Base
 
   # ----------------attributes created----------------------
   attr_accessor :registration_step
+  
 
 
   # ---------------R/SHIPS-----------------
