@@ -40,7 +40,11 @@ gem 'bcrypt', '~> 3.1.7'
   gem 'image_magick'
   gem 'mini_magick'
 
+  # For printing organized output in rails console
   gem "awesome_print", require:"ap"
+
+  # For using slider for range fields like price in charges sections 
+  gem 'bootstrap-slider-rails'
 
 
 group :development, :test do

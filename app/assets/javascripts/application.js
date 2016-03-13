@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui.min.js
+//= require jquery-ui.multidatespicker.js
+//= require prettify.js
 //= require turbolinks
 //= require_tree .
 //= require bootstrap.min
+//= require bootstrap-slider

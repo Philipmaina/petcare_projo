@@ -13,8 +13,19 @@
  *= require_tree .
  *= require_self
  *= require bootstrap.min
+ *= require bootstrap-slider
  *= require customized_bootstrap_things.scss
+ *= require jquery-ui.min.css
+ *= require jquery-ui.structure.min.css
+ *= require prettify.css
+ *= require pepper-ginder-custom.css
+ *= require jquery-ui.theme.min.css
  */
+ 
+ #ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
 
 /*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
 @font-face {

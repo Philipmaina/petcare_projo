@@ -60,21 +60,60 @@ class PetsittersController < ApplicationController
 
 	end
 
-	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	# ~~~~~~~~~~~~~~~~SECOND STEP OF MULTISTEP FORM~~~~~~~~~~~~~~~
+
+	# -----STEP 1 OF MULTISTEP FORM BUT WHEN EDITING A PET SITTER'S BASIC DETAILS--------------------------------------------------- 
+	# BELOW IS A WAY TO EDIT DETAILS OF THE FIRST STEP(TO ALLOW BACK BUTTON FROM SECOND STEP BACK TO HERE and ALSO LATER IF PETSITTER WANTS TO EDIT DETAILS IN THAT FIRST FORM like surname , or contact_line_one)
+	def edit_basic_predetails
+		@petsitter = Petsitter.find( params[:id] )
+
+		# instance variable is killed off so we have to recreate it
+		@all_residential_areas_in_nairobi = ResidentialArea.all
+
+		render 'edit_basic_predetails'	
+	end
+
+	def update_basic_predetails
+
+		@petsitter = Petsitter.find( params[:id] )
+
+		@petsitter.registration_step = "basic_predetails"
+
+		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id ) #prevents mass assignment
+
+		if @petsitter.update( petsitter_first_step_params )
+
+			redirect_to edit_petsitter_personal_details_path(@petsitter.id)
+		else
+
+			# instance variable is killed off so we have to recreate it
+			@all_residential_areas_in_nairobi = ResidentialArea.all
+
+			render 'edit_basic_predetails'
+
+		end
+
+	end
+	# -----------------------------------------------------------------
+
+
+
+
+
+
+	# ~~~~~~~~~~~~~~~~SECOND STEP OF MULTISTEP FORM~~~~~~~~~~~~~~~~~~~~~
 
 	def edit_petsitter_personal_details
 		@petsitter = Petsitter.find( params[:id] )
 		# then renders view with next step(2nd) form
-
 	end
 
 	def update_petsitter_personal_details
 
 		@petsitter = Petsitter.find( params[:id] )
 
-		registration_step = "personal_details"
+		@petsitter.registration_step = "personal_details"
 
 		petsitter_second_step_params = params.require(:petsitter).permit( :date_of_birth , :contact_line_two , :listing_name , :profile_description , :default_pic_file_name )
 
@@ -118,21 +157,21 @@ class PetsittersController < ApplicationController
 	end
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	# ~~~~~~~~~~~~~~~~FOURTH STEP OF MULTISTEP FORM~~~~~~~~~~~~~~~~~~~~
+	# ~~~~~~~~~~~~~~~~FOURTH STEP OF MULTISTEP FORM~~~~~~~~~~~~~~~~~~~~~~
+
 	def edit_petsitter_home_details
 		@petsitter = Petsitter.find( params[:id] )
 		@all_types_of_homes = Petsitter.all_types_of_homes_to_live_in
 	end
 
 	def update_petsitter_home_details
-		fail
 
 		@petsitter = Petsitter.find( params[:id] )
 
 		petsitter_fourth_step_params = params.require(:petsitter).permit( :type_of_home , :presence_of_open_area_outside_home )
 
 		if @petsitter.update( petsitter_fourth_step_params )
-			redirect_to root
+			redirect_to edit_petsitter_charges_plus_calendar_path(@petsitter.id)
 		else
 
 			# instance variables get killed off after an action runs so after edit_petsitter_home_details action we need to again declare this variable otherwise it will give an error of nil:Nil class when there are validation errors
@@ -146,5 +185,20 @@ class PetsittersController < ApplicationController
 
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	# ~~~~~~~~~~~~~~~~~~~~FIFTH STEP OF MULTISTEP FORM~~~~~~~~~~~~~~~~~~
+
+	def edit_petsitter_charges_plus_calendar
+		
+		@petsitter = Petsitter.find( params[:id] )
+
+	end
+
+	def update_petsitter_charges_plus_calendar
+		
+	end
+
+
+	# ------other private methods that can't be routed to directly----
+	private
 
 end

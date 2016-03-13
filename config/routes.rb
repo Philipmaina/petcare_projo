@@ -17,20 +17,31 @@ Rails.application.routes.draw do
   # --------------------------------------------------------------------------------
 
 
-  # ---------2) routes for multistep form of PETSITTERS ----------------------------
+  # ---------2) routes for multistep form of PETSITTERS -----------------
+
+  # _______2a)step 1 routes for creating new petsitter_______________
   get "/petsitters/new/basic_predetails" => "petsitters#new_basic_predetails" , as: "new_petsitter_basic_predetails"
   post "/petsitters/new/basic_predetails" => "petsitters#create_basic_predetails"
 
+  # _______2a i)step 1 routes for editing and updating the basic info(not entirely new creation)
+  get "/petsitters/:id/edit_basic_predetails" => "petsitters#edit_basic_predetails" , as: "edit_basic_predetails"
+  patch "/petsitters/:id/basic_predetails" => "petsitters#update_basic_predetails"
 
+  # ______2b)step 2 routes ___________________________________________
   get "/petsitters/:id/personal_details" => "petsitters#edit_petsitter_personal_details" , as: "edit_petsitter_personal_details"
   patch "/petsitters/:id/personal_details" => "petsitters#update_petsitter_personal_details"
 
+  # ______2c)step 3 routes_____________________________________________
   get "/petsitters/:id/experience_and_skills_details" => "petsitters#edit_petsitter_experience_and_skills_details" , as: "edit_experience_and_skills_details"
   patch "/petsitters/:id/experience_and_skills_details" => "petsitters#update_petsitter_experience_and_skills_details"
 
-
+  # ______2d)step 4 routes_____________________________________________
   get "/petsitters/:id/home_details" => "petsitters#edit_petsitter_home_details" , as: "edit_petsitter_home_details"
   patch "/petsitters/:id/home_details" => "petsitters#update_petsitter_home_details"
+
+  # ______2e)step 5 routes_____________________________________________
+  get "/petsitters/:id/charges_plus_calendar" => "petsitters#edit_petsitter_charges_plus_calendar" , as: "edit_petsitter_charges_plus_calendar"
+  patch "/petsitters/:id/charges_plus_calendar" => "petsitters#update_petsitter_charges_plus_calendar" 
 
 
 
