@@ -194,6 +194,36 @@ class PetsittersController < ApplicationController
 	end
 
 	def update_petsitter_charges_plus_calendar
+
+		@petsitter = Petsitter.find( params[:id] )
+
+
+		# Any Url parameters are automatically captured in a hash called params
+		# If you check parameters by using fail trick one sees a key value pair of the name of the text field and the values chosen on the calendar which are the dates 
+		# "unavailabledates"=>"2016-03-18,2016-03-19,2016-03-23,2016-03-24"
+		# so we access the value which is a string with comma seperating the dates using the key(name of textfield)
+		all_unavailable_dates_chosen = params[:unavailabledates] 
+
+
+		# .split() divides strings into substrings based on a delimiter , returning that array
+		all_unavailable_dates_chosen = all_unavailable_dates_chosen.split(',')
+
+		for i in 0..( all_unavailable_dates_chosen.size - 1) do
+
+			# this converts each substring to a date
+			b = all_unavailable_dates_chosen[i].to_date
+
+			# creating unavailabledates(child) record from parent object which is @petsitter(same as creating registration from event side)
+			date_record_to_be_stored = @petsitter.unavailabledates.new( unavailable_dates_on: b )
+
+			date_record_to_be_stored.save
+
+		end
+
+		value = params[:night_charges]
+		@petsitter.update( night_charges: value )
+
+		render 'trying'
 		
 	end
 

@@ -19,7 +19,7 @@
 	<div class="row">
 		<h5 class="text-center"> 
 
-			<strong> Step 6 </strong>
+			<strong> Step 5 </strong>
 			<br/>
 			Calendar and charges 
 
@@ -48,7 +48,7 @@
 				<div class="form-group">
 
 					<label class="form-label"> Unavailable Days: </label>
-					<input tyoe="text" id="datespicked" class="form-control" placeholder="Click dates on the calendar to mark or unmark the days you might be unavailable" autofocus />
+					<input type="text" name="unavailabledates" id="datespicked" class="form-control" placeholder="Click dates on the calendar to mark or unmark the days you might be unavailable" name="unavailabledates" autofocus />
 
 				</div>
 
@@ -60,6 +60,30 @@
 					<input id="ex1" name="night_charges" data-slider-id='ex1Slider' type="number" data-slider-min="150" data-slider-max="1000" data-slider-step="1" data-slider-value="14"/>
 
 				</div>
+
+
+				<!-- 1) firstly within this middle column, i create a row that spans the width of this column and in this row i create again 3 columns with same ratio 3:6:3 this is called nesting of columns within columns (a row even if it is nested within a column can have a maximum of 2 columns.) -->
+				<!-- again we use spans because there are in line elements which means they don't have to start on new line of parent element but they can start anywhere and that is how we can have both Back and Continue buttons on same line -->
+
+				<div class="row">
+
+					<div class="col-md-6 col-sm-offset-3">
+						<span style="float:right;">
+							<%= f.button :submit, class:"btn btn-success" do %>
+								Save and Continue <span class="glyphicon glyphicon-chevron-right"></span> 
+							<% end %>
+						</span>
+						<!-- we write out Next then &ensp; is a character that yields a wide space in html - it is a HTML special symbol, then we use greater than symbol(>) to show next  -->
+
+						<span style="float:left;">
+							<%= link_to  edit_petsitter_home_details_path(@petsitter.id) ,  :method => :get ,class:"btn btn-success" do  %> 
+								<span class="glyphicon glyphicon-chevron-left">Back</span> 
+							<% end %>
+						</span> 
+
+					</div>
+				</div>
+
 
 			<% end %>
 
@@ -92,7 +116,8 @@
 		// As with the jQuery Datespicker, you can define a minimum and maximum date from where to pick dates from.
 		// The values are relative to the current date.
 		// so minimum value to pick dates from is current valie of today therefore the value is 0 from today
-		minDate: 0 
+		minDate: 0 ,
+		dateFormat: "yy-mm-dd" //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
 	});
 
 
