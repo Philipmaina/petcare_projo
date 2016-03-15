@@ -1,0 +1,18 @@
+
+// This is a sass file which allows us to use variables and functions
+// when sass file are preprocessed they are converted to css so like if we declare color variables in the sass file, the css file that results fills the variable names with actual color values
+
+$primary-color: #3b8898 ;
+
+button.btn{
+
+	.btn-default.navbar-btn{
+
+		.border-highlight{
+
+			border: 1px solid $primary-color  ;
+			color: $primary-color ;
+
+		}
+	}
+}

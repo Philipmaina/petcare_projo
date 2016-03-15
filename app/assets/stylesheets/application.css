@@ -11,17 +11,24 @@
  * file per style scope.
  *
  *= require_tree .
- *= require_self
  *= require bootstrap.min
  *= require bootstrap-slider
  *= require customized_bootstrap_things.scss
+ *= require_self
  *= require jquery-ui.min.css
  *= require jquery-ui.structure.min.css
  *= require prettify.css
  *= require pepper-ginder-custom.css
  *= require jquery-ui.theme.min.css
  */
+
+ button.btn.btn-default.navbar-btn.border-highlight{
+
+			border: 1px solid #3b8898 !important ;
+			color: #3b8898 ;
+}
  
+ /*slider for jquery ui(used in price petsitter charges form) - changed the color to blue*/
  #ex1Slider .slider-selection {
 	background: #BABABA;
 }

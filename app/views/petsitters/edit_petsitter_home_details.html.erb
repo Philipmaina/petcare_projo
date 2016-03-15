@@ -35,52 +35,59 @@
 
 		<!-- main column with our form -->
 		<div class="col-md-6">
-			<!-- form_for rails helper requires an object to bind to, therefore we give it the empty object @petowner THEN which is of more importance, if we don't specify a url where the form data will be sent, Rails will see whether the record is new or being updated and come up with its own url. Therefore in this case we try and avoid this by specifying -->
-			<%= form_for( @petsitter , :url => { controller: 'petsitters' , action: 'update_petsitter_home_details' } , html: { method: "patch"} ) do |f| %>
 
-				<div class="form-group">
-					<%= f.label :type_of_home , "Type of home"  %>
-					<%= f.select :type_of_home , @all_types_of_homes , {}, class:"form-control"  %>
+
+			<div class="panel panel-default">
+  				<div class="panel-body">
+					<!-- form_for rails helper requires an object to bind to, therefore we give it the empty object @petowner THEN which is of more importance, if we don't specify a url where the form data will be sent, Rails will see whether the record is new or being updated and come up with its own url. Therefore in this case we try and avoid this by specifying -->
+					<%= form_for( @petsitter , :url => { controller: 'petsitters' , action: 'update_petsitter_home_details' } , html: { method: "patch"} ) do |f| %>
+
+						<div class="form-group">
+							<%= f.label :type_of_home , "Type of home"  %>
+							<%= f.select :type_of_home , @all_types_of_homes , {}, class:"form-control"  %>
+						</div>
+
+						<div class="form-group">
+							<%= f.label :presence_of_open_area_outside_home , "Presence of open area outside home"  %>
+
+							</br>
+
+							<div class="btn-group" data-toggle="buttons"  >
+								<label class = "btn btn-primary active" style="width: 250px; " >
+									<%= f.radio_button :presence_of_open_area_outside_home , true   %> Yes
+								</label>
+
+								<label class = "btn btn-primary" style="width: 250px;  ">
+									<%= f.radio_button :presence_of_open_area_outside_home , false   %> No
+								</label>
+							</div>
+						</div>
+
+						<!-- 1) firstly within this middle column, i create a row that spans the width of this column and in this row i create again 3 columns with same ratio 3:6:3 this is called nesting of columns within columns (a row even if it is nested within a column can have a maximum of 2 columns.) -->
+						<!-- again we use spans because there are in line elements which means they don't have to start on new line of parent element but they can start anywhere and that is how we can have both Back and Continue buttons on same line -->
+
+						<div class="row">
+
+							<div class="col-md-6 col-sm-offset-3">
+								<span style="float:right;">
+									<%= f.button :submit, class:"btn btn-success" do %>
+										Save and Continue <span class="glyphicon glyphicon-hand-right"></span> 
+									<% end %>
+								</span>
+								<!-- we write out Next then &ensp; is a character that yields a wide space in html - it is a HTML special symbol, then we use greater than symbol(>) to show next  -->
+
+								<span style="float:left;">
+									<%= link_to  edit_experience_and_skills_details_path(@petsitter.id) ,  :method => :get ,class:"btn btn-success" do  %> 
+										<span class="glyphicon glyphicon-hand-left"></span> Back
+									<% end %>
+								</span> 
+
+							</div>
+						</div>
+					<% end %>
+
 				</div>
-
-				<div class="form-group">
-					<%= f.label :presence_of_open_area_outside_home , "Presence of open area outside home"  %>
-
-					</br>
-
-					<div class="btn-group" data-toggle="buttons"  >
-						<label class = "btn btn-primary active" style="width: 278px; " >
-							<%= f.radio_button :presence_of_open_area_outside_home , true   %> Yes
-						</label>
-
-						<label class = "btn btn-primary" style="width: 278px;  ">
-							<%= f.radio_button :presence_of_open_area_outside_home , false   %> No
-						</label>
-					</div>
-				</div>
-
-				<!-- 1) firstly within this middle column, i create a row that spans the width of this column and in this row i create again 3 columns with same ratio 3:6:3 this is called nesting of columns within columns (a row even if it is nested within a column can have a maximum of 2 columns.) -->
-				<!-- again we use spans because there are in line elements which means they don't have to start on new line of parent element but they can start anywhere and that is how we can have both Back and Continue buttons on same line -->
-
-				<div class="row">
-
-					<div class="col-md-6 col-sm-offset-3">
-						<span style="float:right;">
-							<%= f.button :submit, class:"btn btn-success" do %>
-								Save and Continue <span class="glyphicon glyphicon-chevron-right"></span> 
-							<% end %>
-						</span>
-						<!-- we write out Next then &ensp; is a character that yields a wide space in html - it is a HTML special symbol, then we use greater than symbol(>) to show next  -->
-
-						<span style="float:left;">
-							<%= link_to  edit_experience_and_skills_details_path(@petsitter.id) ,  :method => :get ,class:"btn btn-success" do  %> 
-								<span class="glyphicon glyphicon-chevron-left">Back</span> 
-							<% end %>
-						</span> 
-
-					</div>
-				</div>
-			<% end %>
+			</div>
 
 		</div>
 

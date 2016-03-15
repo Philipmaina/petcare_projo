@@ -1,0 +1,49 @@
+
+<!-- all bootstrap elements should exist under/inside a class container -->
+
+<div class="container">
+	<!-- create first empty row in our grid/graph system of bootstrap -->
+	<div class="row" style="height:50px;">
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-2">
+			<!-- first column -->
+		</div>
+
+		<div class="col-md-8 ">
+
+			<h3 class="text-center">
+				Sign Up
+			</h3>
+
+			<p class="text-center">
+				Choose the account you want to create
+				
+				<br/>
+				<br/>
+
+				<%= link_to  new_petowner_basic_predetails_path,  :method => :get ,class:"btn btn-primary" do  %> 
+						I am a pet owner looking for pet sitters 
+				<% end %>
+
+				<br/>
+				<br/>
+
+				~~~~~~~~~~~~~~~~~~Or~~~~~~~~~~~~~~~~~~ 
+
+				<br/>
+				<br/>
+
+				<%= link_to  new_petsitter_basic_predetails_path ,  :method => :get ,class:"btn btn-primary" do  %> 
+						I want to be a pet sitter and offer my services 
+				<% end %>
+
+			</p>
+		</div>
+
+	</div>
+
+</div>

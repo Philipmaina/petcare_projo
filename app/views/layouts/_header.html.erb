@@ -1,28 +1,60 @@
+
+<div class="container">
+
+	<div class="row">
+
+		<header>
+			<div class="col-md-4">
+				<h1 style="float:left;" > PetCare </h1>
+			</div>
+
+			<div class="col-md-8">
+
+				<table style="float:right;">
+					
+					<tr>
+						<!-- login button -->
+						<td>
+							<button type="button" class="btn btn-default navbar-btn border-highlight">Sign in</button>
+						</td>
+						<!-- ~~~~~~~~~~~~~ -->
+
+						<!-- this column allows spacing between the two buttons(sign up and sign in) -->
+						<td style="width:20px;">
+
+						</td>
+
+
+						<!-- sign up button -->
+						<td>
+							<%= link_to  page_for_choosing_type_of_registration_path ,  :method => :get  do  %> 
+								<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Up</button>
+							<% end %>
+						</td>
+						<!-- ~~~~~~~~~~~~~~~ -->
+
+						<!-- help link -->
+						<td>
+
+						</td>
+						<!-- ~~~~~~~~~~ -->
+					</tr>
+
+				</table>
+
+			</div>
+
+		</header>
+
+
+	</div>
 	
 
-<header>
-	<h1> PetCare </h1>
-	<table>
-		
-		<tr>
-			<!-- login button -->
-			<td>
+</div>
+			
 
-			</td>
-			<!-- ~~~~~~~~~~~~~ -->
 
-			<!-- sign up button -->
-			<td>
+	
 
-			</td>
-			<!-- ~~~~~~~~~~~~~~~ -->
 
-			<!-- help link -->
-			<td>
 
-			</td>
-			<!-- ~~~~~~~~~~ -->
-		</tr>
-
-	</table>
-</header>

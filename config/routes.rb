@@ -2,9 +2,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'petowners#index' #this is the default home page(landing page)
+  root 'application#index' #this is the default home page(landing page)
 
-   # -----------------------ADDITIONAL ROUTES---------------------------------
+   # -----------------------ADDITIONAL ROUTES----------------------------
+
+   # ----------------route when sign up button is clicked---------------
+   get "/petcare/register-as-who-now" => "application#page_for_choosing_type_of_registration" , as: "page_for_choosing_type_of_registration"
 
   # -----------1) routes for multistep form of PETOWNERS ---------------------------
   get "/petowners/new/basic_predetails" => "petowners#new_basic_predetails" , as: "new_petowner_basic_predetails"
