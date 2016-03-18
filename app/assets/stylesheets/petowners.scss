@@ -1,3 +1,19 @@
 // Place all the styles related to the petowners controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// --------------THIS IS IN THE ADDPETS PAGE----------------------------
+div#add_pet{
+	display: none ; //this is what is going to hide that form of adding pets for us when we load the page. 
+}
+
+
+// this is the button when clicked that i want the form to slide dowm
+// also i am adding the visiblle property that specifies whether or not an element is visible because it is obvious that by default it is visible but i want to be able to toggle this class - in that when button is clicked and form slides down i should no longer see the button - so first timw in the class will be added. then next time removed.
+.visibleness{ 
+
+	visibility: hidden ;
+
+}
+
+

@@ -75,16 +75,22 @@ class PetownersController < ApplicationController
 		petowner_second_step_params = params.require(:petowner).permit( :date_of_birth  , :contact_line_two , :profile_pic_file_name )
 
 		if @petowner.update( petowner_second_step_params )	
-
+			redirect_to petowner_add_pets_path
 		else
 			render 'edit_petowner_personal_details'
 		end
 
 	end
-	# --------------------------------------------------------------------
+	# -------------------------------------------------------------------
+	
 
-	# -----------------------STEP 3 --------------------------------------
-	# ----------3a)ACTUALLY ADDING PETS OF THE PETOWNER--------------------
+	# -----------------------STEP 3 -------------------------------------
+	# ----------3a)ACTUALLY ADDING PETS OF THE PETOWNER------------------
+	
+	def addpets
+		@all_pets_in_system = Pettype.all
+		
+	end
 
 
 	# ---------------------OTHER METHODS-----------------------------------

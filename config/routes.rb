@@ -10,14 +10,21 @@ Rails.application.routes.draw do
    get "/petcare/register-as-who-now" => "application#page_for_choosing_type_of_registration" , as: "page_for_choosing_type_of_registration"
 
   # -----------1) routes for multistep form of PETOWNERS ---------------------------
+
+# ____________1a) step 1 for basic creation of petowner_______________
   get "/petowners/new/basic_predetails" => "petowners#new_basic_predetails" , as: "new_petowner_basic_predetails"
   post "/petowners/new/basic_predetails" => "petowners#create_basic_predetails"
 
-
+# ___________1b) step 2 for personal details_________________________
   get "/petowners/:id/personal_details" => "petowners#edit_petowner_personal_details" , as: "edit_petowner_personal_details"
   patch "/petowners/:id/personal_details" => "petowners#update_petowner_personal_details"
 
-  # --------------------------------------------------------------------------------
+# _______________1c) step 3 for adding pets_________________________
+
+get "/petowner/:id/pets/new" => "petowners#addpets" , as: "petowner_add_pets"
+
+
+  # --------------------------------------------------------------------
 
 
   # ---------2) routes for multistep form of PETSITTERS -----------------
