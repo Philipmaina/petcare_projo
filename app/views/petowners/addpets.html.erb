@@ -62,7 +62,7 @@
 					<form class="add-pets-form">
 						<div class="form-group">
 							<label class="form-label">Name:</label>
-							<input type="text" name="name" class="form-control"/>
+							<input type="text" name="name" class="form-control" autofocus />
 						</div>
 
 						<div class="form-group">
@@ -120,72 +120,3 @@
 						
 </div>
 
-<script type="text/javascript">
-
-	pets = []; //this is an array in js can be array of anything  it is a global variable. in our case it will be an array of objects
-
-
-	// ~~~~~~WE LISTEN FOR INTERACTION OF CLICKING ADD PET BUTTON~~~~
-
-	$("#add_pet_button").click(function(){
-
-
-		$(this).toggleClass("visibleness"); // toggleClass adds or removes classes from the element matched in the DOM in this case the add_pet_button for lowering the form. So the first time in , the visibleness class is added which makes the button invisible.
-		// this is the object that caused the currently executing event handler to run.
-
-		$("#add_pet").slideDown("slow"); //when page is loaded this section is hidden - so now we want it to show to allow petowner to add pets they own.
-	});
-
-	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-	// ~~~~~WE LISTEN FOR INTERACTION OF CLICKING CANCEL BUTTON~~~~~
-	$("#close_form_btn").click(function(){
-
-		$("#add_pet").slideUp("slow") ; //THIS HIDES THE FORM 
-
-		$("#add_pet_button").toggleClass("visibleness"); //AND BECAUSE FORM IS HIDDEN WE CAN NOW SHOW ADD PETSBUTTON TO ALLOW USER TO RECLICK FOR FORM TO REDISPLAY IF THEY WANT.
-
-	});
-	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-	// ___________BASIC SKELETON FOR ADDIN PETS TO TABLE_____________
-	// ~~~~~~~~~~~~~WE LISTEN FOR FORM SUBMISSION~~~~~~~~~~~~~~~~~~~~
-	$(".add-pets-form").submit( function(event) { //remember it is the form submitted not the button, so we select the form
-
-		// usually when we submit a form the form data is submitted to server - this is a default behaviour. this is what happens when submit event is triggered. So we have to find a way to stop this default action. 
-		// so we stop and intercept that normal action and perform our own custom stuff(we want our own code to be executed)
-		event.preventDefault() ;
-
-		// SO WE WANT TO GET THAT FORM DATA AND CREATE A ROW IN OUR TABLE
-
-		var pet = {}; //empty object in js - remember this pet variable can only be accessed in this function that is attached to submit event
-
-		// we can target the form elements in our form and get actual text or value from them using .val()
-		pet.name = $("#add_pet input[name=name]").val();
-		pet.type = $("#add_pet select[name=type]").val();
-		pet.years = $("#add_pet input[name=years]").val();
-		pet.gender = $("#add_pet select[name=gender]").val();
-		
-
-		pets.push(pet); //the .push method adds new item to end of array
-
-		// ------------dom manipulation , dom insertion inside---------
-		$("#pets").append("<tr class='warning'>" + "<td>" + pet.name + "</td>" + "<td>" + pet.type + "</td>" + "<td>" + pet.years + "</td>" + "<td>" + pet.gender + "</td>" + "<td class=' text-center '><a class='btn btn-xs remove-row'>x</a></td>" + "</tr>") ;
-
-		//--------------erasing out values in fields---------------------
-
-		// -----earlier in the normal action of submission the data in the fields was getting erased for us but sice we stop normal action now the values remain there even after submission so we need to chuck them.
-		$("#add_pet input[name=name]").val(""); //we reset the values to nothing
-		$("#add_pet input[name=years]").val("");
-
-	}) ;
-
-
-	// ---------WHAT HAPPENS WHEN THAT SMALL X BUTTON IS CLICKED---------
-	// we want to be able to remove that pet from the table(easy) and from our pets array.
-
-</script>
