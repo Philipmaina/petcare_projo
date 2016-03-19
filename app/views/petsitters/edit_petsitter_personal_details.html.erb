@@ -1,3 +1,14 @@
+<head>
+	<style type="text/css">
+
+		.ui-datepicker .ui-widget-content {
+		    background: red;
+		}
+
+
+	</style>
+
+</head>
 
 <!-- all bootstrap elements should exist under/inside a class container -->
 
@@ -36,10 +47,14 @@
 		<!-- main column with our form -->
 		<div class="col-md-6">
 
-			<div class="panel panel-default">
-  				<div class="panel-body">
-					<!-- form_for rails helper requires an object to bind to, therefore we give it the empty object @petowner THEN which is of more importance, if we don't specify a url where the form data will be sent, Rails will see whether the record is new or being updated and come up with its own url. Therefore in this case we try and avoid this by specifying -->
-					<%= form_for( @petsitter , :url => { controller: 'petsitters' , action: 'update_petsitter_personal_details' } , html: { method: "patch"} ) do |f| %>
+			<!-- form_for rails helper requires an object to bind to, therefore we give it the empty object @petowner THEN which is of more importance, if we don't specify a url where the form data will be sent, Rails will see whether the record is new or being updated and come up with its own url. Therefore in this case we try and avoid this by specifying -->
+			<%= form_for( @petsitter , :url => { controller: 'petsitters' , action: 'update_petsitter_personal_details' } , html: { method: "patch"} ) do |f| %>
+
+				<!-- we dont want in our form_errors partial to put a specific object like @petowner or @petsitter. instead we want to put a variable and that variable gets filled in with whatever is sent. so in our case we put user variable in actual partial then for this page of petownersnew1ststepform we pass @petowner to replace every occurrence of user or the @petowner gets placed in user variable -->
+				<%= render partial: '/all_other_partials/form_errors' , :locals => { user: @petsitter } %>
+
+				<div class="panel panel-default border_style">
+					<div class="panel-body">
 
 						<div class="form-group">
 							<%= f.label :date_of_birth , "Date of birth"  %>
@@ -84,14 +99,16 @@
 										<span class="glyphicon glyphicon-hand-left"></span> Back 
 									<% end %>
 								</span> 
-
 							</div>
-						</div>
-						
-					<% end %>
 
+						</div>
+
+					</div>
 				</div>
-			</div>
+				
+			<% end %>
+
+				
 
 		</div>
 
@@ -106,8 +123,10 @@
 
 <script type="text/javascript">
 	$( "#datepicker" ).datepicker({
-      changeYear: true,
-      showButtonPanel: true
-    });
 
-</script>
+      changeYear: true,
+      showButtonPanel: true ,
+      yearRange: "-70:+0" // last hundred years
+
+    });
+ </script>

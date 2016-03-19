@@ -37,7 +37,7 @@ class PetsittersController < ApplicationController
 
 	def create_basic_predetails
 	
-		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id ) #prevents mass assignment
+		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation ) #prevents mass assignment
 
 		@petsitter = Petsitter.new( petsitter_first_step_params )
 
@@ -80,7 +80,7 @@ class PetsittersController < ApplicationController
 
 		@petsitter.registration_step = "basic_predetails"
 
-		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id ) #prevents mass assignment
+		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation ) #prevents mass assignment
 
 		if @petsitter.update( petsitter_first_step_params )
 
@@ -223,7 +223,11 @@ class PetsittersController < ApplicationController
 		value = params[:night_charges]
 		@petsitter.update( night_charges: value )
 
-		render 'trying'
+		redirect_to pet_sitter_dashboard_path(@petsitter.id)
+		
+	end
+
+	def dashboard
 		
 	end
 

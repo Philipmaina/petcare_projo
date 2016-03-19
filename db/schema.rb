@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309002708) do
+ActiveRecord::Schema.define(version: 20160319165149) do
 
   create_table "junctionofpetsitterandpettypes", force: :cascade do |t|
     t.integer  "pettype_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160309002708) do
     t.integer  "ResidentialArea_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "password_digest"
   end
 
   add_index "petowners", ["ResidentialArea_id"], name: "index_petowners_on_ResidentialArea_id"
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160309002708) do
     t.text     "profile_description"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "password_digest"
   end
 
   add_index "petsitters", ["ResidentialArea_id"], name: "index_petsitters_on_ResidentialArea_id"

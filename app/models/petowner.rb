@@ -17,11 +17,24 @@
 #
 
 class Petowner < ActiveRecord::Base
+
   # -------------ADDED ATTRIBUTES WHICH AREN'T IN DB TABLE------------
 
   attr_accessor :registration_step # we create a new attribute 
   # remember we dont have to create and declare attributes for the fields in our table because rails does it for us behind the scenes
 
+
+  # ----RAILS GIVES METHODS AND VALIDATIONS FOR STORING PASSWORDS---
+
+  has_secure_password
+  
+  # this line above uses the bcrypt ruby gem to do encryption of passwords for us. So usually it is commented out so we uncomment it 
+  # adds validations like presence and uniqueness so we don't have to explicitely add them
+  # this line also adds a pair of virtual attributes(password and password_confirmation)
+  # -----------------------------------------------------------------
+
+
+  
   # -----------R/SHIPS----------
 
   belongs_to :ResidentialArea

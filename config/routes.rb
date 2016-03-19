@@ -59,7 +59,9 @@ get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboar
 
   # ______2e)step 5 routes_____________________________________________
   get "/petsitters/:id/charges_plus_calendar" => "petsitters#edit_petsitter_charges_plus_calendar" , as: "edit_petsitter_charges_plus_calendar"
-  patch "/petsitters/:id/charges_plus_calendar" => "petsitters#update_petsitter_charges_plus_calendar" 
+  patch "/petsitters/:id/charges_plus_calendar" => "petsitters#update_petsitter_charges_plus_calendar"
+
+  get "/petsitter/:id/dashboard" => "petsitters#dashboard" , as: "pet_sitter_dashboard" 
 
 
 

@@ -40,6 +40,17 @@
 		
 </div>
 
+<div class="form-group">
+	<!-- there is a helper called password_field which masks input of user by putiing bullet marks -->
+	<%= f.label :password , "Password"  %>
+	<%= f.password_field :password , class:"form-control" %>
+</div>
+
+<div class="form-group">
+	<%= f.label :password_confirmation , "Confirm password"  %>
+	<%= f.password_field :password_confirmation , class:"form-control" %>
+</div>
+
 
 <p class="text-right">
 	<%= f.button :submit, class:"btn btn-success" do %>

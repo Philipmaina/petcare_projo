@@ -33,6 +33,22 @@
 	background: #BABABA;
 }
 
+/*THIS CSS MAKES BORDERS OF ALL PANELS THAT SURROUND FORMS TO BE VISIBLE - BY MAKING THEM THICKER */
+.border_style{
+	border: 2px solid black ;
+}
+/*-------------------------------------------------------------------*/
+
+
+/* this makes the years dropdown list in jquery ui datepicker to have text(which are the years) to be blue - bcoz originally you can't see the years*/
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+      color: #0078ae;
+      font-family: ...;
+      font-size: 16px;
+      font-weight: bold;
+}
+/*-------------------------------------------------------------------*/
+
 
 /*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
 @font-face {

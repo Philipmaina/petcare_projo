@@ -29,6 +29,17 @@ class Petsitter < ActiveRecord::Base
 
   # ----------------attributes created----------------------
   attr_accessor :registration_step
+
+
+
+  # ----RAILS GIVES METHODS AND VALIDATIONS FOR STORING PASSWORDS---
+
+  has_secure_password
+  
+  # this line above uses the bcrypt ruby gem to do encryption of passwords for us. So usually it is commented out so we uncomment it 
+  # adds validations like presence and uniqueness so we don't have to explicitely add them
+  # this line also adds a pair of virtual attributes(password and password_confirmation)
+  # -----------------------------------------------------------------
   
 
 
