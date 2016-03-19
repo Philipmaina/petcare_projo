@@ -57,7 +57,41 @@ class PetownersController < ApplicationController
 
 	end
 
-	# --------------------------------------------------------------------
+	# -------------------------------------------------------------------
+
+	# WE NEED TO CONSIDER BACK BUTTON FROM STEP 2 WHICH WOULD MEAN WE WANT TO UPDATE STEP 1 INFO BUT NOT CREATE NEW ONES A FRESH
+	# ITS ALL ABOUT EDITING PETOWNER'S BASIC PREDETAILS
+
+	def edit_basic_predetails
+		@petowner = Petowner.find( params[:id] )
+
+		# instance variable is killed off so we have to recreate it
+		@all_residential_areas_in_nairobi = ResidentialArea.all
+
+		render 'edit_basic_predetails'	
+	end
+
+	def update_basic_predetails
+
+		@petowner = Petowner.find( params[:id] )
+
+		@petowner.registration_step = "basic_predetails"
+
+		petowner_first_step_params = params.require(:petowner).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id ) #prevents mass assignment
+
+		if @petowner.update( petowner_first_step_params )
+
+			redirect_to edit_petowner_personal_details_path(@petowner.id)
+		else
+
+			# instance variable is killed off so we have to recreate it
+			@all_residential_areas_in_nairobi = ResidentialArea.all
+
+			render 'edit_basic_predetails'
+
+		end
+		
+	end
 
 
 
@@ -75,7 +109,7 @@ class PetownersController < ApplicationController
 		petowner_second_step_params = params.require(:petowner).permit( :date_of_birth  , :contact_line_two , :profile_pic_file_name )
 
 		if @petowner.update( petowner_second_step_params )	
-			redirect_to petowner_add_pets_path
+			redirect_to petowner_add_pets_path(@petowner.id)
 		else
 			render 'edit_petowner_personal_details'
 		end
@@ -88,13 +122,79 @@ class PetownersController < ApplicationController
 	# ----------3a)ACTUALLY ADDING PETS OF THE PETOWNER------------------
 	
 	def addpets
+		@petowner = Petowner.find( params[:id] )
 		@all_pets_in_system = Pettype.all
+		
+	end
+
+	def create_pets
+
+		@petowner = Petowner.find( params[:id] )
+
+		# so firstly one can use the fail trick to see request parameters 
+		# then we realize that when we get params[:petowner] we get another hash within it with a key called pets 
+		# so if we get params[:petowner][:pets] we get the JSON string which looks like an array of json objects 
+		# .parse() is a method that converts Json strings to ruby hashes, in essence it removes :(colons) and replaces with =>
+
+		# [{\"name\":\"Martin\",
+		# \"type\":\"Horse\",
+		# \"years\":\"2\",
+		# \"gender\":\"Female\"},
+		# {\"name\":\"Philip\",
+		# \"type\":\"Dog\",
+		# \"years\":\"3\",
+		# \"gender\":\"Male\"}] 
+
+		    # WILL BECOME
+
+		# [{"name"=>"Martin",
+			# "type"=>"Horse",
+			# "years"=>"2",
+			# "gender"=>"Female"},
+		#  {"name"=>"Philip",
+			# "type"=>"Dog",
+			# "years"=>"3",
+			# "gender"=>"Male"}]
+
+			# ONE CAN TEST THIS BEHAVIOUR WITH RAILS C
+
+		array_of_pet_hashes = JSON.parse( params[:petowner][:pets] )
+
+		array_of_pet_hashes.each do | pet_hash |
+
+
+			@pet_object_to_be_stored_in_db = @petowner.pets.new #create pet from parent object(@petowner)
+
+			@pet_object_to_be_stored_in_db.pet_name = pet_hash["name"]
+			@pet_object_to_be_stored_in_db.years_pet_lived = pet_hash["years"]
+			@pet_object_to_be_stored_in_db.gender = pet_hash["gender"]
+
+			# because i have the pettype name not id i have to find a way to get that id because we want to store pettype_id not the name in the pets table.
+			# so we get the pettype object whose name is equal to what is the value in the hash with the key type
+			pettypeobject = Pettype.find_by( type_name: pet_hash["type"] )
+
+
+
+			# because of that belongs_to association the pet has with pettype we are added/given the method .pettype to set the pettype of an object and we must equate it to an object. therefore we dont have to use .pettype_id
+
+			@pet_object_to_be_stored_in_db.pettype = pettypeobject
+
+			@pet_object_to_be_stored_in_db.save
+
+		end
+
+		redirect_to pet_owner_dashboard_path(@petowner.id)
+
+	end
+
+
+	def dashboard
 		
 	end
 
 
 	# ---------------------OTHER METHODS-----------------------------------
-	# ~~~~~~~~~~~THESE METHODS CANNOT BE ROUTED TO DIRECTLY ~~~~~~~~~~~~~~~~~~
+	# ~~~~~~~~THESE METHODS CANNOT BE ROUTED TO DIRECTLY ~~~~~~~~~~~~~~~
 	private
 
 

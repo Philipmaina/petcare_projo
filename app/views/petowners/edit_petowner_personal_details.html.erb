@@ -43,12 +43,27 @@
 					<%= f.file_field :profile_pic_file_name , class:"form-control" %>
 				</div>
 
-				<p class="text-right">
-					<%= f.button :submit, class:"btn btn-success" do %>
-						Save and Continue <span class="glyphicon glyphicon-chevron-right"></span> 
-					<% end %>
-				</p>
-				<!-- we write out Next then &ensp; is a character that yields a wide space in html - it is a HTML special symbol, then we use greater than symbol(>) to show next  -->
+				<!-- 1) firstly within this middle column, i create a row that spans the width of this column and in this row i create again 3 columns with same ratio 3:6:3 this is called nesting of columns within columns (a row even if it is nested within a column can have a maximum of 2 columns.) -->
+				<!-- again we use spans because there are in line elements which means they don't have to start on new line of parent element but they can start anywhere and that is how we can have both Back and Continue buttons on same line -->
+
+				<div class="row">
+
+					<div class="col-md-6 col-sm-offset-3">
+						<span style="float:right;">
+							<%= f.button :submit, class:"btn btn-success" do %>
+								Save and Continue <span class="glyphicon glyphicon-hand-right"></span> 
+							<% end %>
+						</span>
+						<!-- we write out Next then &ensp; is a character that yields a wide space in html - it is a HTML special symbol, then we use greater than symbol(>) to show next  -->
+
+						<span style="float:left;">
+							<%= link_to  edit_petowner_basic_predetails_path(@petowner.id) ,  :method => :get ,class:"btn btn-success" do  %> 
+								<span class="glyphicon glyphicon-hand-left"></span> Back 
+							<% end %>
+						</span> 
+
+					</div>
+				</div>
 				
 			<% end %>
 

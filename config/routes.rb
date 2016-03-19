@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get "/petowners/new/basic_predetails" => "petowners#new_basic_predetails" , as: "new_petowner_basic_predetails"
   post "/petowners/new/basic_predetails" => "petowners#create_basic_predetails"
 
+# __________1a i) step 1 routes for editing and updating basic predetails of petowner(not entirely new creation)
+
+get "/petowners/:id/edit_basic_predetails" => "petowners#edit_basic_predetails" , as: "edit_petowner_basic_predetails"
+patch "/petowners/:id/basic_predetails" => "petowners#update_basic_predetails"
+
 # ___________1b) step 2 for personal details_________________________
   get "/petowners/:id/personal_details" => "petowners#edit_petowner_personal_details" , as: "edit_petowner_personal_details"
   patch "/petowners/:id/personal_details" => "petowners#update_petowner_personal_details"
@@ -22,6 +27,9 @@ Rails.application.routes.draw do
 # _______________1c) step 3 for adding pets_________________________
 
 get "/petowner/:id/pets/new" => "petowners#addpets" , as: "petowner_add_pets"
+post "/petowner/:id/pets/create" =>"petowners#create_pets"
+
+get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboard"
 
 
   # --------------------------------------------------------------------

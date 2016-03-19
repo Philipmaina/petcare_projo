@@ -101,8 +101,30 @@ $(document).ready(function() {
 
 		pets.splice(index_of_deleted_row , 1) ; //the first parameter is the index at which we start removing items from then second parameter is the number of elements to remove. Therefore if array a = ["mat" ,"bat" , "cat" , "rat"] , a.splice(2,1) would remove "cat" , so a is now ["mat","bat","rat"]
 
+
 	});
 	// __________________________________________________________________
+
+
+	// ~~~FINALLY WHEN USER IS SATISFIED WITH THE PETS AND WANT TO SAVE~~
+
+	$("#submission_form_btn").click(function() {
+
+		// JSON.stringify({ x: 5 }) == '{"x":5}'
+
+		// without JSON.stringify you get this 
+		// "petowner"=>{"pets"=>"[object Object],
+		// [object Object],
+		// [object Object]"}
+		// because you are passing objects to a textfield
+		// we should instead pass a string to the textfield
+		$(".interested_input_field").val("")
+		$(".interested_input_field").val(JSON.stringify(pets))
+
+
+
+
+	});
 
 
 

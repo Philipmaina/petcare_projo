@@ -67,7 +67,7 @@
 
 						<div class="form-group">
 							<label class="form-label">Years:</label>
-							<input type="number" name="years" class="form-control"/>
+							<input type="number" name="years" class="form-control" min="0" max="35" />
 						</div>
 
 						<div class="form-group">
@@ -108,12 +108,19 @@
 
 	<br/>
 
-	<div class="row">
+	<div class="row text-center">
 		<p class="text-center">
-			<a class="btn btn-success">
-				Save and Complete
-				<span class="glyphicon glyphicon-hand-right"></span> 
-			</a>
+
+			<%= form_for( @petowner , :url => { controller: 'petowners' , action: 'create_pets' } , html: { method: "post"} ) do |f| %>
+
+				<!-- this is the hidden field that we will place all those pets in our table in, using the global variable pets in the js file - this input field will give us access to all those pets -->
+				<%= f.hidden_field :pets , class:"interested_input_field" %>
+
+				<%= f.button :submit, class:"btn btn-success" , id: "submission_form_btn" do %>
+						Save and Complete <span class="glyphicon glyphicon-hand-right"></span> 
+				<% end %>
+
+			<% end %>
 
 		</p>
 	</div>
