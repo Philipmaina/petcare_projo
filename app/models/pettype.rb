@@ -20,5 +20,6 @@ class Pettype < ActiveRecord::Base
 	# ----------------RELATIONSHIPS--------------
 	has_many :pets
 	has_many :junctionofpetsitterandpettypes
+	has_many :petsitters , through: :junctionofpetsitterandpettypes
 	# -------------------------------------------
 end

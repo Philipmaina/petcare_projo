@@ -1,0 +1,109 @@
+$primary-color-of-site : #00acc1 ;
+// #1d9d74
+// #299858
+// #3b8898
+// #26a69a;
+// #0bb8e3;
+// #00acc1;
+// #27CCC0 ;
+
+$background-color-for-brand-name-section : #D6D6D6;
+
+div#with_background_image{
+
+	height: 350px ;
+	background: url('petimage3.jpg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+
+	div#p_tag_for_landing_page{
+
+		position: relative ;
+		top: 40%;
+		height: 60% ;
+		text-align: center ;
+
+		#project_goal{
+
+			color: white ;
+		}
+
+		.landing_page_btns{
+
+			font-weight: bold;
+			font-size: 13px;
+			text-transform: uppercase;
+			height:50px;
+    		width:250px;	
+		}
+
+		#btn_for_becoming_petowner{
+
+			background-color: $primary-color-of-site ;
+			color: white ;
+			border: 1px solid transparent;
+
+		}
+
+		#btn_for_becoming_petsitter{
+
+			background-color: white ;
+			color: $primary-color-of-site ;
+			border: 2px solid $primary-color-of-site ;
+		}
+
+	}
+
+}
+
+table{
+	position: relative ;
+
+	width: 100% ;
+}
+
+div#how-it-works-section{
+
+	height:250px ;
+	background-color: $primary-color-of-site ;
+
+	table#tbl_for_icons_numbers_and_description{
+
+		td{
+			text-align: center ;
+		}
+		tr#row_for_numbers{
+
+			font-weight: bolder ;
+			height: 28px ;
+		}
+		tr#row_for_one_word_topic{
+			color: white ;
+			font-weight: bold ;
+
+		}
+		tr#row_for_explanation_of_each_topic{
+			color: white ;
+			font-weight: lighter ;
+		}
+		tr#for_icons{
+			height: 40px ;
+		}
+	}
+}
+
+div.overall{
+  padding-right: 0px; 
+  padding-left: 0px;
+  
+}
+
+div#div_for_brand_names{
+
+	background-color: $background-color-for-brand-name-section ;
+	height: 30px;
+
+}

@@ -49,6 +49,8 @@ class Petsitter < ActiveRecord::Base
   has_many :junctionofpetsitterandpettypes
   has_many :junctionofservicesandpetsitters
   has_many :unavailabledates
+  has_many :pettypes, through: :junctionofpetsitterandpettypes
+  has_many :sittingservices , through: :junctionofservicesandpetsitters
   # ----------------------------------------
 
   # ~~~~~~~~~~~~~~~~~~~~~~VALIDATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

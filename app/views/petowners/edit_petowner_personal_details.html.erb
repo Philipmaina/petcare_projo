@@ -1,7 +1,7 @@
 
 <!-- all bootstrap elements should exist under/inside a class container -->
 
-<div class="container">
+<div class="container-fluid" >
 	<!-- create first empty row in our grid/graph system of bootstrap -->
 	<div class="row" style="height:50px;">
 
@@ -9,7 +9,7 @@
 
 	<!-- create 2nd row in our grid system to hold the step we are in -->
 	<div class="row">
-		<h4 class="text-center"> 
+		<h4 class="text-center" > 
 			<strong> Step 2 </strong>
 			<br/>
 			Personal details 
@@ -24,7 +24,7 @@
 		</div>
 
 		<!-- main column with our form -->
-		<div class="col-md-6">
+		<div class="col-md-6" >
 			
 			<!-- form_for rails helper requires an object to bind to, therefore we give it the empty object @petowner THEN which is of more importance, if we don't specify a url where the form data will be sent, Rails will see whether the record is new or being updated and come up with its own url. Therefore in this case we try and avoid this by specifying -->
 			<%= form_for( @petowner , :url => { controller: 'petowners' , action: 'update_petowner_personal_details' } , html: { method: "patch"} ) do |f| %>
@@ -37,7 +37,7 @@
 						
 						<div class="form-group">
 							<%= f.label :date_of_birth , "Date of birth"  %>
-							<%= f.date_field :date_of_birth , class:"form-control" , autofocus: true %>
+							<%= f.text_field :date_of_birth , class:"form-control" , id:"datepicker"   %>
 						</div>
 
 						<div class="form-group">
@@ -55,7 +55,7 @@
 
 						<div class="row">
 
-							<div class="col-md-6 col-sm-offset-3">
+							<div class="col-md-7 col-sm-offset-3">
 								<span style="float:right;">
 									<%= f.button :submit, class:"btn btn-success" do %>
 										Save and Continue <span class="glyphicon glyphicon-hand-right"></span> 
@@ -95,3 +95,13 @@
 
 
 </div>
+
+<script type="text/javascript">
+	$( "#datepicker" ).datepicker({
+
+      changeYear: true,
+      showButtonPanel: true ,
+      yearRange: "-70:+0" // last hundred years
+
+    });
+ </script>

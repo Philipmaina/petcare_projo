@@ -1,0 +1,330 @@
+<div class="container-fluid" style="background-color: #eee;">
+
+	<!-- this will be the first gray space after the header -->
+	<div class="row" style="height: 15px;">
+
+	</div>
+
+	<!-- this will be the container that has the form that a pet owner will use to query for pet sitters -->
+	<div class="row">
+		<!-- leave 2 columns to the right of the edge -->
+		<div class="col-md-3">
+
+		</div>
+
+		<div class="col-md-6">
+			<!-- ive added another div to allow me to tinker with this div without tampering with the div of class="col-md-8" coz they must start to conflict -->
+			<div class="holder_of_form_for_query" style="background-color:white; border: 1px solid #00acc1 ; padding: 8px 8px 8px 8px ;">
+				<!-- within this form_query_container div there is a table of 3 rows and 2 columns -->
+				<%= form_tag(query_main_page_path) do %>
+				<table>
+					
+					<tbody>
+						<!-- WE WILL PUT LABELS ON THEIR OWN ROWS -->
+						<!-- this will be the label row for the sitting services and place/location of sitter -->
+						<tr>
+							<td>
+								<%= label_tag "sittingservices" , "Which service ? "  %>
+							</td>
+
+
+							<td>
+								<!-- the statement below will yield <label for="ResidentialArea">Where ?</label> -->
+								<%= label_tag "ResidentialArea" , "Where ?"  %>
+							</td>
+
+						</tr>
+
+						<!-- THIS NEXT ROW NOW ENCAPSUALTES ACTUAL FORM ELEMENTS LIKE RADIO BUTTONS AND INPUT FIELDS FOR SITTING SERVICES AND PLACE/LOCATION -->
+						<tr style="border-bottom: 2px solid #eee">
+							<!-- this part will contain the services that a petowner wants to be offered to his/her pet(s) -->
+							<td>
+								<div class="btn-group" data-toggle="buttons" >
+									<label class = "btn btn-primary" >
+										<%= radio_button_tag("sitting_service", @sittingservicesoffered[0].id )  %> <%= @sittingservicesoffered[0].service_name %>
+									</label>
+
+						
+								
+									<label class = "btn btn-primary" >
+										<%= radio_button_tag("sitting_service" , @sittingservicesoffered[1].id ) %> <%= @sittingservicesoffered[1].service_name %>
+
+									</label>
+
+									<label class = "btn btn-primary" >
+										<%= radio_button_tag("sitting_service" , @sittingservicesoffered[2].id ) %> <%= @sittingservicesoffered[2].service_name %>
+
+									</label>
+								</div>
+							</td>
+
+							<!-- this part will contain a dropdown list of the locations and a petowner should choose where he/she lives -->
+							<td>
+								<div class="form-group">
+
+
+									<!-- the first parameter of select_tag is the name and id value of the select tag to be created as a whole -->
+									<%= select_tag "ResidentialArea_id" , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location')  , class:"form-control" , style: "border: 1px solid #00acc1 ;" %>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						
+
+						<!-- THIS ROW NOW WILL CONTAIN LABELS FOR PERIOD OF CARE AND PETS CHOSEN -->
+						<tr>
+							<td>
+								<!-- the statement below will yield <label for="period_of_care">From when to when ?</label> -->
+								<%= label_tag "period_of_care" , "From when to when ?"  %>
+							</td>
+
+							<td>
+								<!-- the statement below will yield <label for="petschosen">Which pets? </label> -->
+								<%= label_tag "petschosen" , "Which pet(s) ?"  %>
+							</td>
+
+						</tr>
+
+						<tr style="border-bottom: 2px solid #eee ;  ">
+
+							<!-- this part contains the period of care for the petowner's pet  -->
+							<td>
+								
+								<!-- since we need a pick up and dropoff date field, we need to create 2 columns within this cell .So we can within this table cell, create A HTML table with a row that has two columns: -->
+
+								<table>
+									<tbody>
+										<tr>
+											<!-- this will contain the field for the dropoff day -->
+											<td>
+												<div class="form-group">
+												
+													<input class="datepicker" name="dropoffdate" placeholder="Drop off date" type="text" style="border: 1px solid #00acc1 ;" />
+												</div>
+
+											</td>
+
+											
+
+											<!-- this will contain the field for the pickup day -->
+											<td>
+
+												<div class="form-group">
+												
+													<input class="datepicker" name="pickupdate" placeholder="Pick Up date" type="text" style="border: 1px solid #00acc1 ;" />
+
+												</div>
+
+
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+
+							</td>
+
+
+							<!-- this part contains the pets the petowner wants cared for -->
+							<td>
+						
+								<!-- since there are many pets and one can choose btwn one and five of the existing pets in the db -->
+								
+								<table>
+									<tbody>
+										<tr>
+											<!-- WHY I USED COLSPAN 50% WAS BECAUSE I WANTED A TABLE WHERE THE FIRST ROW HAD ONLY 2 COLUMNS WHICH WERE WIDE BUT EVENLY SPLIT AND THE SECOND ROW HAD 3 COLUMNS ALSO EVENLY SPLIT. as drawn below-->
+											<!-- ____________________ -->
+											<!-- __________|_________ -->
+											<!-- ______|______|______ -->
+											<td colspan="50%">
+												<!-- NOTE TO FUTURE SELF: THIS CODE OF USING .btn_for_pets_query IS YUCKY..WILL HAVE TO LOOK FOR ANOTHER WAY TO MAKE THE DIVS AND LABELS FIT TABLE CELL SIZE BECAUSE THEY ARE SHORTER THAN THE TABLE CELL EVERY TIME AND THIS IS THE ONLY WORK AROUND -->
+												<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+													<label class = "btn btn-primary btn_for_pets_query" >
+														<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+														<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+														<span ></span>
+
+														 <input name="petschosen[]" type="checkbox" autocomplete="off" value="<%= @allpets[0].id %>"> <%= @allpets[0].type_name %>
+														
+
+													</label>
+												</div>
+											</td>
+
+											<td colspan="50%">
+
+												<div class="btn-group btn_for_pets_query" data-toggle="buttons">
+													<label class = "btn btn-primary btn_for_pets_query" >
+														<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+														<span></span>
+
+
+														 <input name="petschosen[]" type="checkbox" autocomplete="off" value="<%= @allpets[1].id %>"> <%= @allpets[1].type_name %> 
+														
+
+													</label>
+												</div>
+
+												 
+											</td>
+										</tr>
+
+										<tr>
+											<td colspan="33%">
+												<div class="btn-group btn_for_pets_query" data-toggle="buttons">
+													<label class = "btn btn-primary btn_for_pets_query" >
+														<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+														<span></span>
+
+
+														 <input name="petschosen[]" type="checkbox" autocomplete="off" value="<%= @allpets[2].id %>"> <%= @allpets[2].type_name %>
+
+													</label>
+												</div>
+											</td>
+
+											<td colspan="33%">
+												<div class="btn-group btn_for_pets_query" data-toggle="buttons">
+													<label class = "btn btn-primary btn_for_pets_query" >
+														<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+														<span></span>
+
+														 <input name="petschosen[]" type="checkbox" autocomplete="off" value="<%= @allpets[3].id %>"> <%= @allpets[3].type_name %> 
+
+													</label>
+												</div>
+											</td>
+
+											<td colspan="33%">
+												<div class="btn-group btn_for_pets_query" data-toggle="buttons">
+													<label class = "btn btn-primary btn_for_pets_query" >
+														<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+														<span ></span>
+
+
+														 <input name="petschosen[]" type="checkbox" autocomplete="off" value="<%= @allpets[4].id %>" > <%= @allpets[4].type_name %>
+
+													</label>
+												</div>
+											
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+
+						</tr>
+
+						<!-- I DONT NEED LABELS ON THEIR OWN ROW BECAUSE IT IS ONLY ONE LABEL FOR THE PRICE THEN A BUTTON THAT SAYS SEARCH -->
+						<tr>
+
+							<!-- this part should contain the price slider to allow user to choose prices accordingly -->
+							<td>
+								<!-- the statement below will yield <label for="petschosen">Which pets? </label> -->
+								<%= label_tag "chosen_price_by_petowner" , "Price rate ?"  %>
+
+								<input style="width:90%" id="ex1" name="pricerate"  data-slider-id='ex1Slider' type="number" data-slider-min="150" data-slider-max="1000" data-slider-step="1" data-slider-value="14"/>
+
+
+							</td>
+
+
+							<!-- this last part should have the search button -->
+							<td style="text-align:right;">
+
+								<button class="btn " id="btn_for_becoming_petowner" type="submit" style="background-color: #00acc1 ; color: white ; width:80% ;" >
+									Search
+								</button>
+
+							</td>
+
+
+						</tr>
+
+					</tbody>
+					
+				</table>
+				<% end %>
+
+			</div>
+
+		</div>
+
+		<!-- leave 2 columns to the left of the edge -->
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+	<!-- this will be the second gray space to allow for spacing out and more defined sections for easy usability -->
+	<div class="row">
+
+
+	</div>
+
+	<!-- this section will now have a list of containers of all the queried pet sitters - it will be like a vertical list going down -->
+	<!-- just like a faint line separating them like a <hr> tag -->
+	<div class="row">
+
+		<div class="col-md-3">
+
+		</div>
+
+		<div class="col-md-6">
+
+
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+</div>
+<script type="text/javascript">
+
+	$( ".datepicker" ).datepicker({
+
+      changeYear: true,
+      showButtonPanel: true ,
+      minDate: 0 ,
+      dateFormat: "yy-mm-dd" //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
+
+    });
+
+	$('#ex1').bootstrapSlider({
+		formatter: function(value) {
+			return value;
+		}
+	});
+
+	$("[type=checkbox]").change( function() { 
+		// the above statement is equal to $(":checkbox")  where :checkbox is a selector is a class offered by jquery
+		// this line says go through the the DOM and find elements with an input type of checkbox and to them apply the change method
+
+		// so to check state of checkbox whether checked or unchecked according to jquery we can either do :
+		// i) if (elem.checked){}
+		// ii) if ( $(elem).prop("checked") ) {}
+		// iii) if ( $(elem).is(":checked") ) {}
+
+		// .prev() - Get the immediately preceding sibling of each element in the set of matched elements - this will be the span class
+	
+		if (this.checked)
+		{
+			$(this).prev().addClass("glyphicon glyphicon-ok") ;
+		}
+		else
+		{
+			$(this).prev().removeClass("glyphicon glyphicon-ok") ;
+		}
+
+
+	});
+
+</script>

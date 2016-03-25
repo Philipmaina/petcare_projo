@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
    # -----------------------ADDITIONAL ROUTES----------------------------
 
+   # --------route when browse_a_sitter_button is clicked from landing pg--
+   get "/search_main_page" => "application#search_main_page" , as: "search_main_page"
+   post "/search_main_page" =>"application#find_all_petsitters_that_match_query" , as: "query_main_page"
+
    # ----------------route when sign up button is clicked---------------
    get "/petcare/register-as-who-now" => "application#page_for_choosing_type_of_registration" , as: "page_for_choosing_type_of_registration"
 
@@ -64,6 +68,11 @@ get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboar
   get "/petsitter/:id/dashboard" => "petsitters#dashboard" , as: "pet_sitter_dashboard" 
 
 
+# -----------------routes for sessions to allow authentication----------------
+
+  # normally we would write resources :sessions(plural) but the problem this gives routes like get "/sessions/:id" or "sessions/:id/edit" but we only use :id placeholder when we need to look up stuff in the db like Model.find(params[:id]), but we are not storing sessions in the db(we are storing them in a hash that we later place in the coookie) so we don't need that .
+  
+  resource :session #called a singular resource
 
   # --------------------------------------------------------------------------------
   resources :unavailabledates

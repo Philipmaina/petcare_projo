@@ -22,5 +22,6 @@ class ResidentialArea < ActiveRecord::Base
 
 	# -----RELATIONSHIPS WITH OTHER TABLES/MODELS----------
 	has_many :petowners
+	has_many :petsitters
 	# -----------------------------------------------------
 end

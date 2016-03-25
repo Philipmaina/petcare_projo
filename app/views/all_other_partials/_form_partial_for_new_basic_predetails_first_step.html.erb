@@ -1,48 +1,90 @@
 				
 
 <div class="form-group">
-	<%= f.label :first_name , "First Name"  %>
+	<!-- i put them the label in another div because if i don't the form control below will move too close to the label making it look yucky -->
+	<!-- i also use font awesome to get the icon of the asterisk -->
+	<!-- finally i use <sup> to make it a superscript - the text appears half a character above the normal line -->
+	<div>
+		<%= f.label :first_name , "First Name"  %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
 	<%= f.text_field :first_name , class:"form-control" , autofocus: true %>
 </div>
 
 <div class="form-group">
-	<%= f.label :surname , "Surname"  %>
+
+	<div>
+		<%= f.label :surname , "Surname"  %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
+
 	<%= f.text_field :surname , class:"form-control" %>
 </div>
 
 <div class="form-group">
+	<!-- THIS IS ONLY FIELD THAT IS NOT REQUIRED IN THIS FORM FOR STEP 1 -->
 	<%= f.label :other_names , "Other Names"  %>
 	<%= f.text_field :other_names , class:"form-control" %>
 </div>
 
 <div class="form-group">
-	<%= f.label :contact_line_one , "Contact Number"  %>
+
+	<div>
+		<%= f.label :contact_line_one , "Contact Number"  %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
+
 	<%= f.text_field :contact_line_one , class:"form-control" %>
 </div>
 
 <div class="form-group">
-	<%= f.label :personal_email , "Personal email"  %>
+
+	<div>
+		<%= f.label :personal_email , "Personal email"  %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
+
 	<%= f.text_field :personal_email , class:"form-control" %>
 </div>
 
 <div class="form-group">
+
+	<div>
 		<%= f.label :ResidentialArea , "Residential Area"  %>
-		<%= f.select :ResidentialArea_id , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location') , {} , class:"form-control" %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
+	<%= f.select :ResidentialArea_id , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location') , {} , class:"form-control" %>
 
 
-		<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->
+	<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->
 
-		<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper within select helper helps in generating the option tags themselves but generates those option tags from a collection of objects from a certain model say ResidentialArea which is what we want -->
+	<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper within select helper helps in generating the option tags themselves but generates those option tags from a collection of objects from a certain model say ResidentialArea which is what we want -->
 
-		<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper takes as first argument collection of objects from a model then second argument is the name of the attribute of the object which will give the value of the option tag and the third argument is the name of the attribute of the object which will give the name/text of the option tag to be seen by user -->
+	<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper takes as first argument collection of objects from a model then second argument is the name of the attribute of the object which will give the value of the option tag and the third argument is the name of the attribute of the object which will give the name/text of the option tag to be seen by user -->
 
-		<!-- the fourth parameter of the select tag not the option tags within is what will allow us to use the BOOTSTRAP CLASS for form controls -->
+	<!-- the fourth parameter of the select tag not the option tags within is what will allow us to use the BOOTSTRAP CLASS for form controls -->
 		
 </div>
 
 <div class="form-group">
 	<!-- there is a helper called password_field which masks input of user by putiing bullet marks -->
-	<%= f.label :password , "Password"  %>
+	<div>
+		<%= f.label :password , "Password"  %>
+		<sup>
+			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
+		</sup>
+	</div>
+	
 	<%= f.password_field :password , class:"form-control" %>
 </div>
 

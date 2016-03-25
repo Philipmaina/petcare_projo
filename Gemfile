@@ -43,8 +43,15 @@ gem 'bcrypt', '~> 3.1.7'
   # For printing organized output in rails console
   gem "awesome_print", require:"ap"
 
+  # This gem helps print tables in the console - start command with tp then modelname.all for instance
+  # tp Petsitter.all ,"id" , "first_name" , "surname" , "other_names" ,  "date_of_birth" , "contact_line_two"
+  gem "table_print"
+
   # For using slider for range fields like price in charges sections 
   gem 'bootstrap-slider-rails'
+  
+  # FOR USING ALL OF FONT AWESOME ICONS BECAUSE BOOTSTRAP HAS FEW ICONS 
+  gem "font-awesome-rails"
 
 
 group :development, :test do

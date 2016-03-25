@@ -58,12 +58,160 @@
 							<%= f.number_field :no_of_pets_owned , min: 0 , max: 20 , class:"form-control" %>
 						</div>
 
+						<div class="form-group">
+
+							<%= label_tag "pet_services_you_can_offer" , "Pet Service(s) you can offer"  %>
+
+							<table>
+								<tr>
+
+									<td>
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+												 <input name="pet_services_you_can_offer[]" type="checkbox" autocomplete="off" value="<%= @sittingservices[0].id %>"> <%= @sittingservices[0].service_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+									<td>
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+												 <input name="pet_services_you_can_offer[]" type="checkbox" autocomplete="off" value="<%= @sittingservices[1].id %>"> <%= @sittingservices[1].service_name %>
+											</label>
+										</div>
+									</td>
+
+									<td>
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+												 <input name="pet_services_you_can_offer[]" type="checkbox" autocomplete="off" value="<%= @sittingservices[2].id %>"> <%= @sittingservices[2].service_name %>
+											</label>
+										</div>
+									</td>
+
+								</tr>
+							</table>
+
+						</div>
+
+						<div class="form-group">
+
+							<%= label_tag "pets_you_can_care_for" , "Pet(s) that you can care for  " %>
+
+							<table>
+
+								<tr>
+
+									<td colspan="50%">
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+
+												<!-- THE STATEMENT HELPS WITH USABILITY -->
+												<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+												<span ></span>
+
+												 <input name="pets_that_you_can_care_for[]" type="checkbox" autocomplete="off" value="<%= @allpettypesthatexist[0].id %>"> <%= @allpettypesthatexist[0].type_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+									<td colspan="50%">
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+
+												<!-- THE STATEMENT HELPS WITH USABILITY -->
+												<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+												<span ></span>
+
+												 <input name="pets_that_you_can_care_for[]" type="checkbox" autocomplete="off" value="<%= @allpettypesthatexist[1].id %>"> <%= @allpettypesthatexist[1].type_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+								</tr>
+
+								<tr>
+									<td colspan="33%">
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+
+												<!-- THE STATEMENT HELPS WITH USABILITY -->
+												<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+												<span ></span>
+												 <input name="pets_that_you_can_care_for[]" type="checkbox" autocomplete="off" value="<%= @allpettypesthatexist[2].id %>"> <%= @allpettypesthatexist[2].type_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+									<td colspan="33%">
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+
+												<!-- THE STATEMENT HELPS WITH USABILITY -->
+												<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+												<span ></span>
+												 <input name="pets_that_you_can_care_for[]" type="checkbox" autocomplete="off" value="<%= @allpettypesthatexist[3].id %>"> <%= @allpettypesthatexist[3].type_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+									<td colspan="33%">
+
+										<div class="btn-group btn_for_pets_query" data-toggle="buttons" >
+											<label class = "btn btn-primary btn_for_pets_query" >
+
+												<!-- When grouping checkboxes and giving them each the same name, attach square brackets to the end of the name in order for server-side code to treat checked checkboxes as an array. -->
+
+												<!-- THE STATEMENT HELPS WITH USABILITY -->
+												<!-- class of glyphicon ok will be added to this span if input is clicked. Check out jquery stuff below   -->
+												<span ></span>
+												 <input name="pets_that_you_can_care_for[]" type="checkbox" autocomplete="off" value="<%= @allpettypesthatexist[4].id %>"> <%= @allpettypesthatexist[4].type_name %>
+
+											</label>
+										</div>
+
+									</td>
+
+
+								</tr>
+
+							</table>
+						</div>
+
 						<!-- 1) firstly within this middle column, i create a row that spans the width of this column and in this row i create again 3 columns with same ratio 3:6:3 this is called nesting of columns within columns (a row even if it is nested within a column can have a maximum of 2 columns.) -->
 						<!-- again we use spans because there are in line elements which means they don't have to start on new line of parent element but they can start anywhere and that is how we can have both Back and Continue buttons on same line -->
 
 						<div class="row">
 
-							<div class="col-md-6 col-sm-offset-3">
+							<div class="col-md-7 col-sm-offset-3">
 								<span style="float:right;">
 									<%= f.button :submit, class:"btn btn-success" do %>
 										Save and Continue <span class="glyphicon glyphicon-hand-right"></span> 
@@ -95,11 +243,20 @@
 
 
 	</div>
-
-
-
-
-
-
-
 </div>
+
+
+<script type="text/javascript">
+
+	$("[type=checkbox]").change( function() { 
+		// the above statement is equal to $(":checkbox")  where :checkbox is a selector is a class offered by jquery
+		// this line says go through the the DOM and find elements with an input type of checkbox and to them apply the change method
+
+		// .prev() - Get the immediately preceding sibling of each element in the set of matched elements - this will be the span class
+
+		$(this).prev().toggleClass("glyphicon glyphicon-ok") ;
+
+	}) ;
+
+
+</script>

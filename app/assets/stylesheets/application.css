@@ -20,12 +20,13 @@
  *= require prettify.css
  *= require pepper-ginder-custom.css
  *= require jquery-ui.theme.min.css
+ *= require font-awesome
  */
 
  button.btn.btn-default.navbar-btn.border-highlight{
 
-			border: 1px solid #3b8898 !important ;
-			color: #3b8898 ;
+			border: 1px solid #00acc1 !important ;
+			color: #00acc1 ;
 }
  
  /*slider for jquery ui(used in price petsitter charges form) - changed the color to blue*/
@@ -49,6 +50,16 @@
 }
 /*-------------------------------------------------------------------*/
 
+/*this is to avoid having a horizontal scrollbar when using <div class="container-fluid" because it makes your site move sideways - which is not proper usability.*/
+.row{
+  margin: 0px ;
+}
+/*---------------------------------------------------------------------*/
+
+.btn_for_pets_query{
+  width: 100% ;
+  border-radius: 0px;
+}
 
 /*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
 @font-face {

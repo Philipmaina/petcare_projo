@@ -132,15 +132,66 @@ class PetsittersController < ApplicationController
 	def edit_petsitter_experience_and_skills_details
 		@petsitter = Petsitter.find( params[:id] )
 		@all_work_situations = Petsitter.all_work_situations_they_can_have
+		@sittingservices = Sittingservice.all # wil allow petsitter to choose pet services he can be able to offer
+		@allpettypesthatexist = Pettype.all # will allow petsitter to choose the pets he can care for
 	end
 
 	def update_petsitter_experience_and_skills_details
 		
-
 		@petsitter = Petsitter.find( params[:id] )
 
 		# in this case i don't need a registration step because there is nothing to validate the partial object in the models - the validation is done frontend
 
+		if params[:pets_that_you_can_care_for].present?
+			# within the form i created checkboxes which look like toggle buttons and that allow multiple selection as do all checkboxes.
+
+			# "pets_that_you_can_care_for"=>["1",
+ 			# "2"]
+ 			# the section above shows the request parameters when intercepted by fail
+ 			# the value is an array of ids of pettypes that we can look up to find objects in Pettype that match the pettypes
+
+ 			array_of_all_pets_sitter_can_care_for = params[:pets_that_you_can_care_for] 
+
+ 			array_of_all_pets_sitter_can_care_for.each do | pet_id_element_array|
+
+ 				pettype_object_from_db = Pettype.find(pet_id_element_array)
+
+ 				# below we create an object from parent object
+ 				object_to_store_in_junction_of_sitterandpettypes = @petsitter.junctionofpetsitterandpettypes.new
+
+ 				object_to_store_in_junction_of_sitterandpettypes.pettype = pettype_object_from_db 
+
+ 				object_to_store_in_junction_of_sitterandpettypes.save
+
+ 				
+ 			end
+				
+		end #endif
+
+
+		if params[:pet_services_you_can_offer].present?
+
+			# within the form i created the checkboxes that look like toggle buttons but not using f object coz there is no attribute of sittingservices that lives directly on @petsitter which was what the form was bound to it. The siitingservice would actual be one to many relation. NOTE TO FUTURE SELF: FIND A WAY TO MAKE THIS A ONE TO MANY FORM EVEN THOUGH THERE ARE OTHER FIELDS.
+			# therefore i created normal checkboxes not bound to f object but that all have one name that is like an array as is needed- 'pet_services_you_can_offer[]' - this ends up being a key which one can see if you use the fail method and the value of this key is an array of chosen textboxes
+			array_of_all_the_services_pet_sitter_can_do = params[:pet_services_you_can_offer]
+
+
+			array_of_all_the_services_pet_sitter_can_do.each do | service |
+
+				sitting_service_object_mapped_from_db = Sittingservice.find( service )
+				# we are using the parent object to store the child record- therefore the petsitter id in the object will be filled with petsitter's id
+				object_to_store_in_junctionsittinserviceandpetsittertbl_as_record =
+				@petsitter.junctionofservicesandpetsitters.new
+
+				# remember the belongs_to association of junctiontableoofservicesandpetsitters give us the method .sittingservice instead of having to write .sittingservice_id but one must pass an object to .sittingserviice
+				object_to_store_in_junctionsittinserviceandpetsittertbl_as_record.sittingservice = sitting_service_object_mapped_from_db
+
+				object_to_store_in_junctionsittinserviceandpetsittertbl_as_record.save
+			end #end do
+
+			
+		end #end if 
+		
 		petsitter_third_step_params = params.require(:petsitter).permit( :work_situation , :no_of_yrs_caring , :no_of_pets_owned)
 
 		if @petsitter.update( petsitter_third_step_params )
@@ -150,6 +201,8 @@ class PetsittersController < ApplicationController
 			# instance variables get killed off after an action runs so after edit_petsitter_experience_and_skills_details action we need to again declare this variable otherwise it will give an error of nil:Nil class when there are validation errors
 			
 			@all_work_situations = Petsitter.all_work_situations_they_can_have
+			@sittingservices = Sittingservice.all
+			@allpettypesthatexist = Pettype.all # will allow petsitter to choose the pets he can care for
 
 			render 'edit_petsitter_experience_and_skills_details'
 		end
