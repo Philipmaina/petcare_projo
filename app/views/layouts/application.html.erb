@@ -20,6 +20,22 @@
 		<%= render 'layouts/header' %>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+	<!-- ______________SHOWING FLASHES RIGHT AFTER HEADERS_______________ -->
+	<% if flash[:notice] %>
+
+		<p class="flash notice">
+			<%= flash[:notice] %>
+		</p>
+
+	<% elsif flash[:alert] %>
+
+		<p class="flash alert">
+			<%= flash[:alert] %>
+		</p>
+
+	<% end %>
+
+
 <%= yield %>
 
 	<!-- ~~~~~this is info listed at the bottom of the page and usually contains technical info like copyrights info, basic info about you and your company(About Us link , Contact Us link , Terms of service ....e.t,c) -->

@@ -7,10 +7,10 @@
 #  surname                            :string
 #  other_names                        :string
 #  date_of_birth                      :date
-#  ResidentialArea_id                 :integer
+#  residential_area_id                :integer
 #  personal_email                     :string
-#  contact_no_one                     :string
-#  contact_no_two                     :string
+#  contact_line_one                   :string
+#  contact_line_two                   :string
 #  no_of_yrs_caring                   :integer
 #  no_of_pets_owned                   :integer
 #  type_of_home                       :string
@@ -23,6 +23,7 @@
 #  profile_description                :text
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
+#  password_digest                    :string
 #
 
 class Petsitter < ActiveRecord::Base
@@ -60,7 +61,7 @@ class Petsitter < ActiveRecord::Base
 
   # ________1) step 1 validations______________________________________
   # the validation at the end applies to all the attributes tacked on
-  validates :first_name , :surname , :contact_line_one , :personal_email , :ResidentialArea_id , presence: true , if: :basic_details?  # if basic_details? returns true then this validation will be done otherwise it won't
+  validates :first_name , :surname , :contact_line_one , :personal_email , :residential_area_id , presence: true , if: :basic_details?  # if basic_details? returns true then this validation will be done otherwise it won't
 
   # validation options are just added after the attribute name like message , if , allow_blank
   # sometimes one doesn't want to use the default error message that is given by Rails so you can create custom error messages .

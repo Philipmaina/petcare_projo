@@ -11,9 +11,10 @@
 #  contact_line_one      :string
 #  contact_line_two      :string
 #  profile_pic_file_name :string
-#  ResidentialArea_id    :integer
+#  residential_area_id   :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  password_digest       :string
 #
 
 module PetownersHelper

@@ -63,7 +63,7 @@
 			<i class="fa fa-asterisk" style="font-size: 8px ; color: red ;"></i>
 		</sup>
 	</div>
-	<%= f.select :ResidentialArea_id , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location') , {} , class:"form-control" %>
+	<%= f.select :residential_area_id , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location') , {} , class:"form-control" %>
 
 
 	<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->

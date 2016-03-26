@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319165149) do
+ActiveRecord::Schema.define(version: 20160325144944) do
 
   create_table "junctionofpetsitterandpettypes", force: :cascade do |t|
     t.integer  "pettype_id"
@@ -42,13 +42,13 @@ ActiveRecord::Schema.define(version: 20160319165149) do
     t.string   "contact_line_one"
     t.string   "contact_line_two"
     t.string   "profile_pic_file_name"
-    t.integer  "ResidentialArea_id"
+    t.integer  "residential_area_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "password_digest"
   end
 
-  add_index "petowners", ["ResidentialArea_id"], name: "index_petowners_on_ResidentialArea_id"
+  add_index "petowners", ["residential_area_id"], name: "index_petowners_on_residential_area_id"
 
   create_table "pets", force: :cascade do |t|
     t.integer  "pettype_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160319165149) do
     t.string   "surname"
     t.string   "other_names"
     t.date     "date_of_birth"
-    t.integer  "ResidentialArea_id"
+    t.integer  "residential_area_id"
     t.string   "personal_email"
     t.string   "contact_line_one"
     t.string   "contact_line_two"
@@ -83,17 +83,17 @@ ActiveRecord::Schema.define(version: 20160319165149) do
     t.string   "type_of_home"
     t.boolean  "presence_of_open_area_outside_home"
     t.string   "work_situation"
-    t.integer  "day_charges"
-    t.integer  "night_charges"
+    t.integer  "day_charges",                        default: 0
+    t.integer  "night_charges",                      default: 0
     t.string   "default_pic_file_name"
     t.string   "listing_name"
     t.text     "profile_description"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "password_digest"
   end
 
-  add_index "petsitters", ["ResidentialArea_id"], name: "index_petsitters_on_ResidentialArea_id"
+  add_index "petsitters", ["residential_area_id"], name: "index_petsitters_on_residential_area_id"
 
   create_table "pettypes", force: :cascade do |t|
     t.string   "type_name"

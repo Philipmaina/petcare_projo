@@ -11,9 +11,10 @@
 #  contact_line_one      :string
 #  contact_line_two      :string
 #  profile_pic_file_name :string
-#  ResidentialArea_id    :integer
+#  residential_area_id   :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  password_digest       :string
 #
 
 class Petowner < ActiveRecord::Base
@@ -47,7 +48,7 @@ class Petowner < ActiveRecord::Base
   # --------------------conditional validations------------------------------
 
   # ________1) step 1 validations__________________________________________
-  validates :first_name , :surname , :contact_line_one , :personal_email , :ResidentialArea_id , presence: true , if: :basic_details? # if basic_details? returns true then this validation will be done otherwise it won't
+  validates :first_name , :surname , :contact_line_one , :personal_email , :residential_area_id , presence: true , if: :basic_details? # if basic_details? returns true then this validation will be done otherwise it won't
 
   # -----create custom error messages--------------------------------
 

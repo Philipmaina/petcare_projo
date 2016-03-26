@@ -11,9 +11,10 @@
 #  contact_line_one      :string
 #  contact_line_two      :string
 #  profile_pic_file_name :string
-#  ResidentialArea_id    :integer
+#  residential_area_id   :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  password_digest       :string
 #
 
 class PetownersController < ApplicationController
@@ -32,7 +33,7 @@ class PetownersController < ApplicationController
 	def create_basic_predetails
 
 		# this helps avoid a common error called mass assignment where you don't whitelist the attributes you want to be stored from the form so a hacker could add his/her own attributes and change stuff in the db table that they shouldnt e.g admin value from 0 to 1
-		petowner_first_step_params = params.require(:petowner).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation  )
+		petowner_first_step_params = params.require(:petowner).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :residential_area_id , :password , :password_confirmation  )
 
 		@petowner = Petowner.new( petowner_first_step_params )
 
@@ -77,10 +78,10 @@ class PetownersController < ApplicationController
 
 		@petowner.registration_step = "basic_predetails"
 
-		petowner_first_step_params = params.require(:petowner).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation  ) #prevents mass assignment
+		petowner_first_step_params = params.require(:petowner).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :residential_area_id , :password , :password_confirmation  ) #prevents mass assignment
 
 		if @petowner.update( petowner_first_step_params )
-
+			
 			redirect_to edit_petowner_personal_details_path(@petowner.id)
 		else
 

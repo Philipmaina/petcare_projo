@@ -7,10 +7,10 @@
 #  surname                            :string
 #  other_names                        :string
 #  date_of_birth                      :date
-#  ResidentialArea_id                 :integer
+#  residential_area_id                :integer
 #  personal_email                     :string
-#  contact_no_one                     :string
-#  contact_no_two                     :string
+#  contact_line_one                   :string
+#  contact_line_two                   :string
 #  no_of_yrs_caring                   :integer
 #  no_of_pets_owned                   :integer
 #  type_of_home                       :string
@@ -23,6 +23,7 @@
 #  profile_description                :text
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
+#  password_digest                    :string
 #
 
 class PetsittersController < ApplicationController
@@ -37,7 +38,7 @@ class PetsittersController < ApplicationController
 
 	def create_basic_predetails
 	
-		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation ) #prevents mass assignment
+		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :residential_area_id , :password , :password_confirmation ) #prevents mass assignment
 
 		@petsitter = Petsitter.new( petsitter_first_step_params )
 
@@ -80,7 +81,7 @@ class PetsittersController < ApplicationController
 
 		@petsitter.registration_step = "basic_predetails"
 
-		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :ResidentialArea_id , :password , :password_confirmation ) #prevents mass assignment
+		petsitter_first_step_params = params.require(:petsitter).permit( :first_name , :surname , :other_names , :contact_line_one , :personal_email , :residential_area_id , :password , :password_confirmation ) #prevents mass assignment
 
 		if @petsitter.update( petsitter_first_step_params )
 

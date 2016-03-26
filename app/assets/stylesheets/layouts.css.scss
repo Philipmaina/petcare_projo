@@ -1,6 +1,22 @@
 
+
+
+$primary-background-color: #F5F5F5;
+$secondary-background-color: #237CBE;
+$primary-text-color: #444;
+$secondary-text-color: #777;
+$primary-link-color: #2E6AA0;
+$secondary-link-color: #FFF;
+$errors-background-color: #FFC;
+$errors-text-color: #DC3D3D;
+$subdued-color: darken($primary-background-color, 20%);
+$flash-notice-color: #DBFFDD;
+$flash-alert-color:  #FFE1DE;
+$accent-color: #FAFBFF;
+$fieldset-color: lighten($secondary-background-color, 50%);
+
 header{
-	height: 80px ;
+	height: 70px ;
 	border-bottom: 2px solid black;
 	width: 100% ;
 }
@@ -11,6 +27,25 @@ footer{
 	table#toptable{
 		width: 100% ;
 	}
+}
+
+// ------------------------------FLASHES-----------------------------
+.flash {
+  color: $primary-text-color;
+  border-radius: 4px;
+  padding: 7px;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: #ffc 0 0 4px;
+  
+  &.notice {
+    background-color: $flash-notice-color;
+  }
+
+  &.alert {
+    background-color: $flash-alert-color;
+  }
 }
 
 

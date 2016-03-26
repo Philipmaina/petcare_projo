@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #eee;">
+<div class="container-fluid" style="background-color: #eee; ">
 
 	<!-- this will be the first gray space after the header -->
 	<div class="row" style="height: 15px;">
@@ -8,11 +8,11 @@
 	<!-- this will be the container that has the form that a pet owner will use to query for pet sitters -->
 	<div class="row">
 		<!-- leave 2 columns to the right of the edge -->
-		<div class="col-md-3">
+		<div class="col-md-2">
 
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<!-- ive added another div to allow me to tinker with this div without tampering with the div of class="col-md-8" coz they must start to conflict -->
 			<div class="holder_of_form_for_query" style="background-color:white; border: 1px solid #00acc1 ; padding: 8px 8px 8px 8px ;">
 				<!-- within this form_query_container div there is a table of 3 rows and 2 columns -->
@@ -64,7 +64,7 @@
 
 
 									<!-- the first parameter of select_tag is the name and id value of the select tag to be created as a whole -->
-									<%= select_tag "ResidentialArea_id" , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location')  , class:"form-control" , style: "border: 1px solid #00acc1 ;" %>
+									<%= select_tag "residential_area_id" , options_from_collection_for_select(@all_residential_areas_in_nairobi , 'id' , 'name_of_location')  , class:"form-control" , style: "border: 1px solid #00acc1 ;" %>
 
 								</div>
 
@@ -255,7 +255,7 @@
 		</div>
 
 		<!-- leave 2 columns to the left of the edge -->
-		<div class="col-md-3">
+		<div class="col-md-2">
 
 		</div>
 

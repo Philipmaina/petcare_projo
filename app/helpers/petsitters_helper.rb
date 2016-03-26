@@ -7,10 +7,10 @@
 #  surname                            :string
 #  other_names                        :string
 #  date_of_birth                      :date
-#  ResidentialArea_id                 :integer
+#  residential_area_id                :integer
 #  personal_email                     :string
-#  contact_no_one                     :string
-#  contact_no_two                     :string
+#  contact_line_one                   :string
+#  contact_line_two                   :string
 #  no_of_yrs_caring                   :integer
 #  no_of_pets_owned                   :integer
 #  type_of_home                       :string
@@ -23,6 +23,7 @@
 #  profile_description                :text
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
+#  password_digest                    :string
 #
 
 module PetsittersHelper
