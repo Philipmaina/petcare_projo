@@ -113,11 +113,11 @@ class ApplicationController < ActionController::Base
 
     }
 
-
+    
 
     # ________3) Find all petsitter whose unavailable dates don't coincide with the days chosen as period of care________
 
-    final_array_with_all_petsitter_objects_that_satisfy_all_criteria = Array.new
+    @final_array_with_all_petsitter_objects_that_satisfy_all_criteria = Array.new
 
     # so we are receiving drop off date and pickup date from params, therefore we need to get petsitters whose unavailable dates are not in the range btwn the dropoffdate and pickup date
 
@@ -147,7 +147,7 @@ class ApplicationController < ActionController::Base
           # if we intersect the two arrays as shown below by & operator end we end up getting an empty array, that means the petsitter that we are currently inspecting doesn't have any of his unavailable dates colliding with the period of care the petowner wants - so his/she is A PERFECT MATCH - THEREFORE WE CAN ADD THAT PETSITTER OBJECT TO FINAL ARRAY
           if (array_containing_dates_for_period_of_care & array_of_all_unavailabledates_for_specificpetsitter).empty?
 
-            final_array_with_all_petsitter_objects_that_satisfy_all_criteria.push(petsitterelement)
+            @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.push(petsitterelement)
             
           end #end of inner if
 
@@ -156,16 +156,18 @@ class ApplicationController < ActionController::Base
     end #end of outer if
 
 
+    # flash[:notice]’s message will persist to the next action and should be used when redirecting to another action via the ‘redirect_to’ method.(only disappears after second request)
+    # flash.now[:notice]’s message will be displayed in the view your are rendering via the ‘render’ method.
 
 
 
 
 
-    if final_array_with_all_petsitter_objects_that_satisfy_all_criteria.any?
+    if @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.any?
         # setup flashes then show in application layouts
-        flash[:notice] = "We have found petsitter(s) that match your criteria"
+        flash.now[:notice] = "We have found petsitter(s) that match your criteria"
     else
-       flash[:alert] = "sorry!! We have not found petsitter(s) that match your criteria."
+       flash.now[:alert] = "sorry!! We have not found petsitter(s) that match your criteria."
     end
 
     @all_residential_areas_in_nairobi = ResidentialArea.all

@@ -1,6 +1,6 @@
 
 
-
+$black-color-for-site: #323232 ;
 $primary-background-color: #F5F5F5;
 $secondary-background-color: #237CBE;
 $primary-text-color: #444;
@@ -15,9 +15,13 @@ $flash-alert-color:  #FFE1DE;
 $accent-color: #FAFBFF;
 $fieldset-color: lighten($secondary-background-color, 50%);
 
+div.div_holding_header{
+
+  border-bottom: 2px solid $black-color-for-site;
+}
+
 header{
 	height: 70px ;
-	border-bottom: 2px solid black;
 	width: 100% ;
 }
 

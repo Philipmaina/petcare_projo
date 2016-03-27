@@ -56,9 +56,16 @@
 }
 /*---------------------------------------------------------------------*/
 
+/*THIS WAS TO MAKE THE CHECKBOXES WHICH APPEAR LIKE TOGGLE BUTTONS STRETCH TO FILL THEIR INDIVIDUAL CELL WIDTH*/
 .btn_for_pets_query{
   width: 100% ;
   border-radius: 0px;
+}
+
+
+body {
+  margin:0px;
+  padding:0px;
 }
 
 /*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/

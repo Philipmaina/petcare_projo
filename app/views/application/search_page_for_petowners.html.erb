@@ -262,25 +262,132 @@
 	</div>
 
 	<!-- this will be the second gray space to allow for spacing out and more defined sections for easy usability -->
-	<div class="row">
+	<div class="row" style="height: 15px;">
 
 
 	</div>
+
+
+
+
 
 	<!-- this section will now have a list of containers of all the queried pet sitters - it will be like a vertical list going down -->
 	<!-- just like a faint line separating them like a <hr> tag -->
 	<div class="row">
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-8">
+
+			<% if @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.present? %>
+
+				<% i = 0 %>
+
+				<table style="width: 100 % ;">
+					<tbody>
+
+						<% while i <= ( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.size - 1 ) do %>
+
+							<tr>
+
+								<% for a in 0..1 do %>
+
+									<% if (i <= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.size - 1) %>
+										
+			
+									<!-- the td just below will represent the table cells of the main outer table -->
+									<!-- THE CONCEPT IS TO CREATE TO 2 COLUMNS(CELLS) FOR EVERY ROW WHERE FOR EACH CELL WE WILL DISPLAY THE DETAILS OF ONE PETSITTER  -->
+									<!-- THIS IS WHY WE LOOP FROM 0 TO 1 THEN FROM 2 TO 3 THEN FROM 4 TO 5 -->
+									<!-- ___________________________ -->
+									<!-- | PETSITTER1  | PETSITTER2| -->
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+									<!-- | PETSITTER3  | PETSITTER4| -->
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+									<!-- remember we are trying to make each cell a link to the show page of the petsitter to see more details(<a>) -->
+									<td style="width: 50% ;">
+										<a>
+											<!-- EACH CELL HOWEVER IS ALSO LIKE A TABLE IN ITSELF  -->
+											<!-- _______________________ -->
+											<!-- |          |__________| -->
+											<!-- |          |__________|-->
+											<!-- |__________|__________| -->
+
+											<table>
+												<tr>
+													<!-- this section will have image of petsitter -->
+													<td style="width: 40% ;">
+
+
+													</td>
+
+													<td style="width: 60% ;">
+														<table>
+															<!-- this first row will have petsitter formal names -->
+															<tr>
+																<td>
+																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].first_name %> 
+																&nbsp;
+																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].surname %> 
+
+																</td>
+															</tr>
+
+															<!-- this second row will have the listing name -->
+															<tr>
+																<td>
+																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].listing_name %> 
+
+																</td>
+															</tr>
+
+															<!-- this third row will have the truncated profile description -->
+															<tr>
+																<td>
+
+
+
+																</td>
+															</tr>
+
+														</table>
+													</td>
+
+												</tr>
+											</table>
+
+										</a>
+									</td>
+
+									<% elsif %>
+
+										<% break %>
+
+									<% end %>
+
+									<% i = i + 1 %>
+									
+								<% end %>
+
+							</tr>
+
+							<!-- i create another tr tag just for spacing purposes so that after the row that has 2 petsitters on each cell, there is a row below that is coloured gray like background making a space btwn two rows which have petsitters -->
+							<tr>
+
+							</tr>
+
+						<% end %>
+
+					</tbody>
+				</table>
+
+			<% end %>
 
 
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 
 		</div>
 
