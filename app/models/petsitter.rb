@@ -45,7 +45,7 @@ class Petsitter < ActiveRecord::Base
 
 
   # ---------------R/SHIPS-----------------
-  belongs_to :ResidentialArea
+  belongs_to :residential_area
 
   has_many :junctionofpetsitterandpettypes
   has_many :junctionofservicesandpetsitters

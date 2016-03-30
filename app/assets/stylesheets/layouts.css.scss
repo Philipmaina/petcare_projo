@@ -23,6 +23,38 @@ div.div_holding_header{
 header{
 	height: 70px ;
 	width: 100% ;
+
+
+
+// this nested trail is for the name of a person on the header section once the person successfuly signs in
+  div{
+
+    table{
+
+      tr{
+
+        td{
+
+          div.btn.btn-default.navbar-btn.name_section_log_in{
+
+            border:none !important ;
+            color: #00acc1; 
+            font-size: 16px ;
+
+          }
+
+          div:hover{
+
+            text-decoration: none ;
+          }
+        }
+      }
+    }
+  }
+// ------------------------------------------------------------
+
+
+
 }
 
 footer{

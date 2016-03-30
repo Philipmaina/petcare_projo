@@ -1,0 +1,101 @@
+<style type="text/css">
+    p#sign_in_btn_actual_page{
+    	text-align: center ;
+    }
+    .sign_in_page_sign_in_btn{
+    width:90% ;
+    background-color: #00acc1;
+    height: 50px;
+    color:white;
+    font-size: 18px ;
+
+  }
+	
+</style>
+<!-- INSPIRATION PAGE ROVER -->
+<!-- remember we dont have an active model object because we aren't even going to store anything in the db -->
+<div class="container-fluid" style="background-color: #eee;">
+
+	<div class="row" style="height: 50px ;" >
+	</div>
+
+
+	<div class="row" >
+
+		<div class="col-md-3">
+
+		</div>
+
+		<!-- sign in form will be here -->
+		<div class="col-md-6" style="background-color: white ;">
+
+
+			<!-- The CSS padding properties define the white space between the element content and the element border. -->
+			<div style="padding: 40px 20px 20px 20px;">
+
+				<h1 style="text-align: center ;">
+					Sign In to Pet<span style="color:#00acc1;">Care</span>
+				</h1>
+
+				<div class="row" style="height: 50px;">
+
+				</div>
+
+			
+
+				<%= form_tag(session_path) do %>
+
+					<div class="form-group">
+
+						<%= label_tag :personal_email %>
+
+						<%= email_field_tag :personal_email , nil , autofocus: true , class:"form-control" %>
+
+					</div>
+
+					<!-- space between form control - email field and the next label -->
+					<div class="row" style="height:25px;">
+
+					</div>
+
+					<div class="form-group">
+
+						<%= label_tag :password %>
+
+						<%= password_field_tag :password ,nil, class:"form-control" %>
+
+					</div>
+
+					<div class="row" style="height:25px;" >
+
+					</div>
+
+					<p id="sign_in_btn_actual_page" >
+
+					 	 <%= submit_tag "Sign In" , class:"btn sign_in_page_sign_in_btn" %>
+					 </p>
+
+
+					 
+				<% end %>
+
+			</div>
+			
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+	<!-- want a gray row after button to blend to whole gray body container feel -->
+
+	<div class="row" style="background-color: #eee; height: 40px;" >
+
+	</div>
+
+
+
+
+</div>

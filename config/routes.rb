@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
+
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
+
+  # _________________sessions and login stuff_________________________
+  resource :session #singular resource which removes listing route and :id placeholder because we are not any session from db because we are storing in a hash
 
    # -----------------------ADDITIONAL ROUTES----------------------------
 

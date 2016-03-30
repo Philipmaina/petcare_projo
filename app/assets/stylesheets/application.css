@@ -23,6 +23,7 @@
  *= require font-awesome
  */
 
+ /*these are the sign up and sign in buttons on the layout of every page*/
  button.btn.btn-default.navbar-btn.border-highlight{
 
 			border: 1px solid #00acc1 !important ;
@@ -67,6 +68,10 @@ body {
   margin:0px;
   padding:0px;
 }
+
+
+
+
 
 /*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
 @font-face {

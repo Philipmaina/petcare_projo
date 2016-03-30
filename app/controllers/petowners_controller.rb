@@ -40,7 +40,11 @@ class PetownersController < ApplicationController
 		# --THIS WILL HELP US IN THE PARTIAL OBJECT VALIDATION WHILE SAVING--
 		@petowner.registration_step = "basic_predetails"
 
-		if @petowner.save 
+		if @petowner.save
+			# if you create an account with us which in our case involves bypassing the first step of our multistep form we want to automatically sign in you otherwise you would have to sign in as a separate step
+			session[:petowner] = @petowner.id
+
+
 			# --------go to the NEXT(2nd) STEP----------------------
 			# ---starts a whole request response cycle for STEP 2---
 			redirect_to edit_petowner_personal_details_path(@petowner.id)

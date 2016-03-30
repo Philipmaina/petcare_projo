@@ -46,6 +46,10 @@ class PetsittersController < ApplicationController
 		@petsitter.registration_step = "basic_predetails"
 
 		if @petsitter.save
+
+			# if you create an account with us which in our case involves bypassing the first step of our multistep form we want to automatically sign in you otherwise you would have to sign in as a separate step
+			session[:petsitter] = @petsitter.id
+			
 			redirect_to edit_petsitter_personal_details_path(@petsitter.id)	
 		else
 

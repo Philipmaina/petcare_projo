@@ -38,7 +38,7 @@ class Petowner < ActiveRecord::Base
   
   # -----------R/SHIPS----------
 
-  belongs_to :ResidentialArea
+  belongs_to :residential_area
   has_many :pets
 
 

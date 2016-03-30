@@ -1,3 +1,19 @@
+
+<head>
+
+	<style type="text/css">
+
+		 tr.whole_a_tag_with_matched_sitter_from_query:hover {
+
+		  cursor:pointer;
+		  border: 1px solid  #FF7F50;
+
+		 }
+
+
+	</style>
+
+</head>
 <div class="container-fluid" style="background-color: #eee; ">
 
 	<!-- this will be the first gray space after the header -->
@@ -262,7 +278,7 @@
 	</div>
 
 	<!-- this will be the second gray space to allow for spacing out and more defined sections for easy usability -->
-	<div class="row" style="height: 15px;">
+	<div class="row" style="height: 30px;">
 
 
 	</div>
@@ -280,7 +296,7 @@
 		</div>
 
 		<div class="col-md-8">
-
+			<!-- .present? checks whether the array has any elements  -->
 			<% if @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.present? %>
 
 				<% i = 0 %>
@@ -306,18 +322,23 @@
 									<!-- | PETSITTER3  | PETSITTER4| -->
 									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 									<!-- remember we are trying to make each cell a link to the show page of the petsitter to see more details(<a>) -->
-									<td style="width: 50% ;">
-										<a>
+									<td style="width: 50% ; ">
+
+										<%= link_to pet_sitter_dashboard_path(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].id) do %>
+
 											<!-- EACH CELL HOWEVER IS ALSO LIKE A TABLE IN ITSELF  -->
 											<!-- _______________________ -->
 											<!-- |          |__________| -->
 											<!-- |          |__________|-->
 											<!-- |__________|__________| -->
+											<!-- make the background white otherwise it takes default colo of container which is grayish , also put a border around this, when hovered on it should change color -->
+											<table style="border: 1px solid #7f9294;  background-color: white ; height: 115px ;" >
+												<tr class="whole_a_tag_with_matched_sitter_from_query">
 
-											<table>
-												<tr>
 													<!-- this section will have image of petsitter -->
-													<td style="width: 40% ;">
+													<td style="width: 40% ; text-align: center ;">
+
+														<i class="fa fa-user fa-3x"></i>
 
 
 													</td>
@@ -326,17 +347,31 @@
 														<table>
 															<!-- this first row will have petsitter formal names -->
 															<tr>
-																<td>
+																<td style="color: #323232; font-size: 20px ; font-weight: bolder ; ">
 																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].first_name %> 
 																&nbsp;
-																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].surname %> 
+																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].surname[0] %> 
 
 																</td>
+
+																<!-- at the very corner of this row we should have another cell that shows price rate of petsitter - same row as names -->
+																<td style="width:20% " >
+
+																	<!-- we've used a custom helper -->
+																	<%= custom_price_rate(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i]) %>
+
+																</td>
+														<!-- _____________ -->
+														<!-- |     |___|_| -->
+														<!-- |     |_____| -->
+														<!-- |_____|_____| -->
+
+
 															</tr>
 
 															<!-- this second row will have the listing name -->
 															<tr>
-																<td>
+																<td style="font-size: 18px ;">
 																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].listing_name %> 
 
 																</td>
@@ -344,9 +379,10 @@
 
 															<!-- this third row will have the truncated profile description -->
 															<tr>
-																<td>
+																<td style="color: #7f9294;">
 
-
+																	<%= truncate( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].profile_description , length: 65 , separator: ' ' ) %>
+																	
 
 																</td>
 															</tr>
@@ -357,7 +393,7 @@
 												</tr>
 											</table>
 
-										</a>
+										<% end %>
 									</td>
 
 									<% elsif %>

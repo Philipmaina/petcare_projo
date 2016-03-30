@@ -16,33 +16,176 @@
 			<div class="col-md-8">
 
 				<table style="float:right; width: 26% ;">
-					
+
 					<tr>
-						<!-- login button -->
-						<td>
-							<button type="button" class="btn btn-default navbar-btn border-highlight">Sign in</button>
-						</td>
-						<!-- ~~~~~~~~~~~~~ -->
 
-						<!-- this column allows spacing between the two buttons(sign up and sign in) -->
-						<td style="width:5px;">
+						<!-- even if session DOESN'T have keys petsitter or petowner , the session hash still exists and has keys ["session_id", "_csrf_token"] - IMPORTANT TO NOTE THAT  -->
 
-						</td>
+						<% if session.key?(:petsitter) %>
+
+							<!-- we already have a table with a row  -->
+
+							<!-- so i want that cell to look like so -->
+							<!-- _____________ -->
+							<!-- |_______|____| -->
+							<!-- therefore it is like another table within the cell with one row and two cell(tds) -->
+
+							<td>
 
 
-						<!-- sign up button -->
-						<td>
-							<%= link_to  page_for_choosing_type_of_registration_path ,  :method => :get  do  %> 
-								<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Up</button>
-							<% end %>
-						</td>
-						<!-- ~~~~~~~~~~~~~~~ -->
+								<table>
 
-						<!-- help link -->
-						<td>
+									<tr>
 
-						</td>
-						<!-- ~~~~~~~~~~ -->
+										<td style="text-align:right;">
+
+											<i class="fa fa-user" style="color: #D3D3D3 ; " ></i>
+
+										</td>
+
+										<td>
+
+											<%= link_to pet_sitter_dashboard_path(current_petsitter.id) , :method => :get do   %>
+
+												<div class="btn btn-default navbar-btn name_section_log_in"  >
+													<!-- we never want to run queries inside views, they should just display data given to them. views shouldn't even know of existence of models -->
+													<!-- Petsitter.find( session[:petsitter] ).first_name.downcase in ruby -->
+													<!-- so we could just do the above and it would work but it isn't where that code should be -->
+													<!-- current_petsitter is a helper method -->
+													<!-- because we might want to call this from other views we put it in global application helper because methods placed here are available to all views  -->
+
+
+													<!-- we can make this name a link to dashboard -->
+													
+
+														<%= current_petsitter.first_name.downcase %>
+
+													
+													
+												</div>
+
+											<% end %>
+
+
+										</td>
+
+										<!-- this column allows spacing between the name of user and sign out button -->
+										<td style="width:5px;">
+
+										</td>
+
+										<!-- this is the actual sign out button remember can only appear if there is someone currently signed in -->
+										<td>
+
+											<%= link_to  session_path ,  :method => :delete  do  %>
+
+												<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Out</button>
+
+											<% end %>
+
+										</td>
+
+									</tr>
+
+
+
+								</table>
+
+							</td>
+
+
+
+						<% elsif session.key?(:petowner) %>
+
+							<td>
+
+								<table>
+									<tr>
+
+										<td style="text-align:right;">
+
+											<i class="fa fa-user" style="color: #D3D3D3 ; "></i>
+
+										</td>
+
+										<td>
+
+											<!-- we can make this name a link to dashboard -->
+
+											<%= link_to pet_owner_dashboard_path(current_petowner.id) , :method => :get do   %>
+							
+												<div class="btn btn-default navbar-btn name_section_log_in" >
+
+													<!-- Petowner.find( session[:petowner] ).first_name.downcase  --> 
+													<!-- the statement above could work just fine -->
+													<!-- but we never want to run queries inside views, they should just display data given to them. views shouldn't even know of existence of models  -->
+
+														<%= current_petowner.first_name.downcase %>
+
+												</div>
+
+											<% end %>
+								
+
+										</td>
+
+										<!-- this column allows spacing between the name of user and sign out button -->
+										<td style="width:5px;">
+
+										</td>
+
+										<!-- this is the actual sign out button remember can only appear if there is someone currently signed in -->
+										<td>
+											<!-- ACTUALLY NAME FOR ROUTE HELPER FOR DELETING SESSION DOESN'T EXIST BUT IT IS session_path just with a different HTTP verb - delete -->
+											<%= link_to  session_path ,  :method => :delete  do  %>
+
+												<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Out</button>
+												
+											<% end %>
+
+										</td>
+
+
+									</tr>
+
+								</table>
+
+							</td>
+
+							
+
+						<% else %>
+
+							
+							<!-- login button -->
+							<td>
+								<%= link_to new_session_path , :method => :get do   %>
+									<button type="button" class="btn btn-default navbar-btn border-highlight">Sign in</button>
+								<% end %>
+							</td>
+							<!-- ~~~~~~~~~~~~~ -->
+
+							<!-- this column allows spacing between the two buttons(sign up and sign in) -->
+							<td style="width:5px;">
+
+							</td>
+
+
+							<!-- sign up button -->
+							<td>
+								<%= link_to  page_for_choosing_type_of_registration_path ,  :method => :get  do  %> 
+									<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Up</button>
+								<% end %>
+							</td>
+							<!-- ~~~~~~~~~~~~~~~ -->
+
+							<!-- help link -->
+							<td>
+
+							</td>
+							<!-- ~~~~~~~~~~ -->
+
+						<% end %>
 					</tr>
 
 				</table>
