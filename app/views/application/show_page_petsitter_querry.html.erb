@@ -1,0 +1,266 @@
+<div class="container-fluid" style="background-color: #eee; ">
+
+	<!-- this will be the first gray space after the header -->
+	<div class="row" style="height: 10px;">
+
+	</div>
+
+	<!-- this will be the container that contains actual content of petsitter, all his details -->
+	<div class="row" style="height: 550px ; background-color: #eee; ">
+
+		<!-- leave 2 columns to the right of the edge -->
+		<div class="col-md-1">
+
+		</div>
+
+
+		<div class="col-md-10" style="background-color: white ; position: relative ; height: 98%">
+
+			<!-- first table is like container of everything that has 2 columns - one for petsitter details and images and description, another for calendar and confirmation booking form -->
+
+			<!-- ________________________________________________-->
+			<!-- | _______________________________ | __________ | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |_____________________________| | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |                             | | |________| | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |_____________________________| | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |                             | | |        | | -->
+			<!-- | |_____________________________| | |________| | -->
+			<!-- |_________________________________|____________| -->
+			<table style="position: relative; height: 100% ; padding: 5px 5px 5px 5px ;" >
+
+				<tr style="position: relative; height: 100% ;"> 
+
+					<!-- column for images , petsitter prof description and pet sitter formal details  -->
+					<td style="width=65%;">
+
+						<!-- within this column(cell) we have three rows for each of the stated things above -->
+						<!-- therefore we need to create another table -->
+						<table style="position: relative; height: 100% ;" >
+
+							<!-- this row will have the images/images of petsitter -->
+							<tr style="position: relative ;height: 35% ;">
+
+
+							</tr>
+
+							<!-- this row will have the lengthened profile desciption of petsitter if any -->
+							<tr style="height: 25% ;">
+								<td >
+									<span style="font-family: 'bichette' !important ; font-size: 35px ; color: #00acc1 ;">
+										All about me
+									</span>
+
+									<% @petsitter_querried.profile_description.split("." , 3 ).each do |paragraph|  %>
+
+										<p style="font-size: 13px ;">
+											<%= paragraph %>
+										</p>
+
+									<% end %>
+
+									
+								</td>
+							</tr>
+
+							<!-- this row will contain all the formal details like how many pets they own , years of experience -->
+							<tr>
+								<td>
+									<span style="font-family: 'bichette' !important ; font-size: 35px ; color: #00acc1; ">
+										Formal Details
+									</span>
+
+									<table style="font-size: 13px ;" >
+										<tr>
+
+											<td>
+
+												<table class="table table-striped"  style="border-collapse: separate; border-spacing: 5px;" >
+
+													<tr>
+														<td style="text-align:left;">
+
+															Price/Charges
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+													</tr>
+
+													<tr>
+														<td style="text-align:left;">
+
+															Type of house
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+													</tr>
+
+													<tr>
+
+														<td style="text-align:left;">
+
+															Presence of open area
+
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+
+													</tr>
+
+													<tr>
+
+														<td style="text-align:left;">
+
+															Work situation
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+													</tr>
+
+												</table>
+
+											</td>
+
+
+											<td>
+												<table class="table table-striped"  style="border-collapse: separate; border-spacing: 5px;">
+
+													<tr>
+														<td style="text-align:left;">
+
+															No of yrs caring for pets
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+													</tr>
+
+													<tr>
+														<td style="text-align:left;">
+
+															No of pets owned
+
+														</td>
+
+														<td style="text-align:right;">
+
+														</td>
+
+
+													</tr>
+
+													<tr>
+
+														<td style="text-align:left;">
+
+															Pets i can care for
+
+														</td>
+
+														<td style="text-align:right;">
+
+
+														</td>
+
+
+													</tr>
+
+													<tr>
+
+														<td style="text-align:left;">
+
+															Services offered
+
+														</td>
+
+														<td style="text-align:right;">
+
+
+														</td>
+
+													</tr>
+
+												</table>
+
+											</td>
+
+										</tr>
+
+
+
+
+
+									</table>
+
+
+								</td>
+							</tr>
+
+
+						</table>
+
+					</td>
+
+					<!-- column for availability calendar and confirmation booking form -->
+					<td style="width: 35% ;">
+						<!-- within this column we have two rows one for calendar the other for the form -->
+						<table>
+
+							<!-- this row has the availability calendar of petsitter -->
+							<tr>
+
+
+							</tr>
+
+							<!-- this row has the confirmation booking form - might have some repetitive fields from search query page but we need to confirm stuff like days or sitting services just to be sure coz this info is vital  -->
+							<tr>
+
+
+							</tr>
+
+
+						</table>
+
+					</td>
+
+				</tr>
+
+			</table>
+
+
+		</div>
+
+
+		<div class="col-md-1">
+
+
+		</div>
+
+	</div>
+
+</div>

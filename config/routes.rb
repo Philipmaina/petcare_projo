@@ -18,7 +18,8 @@ Rails.application.routes.draw do
    # ----------------route when sign up button is clicked---------------
    get "/petcare/register-as-who-now" => "application#page_for_choosing_type_of_registration" , as: "page_for_choosing_type_of_registration"
 
-  # -----------1) routes for multistep form of PETOWNERS ---------------------------
+
+  # -----------1) routes for multistep form of PETOWNERS ----------------------
 
 # ____________1a) step 1 for basic creation of petowner_______________
   get "/petowners/new/basic_predetails" => "petowners#new_basic_predetails" , as: "new_petowner_basic_predetails"
@@ -71,6 +72,10 @@ get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboar
   patch "/petsitters/:id/charges_plus_calendar" => "petsitters#update_petsitter_charges_plus_calendar"
 
   get "/petsitter/:id/dashboard" => "petsitters#dashboard" , as: "pet_sitter_dashboard" 
+
+  # __ROUTE ONCE YOU CLICK A PETSITTER THAT A [ETOWNER] HAD QUERRIED FOR______
+  get "/show_page_petsitter/:id/" => "application#show_page_petsitter_querry" , as: "show_page_petsitter_querry"
+
 
 
 # -----------------routes for sessions to allow authentication----------------

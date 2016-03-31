@@ -15,7 +15,7 @@
 			
 			<div class="col-md-8">
 
-				<table style="float:right; width: 26% ;">
+				<table style="float:right; width: 35% ;">
 
 					<tr>
 
@@ -99,8 +99,28 @@
 
 							<td>
 
+								
 								<table>
 									<tr>
+
+										<td style="text-align:left;">
+											<!-- remember we want this FIND A SITTER link button to only come when you're logged in as a petowner -->
+												<%= link_to  search_main_page_path ,  :method => :get  do  %>
+
+													<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
+													
+												<% end %>
+
+										</td>
+
+
+										<!-- for spacing between icon and find a sitter button -->
+
+										<td style="width: 6px;">
+
+										</td>
+
+										
 
 										<td style="text-align:right;">
 

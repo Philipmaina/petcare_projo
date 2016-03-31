@@ -179,6 +179,14 @@ class ApplicationController < ActionController::Base
     
   end # end of action
 
+  def show_page_petsitter_querry
+
+    @petsitter_querried = Petsitter.find( params[:id] )
+
+    
+    
+  end
+
 
 
 

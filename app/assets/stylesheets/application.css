@@ -73,7 +73,7 @@ body {
 
 
 
-/*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
+/*THIS IS WHAT CHANGES THE PATH TO GLYPHICONS FONTS AND ALLOWS US TO ACCESS THEM WITHOUT ACTUALLY CHANGING THE BOOTSTRAP FILES*/
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../assets/glyphicons-halflings-regular.eot');
@@ -81,4 +81,13 @@ body {
        url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/*The @font-face rule allows custom fonts to be loaded on a webpage.*/
+/*this is how to include fonts in your css*/
+/*Specify a font named "myFirstFont", and specify the URL where it can be found:*/
+/*tested out the url path with terminal how to get to vendor/assets from stylesheets folder*/
+@font-face {
+    font-family: 'bichette';
+    src: url('bichette.ttf');
 }
