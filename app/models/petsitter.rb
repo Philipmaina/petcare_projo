@@ -28,6 +28,9 @@
 
 class Petsitter < ActiveRecord::Base
 
+  # ----------------------------images/uploader stuff--------------------------
+  mount_uploader :default_pic_file_name , ThumbnailstuffUploader
+
   # ----------------attributes created----------------------
   attr_accessor :registration_step
 

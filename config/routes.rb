@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :bookings
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
    # --------route when browse_a_sitter_button is clicked from landing pg--
    get "/search_main_page" => "application#search_main_page" , as: "search_main_page"
    post "/search_main_page" =>"application#find_all_petsitters_that_match_query" , as: "query_main_page"
+
+
 
    # ----------------route when sign up button is clicked---------------
    get "/petcare/register-as-who-now" => "application#page_for_choosing_type_of_registration" , as: "page_for_choosing_type_of_registration"
@@ -73,8 +76,14 @@ get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboar
 
   get "/petsitter/:id/dashboard" => "petsitters#dashboard" , as: "pet_sitter_dashboard" 
 
+
+
   # __ROUTE ONCE YOU CLICK A PETSITTER THAT A [ETOWNER] HAD QUERRIED FOR______
   get "/show_page_petsitter/:id/" => "application#show_page_petsitter_querry" , as: "show_page_petsitter_querry"
+
+  # route when from show page of petsitter querried you click confirm booking
+
+  post "/submit_booking_details/:id" => "application#create_booking_record" , as: "create_booking_record"
 
 
 

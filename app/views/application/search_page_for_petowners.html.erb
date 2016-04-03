@@ -32,6 +32,7 @@
 		<div class="col-md-8">
 			<!-- ive added another div to allow me to tinker with this div without tampering with the div of class="col-md-8" coz they must start to conflict -->
 			<div class="holder_of_form_for_query" style="background-color:white; border: 1px solid #00acc1 ; padding: 8px 8px 8px 8px ;">
+				<!-- can't put a form inside a table but can put it in a td or tr tag -->
 				<!-- within this form_query_container div there is a table of 3 rows and 2 columns -->
 				<%= form_tag(query_main_page_path) do %>
 				<table>
@@ -253,7 +254,7 @@
 							<!-- this last part should have the search button -->
 							<td style="text-align:right;">
 
-								<button class="btn " id="btn_for_becoming_petowner" type="submit" style="background-color: #00acc1 ; color: white ; width:80% ;" >
+								<button class="btn " type="submit" style="background-color: #00acc1 ; color: white ; width:80% ;" >
 									Search
 								</button>
 

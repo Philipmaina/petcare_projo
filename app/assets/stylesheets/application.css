@@ -91,3 +91,9 @@ body {
     font-family: 'bichette';
     src: url('bichette.ttf');
 }
+
+@font-face {
+
+  font-family: 'rifficfreebold' ;
+  src: url('RifficFree-Bold.ttf');
+}

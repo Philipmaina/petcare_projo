@@ -86,9 +86,9 @@ module ApplicationHelper
  			# "cat , dog , horse"
  			# we want it to read Can care for: dogs , horses , pets......
 
-			petsitter.pettypes.each do |petarray|
+			petsitter.pettypes.each do |petelement|
 
-				a.push(petarray.type_name.pluralize)
+				a.push(petelement.type_name.pluralize)
 				# 'post'.pluralize will become "posts"
 
 			end
@@ -101,6 +101,176 @@ module ApplicationHelper
 		
 	end
 
+	# one would think that these next set of helpers aren't needed but what if you do step 1 and want to skip the rest of the steps of sign up - your type of house will be nil - so wont necessarily have a value though theoretically if you got to Step 4 it would take the first value in the dropdown list
+
+	# :contact_line_two => nil,
+    # :no_of_yrs_caring => nil,
+    # :no_of_pets_owned => nil,
+    # :type_of_home => nil,
+    # :presence_of_open_area_outside_home => nil,
+    # :work_situation => nil,
+    # :default_pic_file_name => nil,
+    # :listing_name => nil,
+    # :profile_description => nil,
+
+    # THESE NEXT HELPERS WILL BE USED IN SHOW_PAGE_FOR_QUERRIED_PETSITTER
+	def custom_type_of_home(petsitter)
+
+		if petsitter.type_of_home.blank?
+
+			"?"
+
+		else
+
+			return petsitter.type_of_home
+
+		end
+
+	end
+
+	def custom_presence_of_open_area(petsitter)
+
+		if petsitter.presence_of_open_area_outside_home.blank?
+
+			"?"
+		else
+
+			return petsitter.presence_of_open_area_outside_home
+			
+		end
+		
+	end
+
+	def custom_work_situation(petsitter)
+
+		if petsitter.work_situation.blank?
+
+			"?"
+
+		else
+
+			return petsitter.work_situation
+
+		end
+		
+	end
+
+	def custom_no_of_yrs_caring(petsitter)
+
+		if petsitter.no_of_yrs_caring.blank?
+
+			"?"
+
+		else
+
+			return petsitter.no_of_yrs_caring
+
+		end
+		
+	end
+
+	def custom_no_of_pets_owned(petsitter)
+
+		if petsitter.no_of_pets_owned.blank?
+
+			"?"
+
+		else
+
+			return petsitter.no_of_pets_owned
+			
+		end
 	
+	end
+
+	def custom_services_offered(petsitter)
+
+		if petsitter.sittingservices.blank?
+
+			"Yet to declare sitting services"
+			
+		else
+
+			a = Array.new #this is store the names of the petsservices themselves not whole object
+
+			# petsitter.sittingservices returns an array of sittingservices objects if any 
+			# then we loop through getting each object
+			# we store the sittingservice name in the array
+			# later we'll call .join() passing in a parameter that creates a string separating the element values by the parameter
+			# ["Normal boarding" , "Daycare" , "In home boarding" ].join(" , ")
+ 			# "Normal boarding , Daycare , In home boarding"
+ 			# we want it to read Sitting services: Normal boarding , daycare...
+
+			petsitter.sittingservices.each do |serviceelement|
+
+				a.push(serviceelement.service_name)
+			end
+
+
+			string_to_return = a.join(" , ")
+
+			return string_to_return = " #{string_to_return}"
+
+		end
+
+
+		
+	
+	end
+
+
+	def customize_thumbnail_pic(petsitter)
+
+		if petsitter.default_pic_file_name.blank?
+
+			"<i class='fa fa-user fa-5x' ></i> ".html_safe
+
+		else
+
+			 image_tag(@petsitter_querried.default_pic_file_name.thumb , :style => "border-radius: 50% ;padding-top: 8px;") 
+
+		end
+	end
+
+
+
+# --------THIS HELPS IN THE SHOW PAGE FOR QUERRIED PETSITTER---------------
+# --------IT HELPS DISABLE DATES WHEN THE PETSITTER IS UNAVAILABLE---------
+
+	def ruby_array_to_javascript_dates_multidates_picker(petsitter)
+
+		ruby_array_of_dates = Array.new
+
+		# firstly for the current petsitter we get the array of dates he/she is unavailable for in ruby
+		petsitter.unavailabledates.each do |unavailabledate_object|
+			ruby_array_of_dates.push(unavailabledate_object.unavailable_dates_on)
+		end
+
+		# addDisabledDates: [today.setDate(1), today.setDate(3)]
+		# we want to do the same but base our dates from the ruby array above
+		if ruby_array_of_dates.respond_to?(:map)
+
+			return ruby_array_of_dates.map{ |eachdate| 
+
+				"new Date(#{eachdate.year}, #{eachdate.month - 1}, #{eachdate.day})"
+
+			}
+			
+		end
+
+		# at the end we get 
+		
+		# [new Date(2016, 2, 24), new Date(2016, 2, 25), new Date(2016, 3, 11), new Date(2016, 3, 12), new Date(2016, 3, 14)]
+
+		# addDisabledDates: [new Date(2016, 2, 24), new Date(2016, 2, 25), new Date(2016, 3, 11), new Date(2016, 3, 12), new Date(2016, 3, 14)]
+
+		
+	end
+
+	def format_dates_for_js(petsitter)
+
+		ruby_array_to_javascript_dates_multidates_picker(petsitter).to_s.gsub("\"", "").html_safe
+	
+	end
 
 end

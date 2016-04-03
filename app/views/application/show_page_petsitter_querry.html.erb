@@ -6,7 +6,7 @@
 	</div>
 
 	<!-- this will be the container that contains actual content of petsitter, all his details -->
-	<div class="row" style="height: 550px ; background-color: #eee; ">
+	<div class="row" style="height: 625px ; background-color: #eee; ">
 
 		<!-- leave 2 columns to the right of the edge -->
 		<div class="col-md-1">
@@ -14,9 +14,9 @@
 		</div>
 
 
-		<div class="col-md-10" style="background-color: white ; position: relative ; height: 98%">
+		<div class="col-md-10" style="background-color: white ; position: relative ; height: 99%">
 
-			<!-- first table is like container of everything that has 2 columns - one for petsitter details and images and description, another for calendar and confirmation booking form -->
+			<!-- first table is like container of everything that has 2 columns - one for petsitter details and titles and description, another for calendar and confirmation booking form and images -->
 
 			<!-- ________________________________________________-->
 			<!-- | _______________________________ | __________ | -->
@@ -37,31 +37,82 @@
 
 				<tr style="position: relative; height: 100% ;"> 
 
-					<!-- column for images , petsitter prof description and pet sitter formal details  -->
+					<!-- column for titles , petsitter prof description and pet sitter formal details  -->
 					<td style="width=65%;">
 
 						<!-- within this column(cell) we have three rows for each of the stated things above -->
 						<!-- therefore we need to create another table -->
 						<table style="position: relative; height: 100% ;" >
 
-							<!-- this row will have the images/images of petsitter -->
-							<tr style="position: relative ;height: 35% ;">
+							<!-- this row will have the name and place of location of petsitter and listing name -->
+							<tr style="position: relative ;height: 10% ;">
+
+								<td style="text-align:center ;">
+
+									<table>
+
+										<!-- this is where the name of the petsitter will appear -->
+										<tr>
+											<td style="color: #2a494b; font-size: 30px; font-family: rifficfreebold ; font-weight:normal ;">
+												<%= @petsitter_querried.first_name %> 
+
+												&nbsp; <!-- this is white space character in html -->
+
+												<%= @petsitter_querried.surname[0] %>. 
+
+											</td>
+
+										</tr>
+
+										<!-- this is where the listing name of petsitter will appear -->
+										<tr>
+											<td style="color: #2a494b; font-size: 19px; font-family: rifficfreebold ; font-weight:lighter ;" >
+												<%= custom_listing_name(@petsitter_querried) %>
+											</td>
+										</tr>
+
+										<!-- this is where residential area of petsitter will appear -->
+										<tr>
+											<td style="color: #2a494b; font-size: 15px; font-family: rifficfreebold ; font-weight:100 ;">
+												<%= @petsitter_querried.residential_area.name_of_location %>
+											</td>
+										</tr>
+
+
+									</table>
+
+
+								</td>
 
 
 							</tr>
 
 							<!-- this row will have the lengthened profile desciption of petsitter if any -->
-							<tr style="height: 25% ;">
+							<tr style="height: 40% ;">
 								<td >
 									<span style="font-family: 'bichette' !important ; font-size: 35px ; color: #00acc1 ;">
-										All about me
+										All  about  me
 									</span>
+									<% if @petsitter_querried.profile_description.blank? %>
+										<p>
+											As a child I have always had a special place in my heart for animals. In my eyes they are angels on earth.
 
-									<% @petsitter_querried.profile_description.split("." , 3 ).each do |paragraph|  %>
-
-										<p style="font-size: 13px ;">
-											<%= paragraph %>
 										</p>
+										<p> 
+											I will therefore care for your adorable pet in a loving and caring way by providing the comfort and care of a loving, experienced home with plenty of playtime activities.
+										</p>
+
+						
+
+									<% else %>
+
+										<% @petsitter_querried.profile_description.split("." , 3 ).each do |paragraph|  %>
+
+											<p style="font-size: 13px ;">
+												<%= paragraph %>
+											</p>
+
+										<% end %>
 
 									<% end %>
 
@@ -73,150 +124,126 @@
 							<tr>
 								<td>
 									<span style="font-family: 'bichette' !important ; font-size: 35px ; color: #00acc1; ">
-										Formal Details
+										Formal  Details
 									</span>
 
-									<table style="font-size: 13px ;" >
+									<table class="table table-striped"  style=" font-size: 13px ;" >
+
 										<tr>
+											<td style="text-align:left;">
 
-											<td>
-
-												<table class="table table-striped"  style="border-collapse: separate; border-spacing: 5px;" >
-
-													<tr>
-														<td style="text-align:left;">
-
-															Price/Charges
-
-														</td>
-
-														<td style="text-align:right;">
-
-														</td>
-
-													</tr>
-
-													<tr>
-														<td style="text-align:left;">
-
-															Type of house
-
-														</td>
-
-														<td style="text-align:right;">
-
-														</td>
-
-													</tr>
-
-													<tr>
-
-														<td style="text-align:left;">
-
-															Presence of open area
-
-
-														</td>
-
-														<td style="text-align:right;">
-
-														</td>
-
-
-													</tr>
-
-													<tr>
-
-														<td style="text-align:left;">
-
-															Work situation
-
-														</td>
-
-														<td style="text-align:right;">
-
-														</td>
-
-													</tr>
-
-												</table>
+												Price/Charges
 
 											</td>
 
+											<td style="text-align:right; font-weight: bolder;">
 
-											<td>
-												<table class="table table-striped"  style="border-collapse: separate; border-spacing: 5px;">
+												<%= custom_price_rate(@petsitter_querried) %>
 
-													<tr>
-														<td style="text-align:left;">
+											</td>
 
-															No of yrs caring for pets
+											<td style="text-align:left;">
 
-														</td>
+												No of yrs caring for pets
 
-														<td style="text-align:right;">
+											</td>
 
-														</td>
+											<td style="text-align:right; font-weight: bolder;">
 
-													</tr>
-
-													<tr>
-														<td style="text-align:left;">
-
-															No of pets owned
-
-														</td>
-
-														<td style="text-align:right;">
-
-														</td>
-
-
-													</tr>
-
-													<tr>
-
-														<td style="text-align:left;">
-
-															Pets i can care for
-
-														</td>
-
-														<td style="text-align:right;">
-
-
-														</td>
-
-
-													</tr>
-
-													<tr>
-
-														<td style="text-align:left;">
-
-															Services offered
-
-														</td>
-
-														<td style="text-align:right;">
-
-
-														</td>
-
-													</tr>
-
-												</table>
+												<%= custom_no_of_yrs_caring(@petsitter_querried) %>
 
 											</td>
 
 										</tr>
 
 
+										<tr>
+
+											<td style="text-align:left;">
+
+												Type of house
+
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_type_of_home(@petsitter_querried) %>
+
+											</td>
+
+											<td style="text-align:left;">
+
+												No of pets owned
+
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_no_of_pets_owned( @petsitter_querried ) %>
+
+											</td>
+
+										</tr>
+
+										<tr>
+
+											<td style="text-align:left;">
+
+												Presence of open area around house
 
 
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_presence_of_open_area(@petsitter_querried) %>
+
+											</td>
+
+											<td style="text-align:left;">
+
+												Pets
+
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_petscare_for( @petsitter_querried ) %>
+
+
+										</tr>
+
+										<tr>
+
+											<td style="text-align:left;">
+
+												Work situation
+
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_work_situation(@petsitter_querried) %>
+
+											</td>
+
+
+											<td style="text-align:left;  ">
+
+												Services offered
+
+											</td>
+
+											<td style="text-align:right; font-weight: bolder;">
+
+												<%= custom_services_offered( @petsitter_querried  ) %>
+
+
+											</td>
+
+										</tr>
 
 									</table>
-
 
 								</td>
 							</tr>
@@ -226,25 +253,175 @@
 
 					</td>
 
-					<!-- column for availability calendar and confirmation booking form -->
-					<td style="width: 35% ;">
-						<!-- within this column we have two rows one for calendar the other for the form -->
-						<table>
+					<!-- column for rounded image, availability calendar and confirmation booking form -->
+					<td style="width: 35% ; padding: 8px 5px 2px 5px ; ">
+						
+						<!-- within this column we have three rows one for image, one for calendar the other for the form -->
+						<!-- ____________________________ -->
+						<!-- |                          | -->
+						<!-- |                          | -->
+						<!-- |__________________________| -->
+						<!-- |                          | -->
+						<!-- |                          | -->
+						<!-- |__________________________| -->
+						<!-- |                          | -->
+						<!-- |                          | -->
+						<!-- |__________________________| -->
+						<table style="background-color: #eee; height:100%;">
 
-							<!-- this row has the availability calendar of petsitter -->
-							<tr>
 
+							<!-- this row will have the image of petsitter and name underneath -->
+							<tr style="position: relative ; height: 40% ;">
+
+								<td style="text-align:center ; ">
+
+									<%= customize_thumbnail_pic(@petsitter_querried) %>
+
+								</td>
+
+								
 
 							</tr>
 
+
+
+							<!-- this row has the availability calendar of petsitter -->
+							<tr style="position: relative ; height: 35% ; border-bottom: 2px solid #ddd ;">
+
+								<td style="text-align: center ;">
+
+									<span  style="font-family: 'bichette' !important ; font-size: 33px ; color: #00acc1; "> Availability </span>
+
+									<div name="unavailabledates" id="datespicked" style="font-size: 12px ; position:relative ; margin-left:60px ; margin-bottom: 9px ;"    />
+
+								</td>
+							</tr>
+
+
+
+
 							<!-- this row has the confirmation booking form - might have some repetitive fields from search query page but we need to confirm stuff like days or sitting services just to be sure coz this info is vital  -->
-							<tr>
+							<tr >
+
+								<td>
+
+									<!-- NOTE TO FUTURE SELF: HAVE TO FIND A WAY TO  CENTER THIS WHOLE FORM WITHOUT USING MARGINS CSS ON ACTUAL STUFF, FIND A BETTER WAY !!!!!!!!!!!! -->
+
+								<%= form_tag(create_booking_record_path) do %>
+
+									<table>
+
+										<tr>
+
+											<td >
+
+												<p class="form-group" style=" position:relative  ; margin: 10px 5px 15px 35px  ;" >
 
 
+													<!-- the first parameter of select_tag is the name and id value of the select tag to be created as a whole -->
+
+
+													<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->
+
+													<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper within select helper helps in generating the option tags themselves but generates those option tags from a collection of objects from a certain model say ResidentialArea which is what we want -->
+
+													<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper takes as first argument collection of objects from a model then second argument is the name of the attribute of the object which will give the value of the option tag and the third argument is the name of the attribute of the object which will give the name/text of the option tag to be seen by user -->
+
+													<!-- the fourth parameter of the select tag not the option tags within is what will allow us to use the BOOTSTRAP CLASS for form controls -->
+													<%= select_tag "type_of_sitting_service" , options_from_collection_for_select(@petsitter_querried.sittingservices , 'id' , 'service_name')  , class:"form-control" , style: "border: 1px solid #00acc1 ; width:90%; " %>
+
+												</p>
+											</td>
+
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center ;">
+
+											  <% for item in @petsitter_querried.pettypes %>
+
+											  		<label class="checkbox-inline">
+
+													  <input type="checkbox" name="petschoseninshowpage[]"  value="<%= item.type_name %>"> 
+													  <%= item.type_name %>
+
+													</label>
+
+											  		
+											  <% end %>
+											
+							
+											</td>
+
+
+										</tr>
+
+
+										<!-- this row within the confirmation booking row has the period of care -->
+
+										<tr>
+
+											<td>
+												<!-- since we need a pick up and dropoff date field, we need to create 2 columns within this cell .So we can within this table cell, create A HTML table with a row that has two columns: -->
+
+												<table>
+													<tbody>
+														<tr>
+															<!-- this will contain the field for the dropoff day -->
+															<td>
+																<div class="form-group text-center">
+																
+																	<input class=" form-control datepicker" name="dropoffdate" placeholder="Drop off date" type="text" style="border: 1px solid #00acc1 ;  position:relative  ; margin: 5px 0px 2px 10px  ;" />
+																</div>
+
+															</td>
+
+															
+
+															<!-- this will contain the field for the pickup day -->
+															<td>
+
+																<div class="form-group">
+																
+																	<input class=" form-control datepicker" name="pickupdate" placeholder="Pick Up date" type="text" style="border: 1px solid #00acc1 ;  position:relative  ; margin: 5px 50px 2px 0px  ;" />
+
+																</div>
+
+
+															</td>
+
+														</tr>
+													</tbody>
+												</table>
+
+											</td>
+
+										</tr>
+
+
+										<!-- contains button for reservation  -->
+										<tr>
+
+											<td style="text-align:center;">
+
+												<button class="btn " type="submit" style="background-color: #ec6350; ; color: white ; width:80% ; font-size: 14px; font-weight:bolder ;" >
+													Confirm Booking
+												</button>
+
+											</td>
+
+										</tr>
+
+									</table>
+
+								<% end %>
+								</td>
 							</tr>
 
 
 						</table>
+						
 
 					</td>
 
@@ -264,3 +441,35 @@
 	</div>
 
 </div>
+
+<script type="text/javascript">
+
+	
+	$( ".datepicker" ).datepicker({
+
+      changeYear: true,
+      showButtonPanel: true ,
+      minDate: 0 ,
+      dateFormat: "yy-mm-dd" //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
+      
+      
+
+    });
+
+    $("#datespicked").multiDatesPicker({
+
+    	
+
+		// As with the jQuery Datespicker, you can define a minimum and maximum date from where to pick dates from.
+		// The values are relative to the current date.
+		// so minimum value to pick dates from is current valie of today therefore the value is 0 from today
+		minDate: 0 ,
+		dateFormat: "yy-mm-dd" , //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
+		addDisabledDates: <%= format_dates_for_js(@petsitter_querried) %>
+
+		
+
+
+	});
+
+ </script>

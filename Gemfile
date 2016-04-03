@@ -38,7 +38,7 @@ gem 'bcrypt', '~> 3.1.7'
 
   # For image manipulation
   gem 'image_magick'
-  gem 'mini_magick'
+  gem 'mini_magick' # sijui err0r for must install imagemagick or graphicsmagick if you dont install - requirements according to ruby gem is that you must have these things installed
 
   # For printing organized output in rails console
   gem "awesome_print", require:"ap"

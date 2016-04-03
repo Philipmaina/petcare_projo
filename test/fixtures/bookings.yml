@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2016-04-03
+  end_date: 2016-04-03
+  petowner_id: 
+  pets_booked_for: MyString
+  petsitter_id: 
+  residential_area_id: 
+  no_of_night_days_for_pet_stay: 1
+  total_price_of_stay: 9.99
+  sittingservice_id: 
+  reason_of_booking: MyString
+  petsitter_acceptance_confirmation: false
+  petsitter_booking_cancellation: false
+  completion_of_pet_stay: false
+
+two:
+  start_date: 2016-04-03
+  end_date: 2016-04-03
+  petowner_id: 
+  pets_booked_for: MyString
+  petsitter_id: 
+  residential_area_id: 
+  no_of_night_days_for_pet_stay: 1
+  total_price_of_stay: 9.99
+  sittingservice_id: 
+  reason_of_booking: MyString
+  petsitter_acceptance_confirmation: false
+  petsitter_booking_cancellation: false
+  completion_of_pet_stay: false
