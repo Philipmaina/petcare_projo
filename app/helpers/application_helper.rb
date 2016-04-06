@@ -227,7 +227,7 @@ module ApplicationHelper
 
 		else
 
-			 image_tag(@petsitter_querried.default_pic_file_name.thumb , :style => "border-radius: 50% ;padding-top: 8px;") 
+			 image_tag(@petsitter_querried.default_pic_file_name.thumb , :style => "border-radius: 50% ;padding-top: 5px;") 
 
 		end
 	end
@@ -250,6 +250,13 @@ module ApplicationHelper
 		# we want to do the same but base our dates from the ruby array above
 		if ruby_array_of_dates.respond_to?(:map)
 
+
+			# The map method takes an enumerable object and a block, and runs the block for each element, outputting each returned value from the block (the original object is unchanged unless you use map!)
+			# a = [1,2,3]
+
+			# a.map { |n| n * n } #=> [1, 4, 9]
+			# but a is still [1,2,3]
+
 			return ruby_array_of_dates.map{ |eachdate| 
 
 				"new Date(#{eachdate.year}, #{eachdate.month - 1}, #{eachdate.day})"
@@ -268,6 +275,14 @@ module ApplicationHelper
 	end
 
 	def format_dates_for_js(petsitter)
+
+		# gsub - Returns a copy of str with the all occurrences of pattern substituted for the second argument. 
+
+		# "[\"new Date(2016, 2, 24)\", \"new Date(2016, 2, 25)\", \"new Date(2016, 3, 11)\", \"new Date(2016, 3, 12)\", \"new Date(2016, 3, 14)\"]"
+
+		# so gsub(" \" " , "") means everywhere there is a backslash followed by a quotation mark replace with nothing(space)
+
+		# "[new Date(2016, 2, 24), new Date(2016, 2, 25), new Date(2016, 3, 11), new Date(2016, 3, 12), new Date(2016, 3, 14)]"
 
 		ruby_array_to_javascript_dates_multidates_picker(petsitter).to_s.gsub("\"", "").html_safe
 	

@@ -1,3 +1,4 @@
+
 <div class="container-fluid" style="background-color: #eee; ">
 
 	<!-- this will be the first gray space after the header -->
@@ -6,7 +7,7 @@
 	</div>
 
 	<!-- this will be the container that contains actual content of petsitter, all his details -->
-	<div class="row" style="height: 625px ; background-color: #eee; ">
+	<div class="row" style="height: 660px ; background-color: #eee; ">
 
 		<!-- leave 2 columns to the right of the edge -->
 		<div class="col-md-1">
@@ -271,7 +272,7 @@
 
 
 							<!-- this row will have the image of petsitter and name underneath -->
-							<tr style="position: relative ; height: 40% ;">
+							<tr style="position: relative ; height: 30% ;">
 
 								<td style="text-align:center ; ">
 
@@ -307,7 +308,19 @@
 
 									<!-- NOTE TO FUTURE SELF: HAVE TO FIND A WAY TO  CENTER THIS WHOLE FORM WITHOUT USING MARGINS CSS ON ACTUAL STUFF, FIND A BETTER WAY !!!!!!!!!!!! -->
 
-								<%= form_tag(create_booking_record_path) do %>
+									<!-- this form posts to bookings controller create_booking action -->
+								<%= form_tag create_booking_record_path, :id => "confirmation_booking_form"  do %>
+
+									<!-- this section will show form errors like lack of choosing a pet from the checkbix or lack of choosing dates -->
+									<div id="row_for_errors_of_confirmation_form" >
+
+										<ul>
+
+										</ul>
+
+									</div>
+
+
 
 									<table>
 
@@ -343,7 +356,7 @@
 
 											  		<label class="checkbox-inline">
 
-													  <input type="checkbox" name="petschoseninshowpage[]"  value="<%= item.type_name %>"> 
+													  <input type="checkbox" name="petschoseninshowpage[]"  value="<%= item.type_name %>"  /> 
 													  <%= item.type_name %>
 
 													</label>
@@ -384,7 +397,7 @@
 
 																<div class="form-group">
 																
-																	<input class=" form-control datepicker" name="pickupdate" placeholder="Pick Up date" type="text" style="border: 1px solid #00acc1 ;  position:relative  ; margin: 5px 50px 2px 0px  ;" />
+																	<input class=" form-control datepicker" name="pickupdate" placeholder="Pick Up date" type="text" style="border: 1px solid #00acc1 ;  position:relative  ; margin: 5px 50px 2px 0px  ;" autofocus />
 
 																</div>
 
@@ -443,14 +456,22 @@
 </div>
 
 <script type="text/javascript">
+	
+	var array_of_unavailabledates = <%= format_dates_for_js(@petsitter_querried) %> ;
 
 	
-	$( ".datepicker" ).datepicker({
+	$( ".datepicker" ).multiDatesPicker({
 
       changeYear: true,
       showButtonPanel: true ,
       minDate: 0 ,
-      dateFormat: "yy-mm-dd" //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
+      dateFormat: "yy-mm-dd" , //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
+      <% if @petsitter_querried.unavailabledates.any? %>
+      		addDisabledDates: <%= format_dates_for_js(@petsitter_querried) %> ,
+      <% end %>
+      maxPicks: 1 ,
+      
+
       
       
 
@@ -465,11 +486,75 @@
 		// so minimum value to pick dates from is current valie of today therefore the value is 0 from today
 		minDate: 0 ,
 		dateFormat: "yy-mm-dd" , //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
-		addDisabledDates: <%= format_dates_for_js(@petsitter_querried) %>
-
-		
-
+		 <% if @petsitter_querried.unavailabledates.any? %>
+				addDisabledDates: <%= format_dates_for_js(@petsitter_querried) %>
+		<% end %>
 
 	});
+
+	$("#confirmation_booking_form").submit( function(event) {
+
+
+
+		// this line below is so that when we resubmit confirmation form that had errors and upon resubmission we still have errors , we can clear off the first submission errors and show the current errors.
+		$("div#row_for_errors_of_confirmation_form").children().html("");
+
+		// what should happen when we submit this form - we want to check for whether any of the checkboxes for petschosen is selected if none is we stop normal default submission and show error message somewhere 
+
+		var counter = 0 ; //will be used to check the number of checked checkboxes
+
+		// the statement below is equal to $(":checkbox")  where :checkbox is a selector is a class offered by jquery
+		// this line says go through the the DOM and find elements with an input type of checkbox and to them we apply each method which iterates over each matched element in the collection and does something
+		$("[type=checkbox]").each( function() {
+
+			// this is the current element in the collection of element
+			if (this.checked)
+			{
+				counter++ ;		
+			}
+
+
+		}) ;
+
+		if ( counter == 0 )
+		{
+			// we first stop the normal default behaviour of the form submitting data to server
+			event.preventDefault() ;
+
+			// we want to set the html content of the div with form errors for confirmation booking
+			$("div#row_for_errors_of_confirmation_form").addClass("flash alert") ;
+
+			// if you want to add one ccs style then another later use commas between attribute and value BUT when writing many stylesat once use colon between attribute and value and commas between the different styles.
+			// remember .html overwrites but .appends adds on to 
+			// .html is like .empty().append()
+			$("div#row_for_errors_of_confirmation_form").css({'padding' : '4px' , 'font-size' : '11px' , 'font-weight' : 'bold' }); 
+			$("div#row_for_errors_of_confirmation_form").children().append("<li>Choose at least a pet </li>") ;
+
+		}
+
+
+
+		if ( (  $("input[name='dropoffdate']").val() == ""  ) || ( $("input[name='pickupdate']").val() == ""  ) )
+		{
+			// we first stop the normal default behaviour of the form submitting data to server
+			event.preventDefault() ;
+
+			
+			// --------------same as if statement above----------------------\
+
+			$("div#row_for_errors_of_confirmation_form").addClass("flash alert") ;
+
+			// only diff is what the list element reads out
+			$("div#row_for_errors_of_confirmation_form").css({'padding' : '4px' , 'font-size' : '11px' , 'font-weight' : 'bold' }); 
+			$("div#row_for_errors_of_confirmation_form").children().append("<li>Date(s) not chosen </li>") ;
+			// ----------------------------------------------------------------
+
+		}
+
+
+
+
+
+	}) ;
 
  </script>

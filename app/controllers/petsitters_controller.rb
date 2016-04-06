@@ -16,8 +16,8 @@
 #  type_of_home                       :string
 #  presence_of_open_area_outside_home :boolean
 #  work_situation                     :string
-#  day_charges                        :integer
-#  night_charges                      :integer
+#  day_charges                        :integer          default(0)
+#  night_charges                      :integer          default(0)
 #  default_pic_file_name              :string
 #  listing_name                       :string
 #  profile_description                :text

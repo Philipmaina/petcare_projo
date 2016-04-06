@@ -40,6 +40,7 @@ class Petowner < ActiveRecord::Base
 
   belongs_to :residential_area
   has_many :pets
+  has_many :bookings
 
 
   # ----------------------------VALIDATIONS-----------------------------------

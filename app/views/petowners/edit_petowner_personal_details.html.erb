@@ -99,6 +99,7 @@
 <script type="text/javascript">
 	$( "#datepicker" ).datepicker({
 
+	  dateFormat: "yy-mm-dd" , //this is customizing the date format because the default format is mm-dd-yyyy which is a deprecated format in ruby that doesn't work well with to_date function
       changeYear: true,
       showButtonPanel: true ,
       yearRange: "-70:+0" // last hundred years

@@ -14,5 +14,6 @@ class Sittingservice < ActiveRecord::Base
 	# --------------R/SHIPS----------------
 	has_many :junctionofservicesandpetsitters
 	has_many :petsitters , through: :junctionofservicesandpetsitters
+	has_many :bookings
 	# ---------------------------------------
 end

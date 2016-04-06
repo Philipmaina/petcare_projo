@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325144944) do
+ActiveRecord::Schema.define(version: 20160403002732) do
+
+  create_table "bookings", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "petowner_id"
+    t.string   "pets_booked_for"
+    t.integer  "petsitter_id"
+    t.integer  "residential_area_id"
+    t.integer  "no_of_night_days_for_pet_stay"
+    t.decimal  "total_price_of_stay"
+    t.integer  "sittingservice_id"
+    t.string   "reason_of_booking"
+    t.boolean  "petsitter_acceptance_confirmation", default: false
+    t.boolean  "petsitter_booking_cancellation",    default: false
+    t.boolean  "completion_of_pet_stay",            default: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+  end
+
+  add_index "bookings", ["petowner_id"], name: "index_bookings_on_petowner_id"
+  add_index "bookings", ["petsitter_id"], name: "index_bookings_on_petsitter_id"
+  add_index "bookings", ["residential_area_id"], name: "index_bookings_on_residential_area_id"
+  add_index "bookings", ["sittingservice_id"], name: "index_bookings_on_sittingservice_id"
 
   create_table "junctionofpetsitterandpettypes", force: :cascade do |t|
     t.integer  "pettype_id"

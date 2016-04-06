@@ -11,9 +11,9 @@ class CreateBookings < ActiveRecord::Migration
       t.decimal :total_price_of_stay
       t.references :sittingservice, index: true, foreign_key: true
       t.string :reason_of_booking
-      t.boolean :petsitter_acceptance_confirmation
-      t.boolean :petsitter_booking_cancellation
-      t.boolean :completion_of_pet_stay
+      t.boolean :petsitter_acceptance_confirmation , default: false
+      t.boolean :petsitter_booking_cancellation , default: false
+      t.boolean :completion_of_pet_stay , default: false
 
       t.timestamps null: false
     end

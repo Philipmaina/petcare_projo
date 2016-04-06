@@ -83,7 +83,7 @@ get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboar
 
   # route when from show page of petsitter querried you click confirm booking
 
-  post "/submit_booking_details/:id" => "application#create_booking_record" , as: "create_booking_record"
+  post "/submit_booking_details/:id" => "bookings#create_booking" , as: "create_booking_record"
 
 
 
