@@ -187,6 +187,68 @@ class ApplicationController < ActionController::Base
     
   end
 
+
+
+
+  # THESE METHODS ARENT REALLY ACTIONS COZ WE CAN'T ROUTE DIRECTLY TO THEM
+  private
+
+
+
+    # NOTE: HELPER METHODS AREN'T ACCESSIBLE INSIDE CONTROLLERS
+
+    # ------------METHODS USED BY BOTH HELPERS AND CONTROLLERS------------- 
+    # TO BE CALLED FROM ANY VIEW AND ANY CONTROLLER
+    def current_petsitter
+
+      petsitterobjectview = Petsitter.find_by(id: session[:petsitter] )
+      return petsitterobjectview
+      
+    end
+
+    def current_petowner
+
+      petownerobjectview = Petowner.find_by(id: session[:petowner] )
+      return petownerobjectview
+      
+    end
+
+
+    # HOW TO MAKE THE METHODS ABOVE AVAILABLE TO ANY VIEW
+    helper_method :current_petsitter , :current_petowner #Declare a controller method as a helper
+
+    # ------------------------------------------------------------------
+
+
+    
+
+    def require_petsitter_signin
+
+      # how we can tell if a user who is a petsitter is signed in is by checking current_petsitter method which would either return nil or a petsitter object
+
+      # we want to redirect to sign in page unless there is a petsitter object(meaning a petsitter is signed in)
+      unless current_petsitter
+
+        # if we enter inside this block it means there is no signed in user and the action that was to be run whether edit or update wont be run because we will redirect
+        redirect_to new_session_path , alert: "Please sign in first!!"
+
+      end
+
+    end
+
+
+    def require_petowner_signin
+
+      unless current_petowner
+
+        redirect_to new_session_path , alert: "Please sign in first!!"
+
+      end
+
+    end
+
+
+
   
 
 

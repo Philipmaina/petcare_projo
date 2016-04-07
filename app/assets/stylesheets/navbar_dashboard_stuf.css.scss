@@ -1,0 +1,57 @@
+$primary-base-color: #00acc1 ;
+
+// THIS IS TO MAKE THE LIST ITEM THAT IS ACTIVE HAVE A DIFFERENT STYLE LIKE A DIFFERENT TEXT COLOR AND A DIFFERENT BACKGROUND - THIS WILL CHANGE AS WE CLICK THROUGH NOTIFICATIONS ANCHOR TAG AS THE ACTIVE LI FOR THAT IS THE ONE CONTAINING NOTIFICATIONS.
+#dashboard_nav_options>nav>ul.nav-tabs>li.active>a
+{
+    color: #ffc04c !important;
+    
+    background-color: darken($primary-base-color , 7%) !important ;
+    
+}
+
+
+
+// ------------------THIS IS NORMAL PART ------------------------------------
+
+#dashboard_nav_options{
+		position:relative ;
+		background-color: $primary-base-color !important ;
+		padding: 0px 0px 0px 0px !important ; //this is to chuck the padding that bootstrap gives us for free
+		
+
+
+		nav{
+
+			
+			ul{
+
+
+
+				li{
+
+		
+
+					a{
+
+						color: white !important;
+						font-weight: bolder ;
+						font-size: 15px ;
+						
+					}
+
+					a:hover{
+
+						// sass gives us functions like darken() which creates a darker color based on the color you give it
+						background-color: darken($primary-base-color , 7%) ;
+					}
+				}
+			}
+		}
+
+
+}
+
+
+
+
+	

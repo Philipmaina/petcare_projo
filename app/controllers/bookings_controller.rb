@@ -22,6 +22,12 @@
 
 class BookingsController < ApplicationController
 
+
+	# we want you to be signed in before you can actually book as it is one of the functional requirements of the app
+	# otherwise there is no way we can get the petowner info to populate in the bookings table esp for the petowner_id field - because we are depending on that session hash to get info of petowner and if it isn't there then we're DOOMED
+	before_action :require_petowner_signin , only: [:create_booking]
+
+
 	# this is where the form data from confirmation bookings form reaches to allow for creation of a booking
 	# most things validated frontend FOR NOW !!!
 	def create_booking
@@ -55,7 +61,7 @@ class BookingsController < ApplicationController
 
 
 		# this gets the no_of_nights_days for booking
-		if ( (sittingservice_object.service_name == "Normal boarding") || (sittingservice_object.service_name == "In home boarding")
+		if ( (sittingservice_object.service_name == "Normal boarding") || (sittingservice_object.service_name == "In home boarding") )
 
 			# (pickup_date - dropoff_date)
 			# => (2/1)

@@ -28,6 +28,22 @@
 
 class PetsittersController < ApplicationController
 
+	# ______________________________________________________________________
+
+
+	# we give before_action a method to run before all the actions
+	# so we give except where we put actions that this method should not run before - easier to invert
+	# we put require_signin method where it'll be accessed by all other controllers coz we might want to use it in another controller , hence we put it in ApplicationController
+	before_action :require_petsitter_signin , except: [:new_basic_predetails , :create_basic_predetails]
+
+	# order here matters - we want to check the correct petsitter only after we've checked whether a petsitter is even signed in
+	# stuff is run in a top down order
+	before_action :require_correct_petsitter , except: [:new_basic_predetails , :create_basic_predetails]
+
+	# ________________________________________________________________________
+
+
+
 	# ~~~~~~~~~~~~~~FIRST STEP OF MULTISTEP FORM~~~~~~~~~~~~
 	def new_basic_predetails
 		@petsitter = Petsitter.new #object that form will bind to 
@@ -292,5 +308,21 @@ class PetsittersController < ApplicationController
 
 	# ------other private methods that can't be routed to directly----
 	private
+
+		# SO WHAT WE CAN DO IS GET THE VALUE OF THE ID IN REQUEST PARAMS AS FROM URL AND COMPARE WITH THE SESSION VALUE FOR PETSITTER KEY - WE ARE SOMEWHAT GOING TO DO THAT BUT IN AN ELEGANT WAY BY COMPARING PETSITTER OBJECTS 
+		def require_correct_petsitter
+
+			# because this controller inherits/subclasses from app controller and i have in app controller defined current_petsitter means i can use that method here( 3 CHEERS FOR INHERITANCE!!!!!!! )
+
+			@petsitter = Petsitter.find( params[:id] )
+
+			unless current_petsitter == @petsitter
+
+				# rememeber we can't redirect to sign in page because they bypassed the first gate which means they are signed in so no need to give them sign in page - also we don't warn them because it means they knew what they were doing - TRYING TO BREAK INTO S/ONE ELSE'S ACCOUNT AND CHANGE STUFF
+				redirect_to root_path
+			end
+
+	
+		end
 
 end

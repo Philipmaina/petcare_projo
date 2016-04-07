@@ -70,6 +70,10 @@ footer{
   border-radius: 4px;
   padding: 7px;
   margin: 0;
+
+  // p { margin: 0 0 10px;} in bootstrap has 10px margin-bottom and we need to overwrite that otherwise there will be a whitespace after the flash - ANNOYING BUG COZ OF BOOTSTRAP!!!!! 
+  margin-bottom: 0px !important ;
+
   text-align: center;
   text-transform: uppercase;
   box-shadow: #ffc 0 0 4px;

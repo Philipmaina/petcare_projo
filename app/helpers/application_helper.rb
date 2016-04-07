@@ -1,19 +1,21 @@
 module ApplicationHelper
 
 	# -------USED THIS HELPERS IN  HEADER SECTION FOR NAVBAR STUFF---------
-	def current_petsitter
+	# NOTE: WE MOVED THESE TWO HELPERS TO APP CONTROLLER BECAUSE WE NEED TO USE IT IN BOTH THE VIEWS AND CONTROLLER, AND HELPER METHODS AREN'T ACCESSIBLE IN CONTROLLERS
+	
+	# def current_petsitter
 
-		petsitterobjectview = Petsitter.find( session[:petsitter] )
-		return petsitterobjectview
+	# 	petsitterobjectview = Petsitter.find_by(id: session[:petsitter] )
+	# 	return petsitterobjectview
 		
-	end
+	# end
 
-	def current_petowner
+	# def current_petowner
 
-		petownerobjectview = Petowner.find( session[:petowner] )
-		return petownerobjectview
+	# 	petownerobjectview = Petowner.find_by(id: session[:petowner] )
+	# 	return petownerobjectview
 		
-	end
+	# end
 
 
 	# -----USED THESE HELPERS IN SEARCH QUERY PAGE FOR SHOWING PETSITTERS---

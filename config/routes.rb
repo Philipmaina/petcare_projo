@@ -42,7 +42,22 @@ patch "/petowners/:id/basic_predetails" => "petowners#update_basic_predetails"
 get "/petowner/:id/pets/new" => "petowners#addpets" , as: "petowner_add_pets"
 post "/petowner/:id/pets/create" =>"petowners#create_pets"
 
+
+
+
+
+
 get "/petowner/:id/dashboard" => "petowners#dashboard" , as: "pet_owner_dashboard"
+
+get "/petowner/:id/dashboard/edit_profile" => "petowners#dashboard_edit_profile" , as: "pet_owner_dashboard_edit_profile"
+
+get "/petowner/:id/dashboard/notifications" => "petowners#dashboard_notifications" , as: "pet_owner_dashboard_notification"
+
+get "/petowners/:id/dashboard/bookings" => "petowners#dashboard_bookings" , as: "pet_owner_dashboard_bookings"
+
+get "/petowners/:id/dashboard/account_details" => "petowners#dashboard_accountdetails" , as: "pet_owner_dashboard_account_details"
+
+
 
 
   # --------------------------------------------------------------------

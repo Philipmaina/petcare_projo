@@ -19,6 +19,17 @@
 
 class PetownersController < ApplicationController
 
+	# _____________________________________________________________________
+
+	# this says carry out this require_signin method before running all other actions except for new and create
+	before_action :require_petowner_signin , except: [ :new_basic_predetails ,:create_basic_predetails ]
+
+	before_action :require_correct_petowner , except: [ :new_basic_predetails ,:create_basic_predetails ]
+
+	# ______________________________________________________________________
+
+
+
 	# INSTANCE VARIABLES DO NOT LIVE ON AFTER THE ACTION RUNS IN RAILS
 
 	# ---------------STEP 1 -----------------------------------------
@@ -197,10 +208,44 @@ class PetownersController < ApplicationController
 		
 	end
 
+	def dashboard_edit_profile
+
+		render 'edit_profile_on_dashboard'
+		
+	end
+
+	def dashboard_notifications
+
+		
+	end
+
+	def dashboard_bookings
+
+	end
+
+	def dashboard_accountdetails
+		
+	end
+
+
+
 
 	# ---------------------OTHER METHODS-----------------------------------
 	# ~~~~~~~~THESE METHODS CANNOT BE ROUTED TO DIRECTLY ~~~~~~~~~~~~~~~
 	private
+
+		def require_correct_petowner
+
+			# checked if signed in petowner is the same as the one whose details are currently being updated,edited or deleted.
+
+			@petowner = Petowner.find( params[:id] )
+
+			# do something else blahblah...
+			unless current_petowner == @petowner
+				redirect_to root_path
+			end
+			
+		end
 
 
 

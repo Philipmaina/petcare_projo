@@ -1,0 +1,69 @@
+
+
+<div class="row">
+
+	<div class="col-md-2">
+
+	</div>
+
+	<div class="col-md-8" id="dashboard_nav_options" >
+
+	
+		<!-- bootstrap navbar -->
+
+		<!-- if you are using navs to provide a navigation bar,wrap a <nav> element around the whole navigation -->
+		<nav>
+
+		    <ul class="nav nav-tabs nav-justified ">
+
+		      <% if session.key?(:petowner) %>
+
+			      <li id="tab_for_home">
+			      	<%= link_to pet_owner_dashboard_path(current_petowner.id)  do   %>
+			      	Home
+			      	<% end %>
+			      </li>
+
+			      <li id="tab_for_edit_profile">
+			      	<%= link_to pet_owner_dashboard_edit_profile_path(current_petowner.id)  do   %>
+			      		Edit profile
+			      	<% end %>
+			      </li>
+
+			      <li id="tab_for_notifications">
+			      	<%= link_to pet_owner_dashboard_notification_path(current_petowner.id)  do   %>
+			      	Notifications
+			      	<% end %>
+			      </li> 
+
+			      <li id="tab_for_bookings">
+			      	<%= link_to pet_owner_dashboard_bookings_path(current_petowner.id)  do   %>
+			      	Bookings
+			      	<% end %>
+			      </li> 
+
+
+			      <li id="tab_for_account_details">
+
+			      	<%= link_to pet_owner_dashboard_account_details_path(current_petowner.id)  do   %>
+			      	Account Details
+			      	<% end %>
+
+			      </li>
+
+			  <% end %>
+
+		    </ul>
+
+		</nav>
+
+
+
+	</div>
+
+	<div class="col-md-2">
+
+
+	</div>
+
+</div>
