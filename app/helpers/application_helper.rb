@@ -320,4 +320,88 @@ module ApplicationHelper
 		
 	end
 
+
+	def pets_table_for_dashboard_page(petowner)
+
+		if petowner.pets.count > 0
+
+			ultimatehtmltosendback = "<tr><td colspan='2' style='font-family: marydale ; font-size: 30px ; text-align: center ; color: #008c9d ; font-weight: bold ;'><span>All your pet(s)</span><hr style='margin-top:10px;margin-bottom:10px; '></td></tr> "
+
+			dogs_names = []
+			cats_names = []
+			horses_names = []
+			parrots_names = []
+			fish_names = []
+
+
+			 petowner.pets.each do |pet_object| 
+
+				if pet_object.pettype.type_name == "Dog"
+
+					dogs_names.push(pet_object.pet_name)
+
+				elsif pet_object.pettype.type_name == "Cat"
+
+					cats_names.push(pet_object.pet_name)
+
+				elsif pet_object.pettype.type_name == "Horse"
+
+					horses_names.push(pet_object.pet_name)
+
+				elsif pet_object.pettype.type_name == "Parrot"
+
+					parrots_names.push(pet_object.pet_name)
+
+				elsif pet_object.pettype.type_name == "Fish"
+
+					fish_names.push(pet_object.pet_name)
+
+				end
+
+			end
+
+
+			if dogs_names.present?
+
+				alldogs = dogs_names.join(' , ')
+
+				ultimatehtmltosendback += " <tr><td style='text-align:right ; width: 30% ;'>" + image_tag('dog_pet2.png' ,height: '25', width: '25') + "</td><td style='padding-top: 7px ;padding-bottom: 7px  ; text-align:center ; '>#{alldogs}</td></tr> "
+
+			end
+
+			if cats_names.present?
+
+				allcats = cats_names.join(' , ') 
+
+				ultimatehtmltosendback +=  "<tr><td style='text-align:right ; width: 30% ;'>" + image_tag('cat_pet.png' ,height: '25', width: '25') + "</td><td style='padding-top: 7px ;padding-bottom: 7px  ; text-align:center ;'>#{allcats}</td></tr> "
+			end
+
+			if horses_names.present?
+
+				allhorses = horses_names.join(' , ')
+
+				ultimatehtmltosendback +=  "<tr><td style='text-align:right ; width: 30% ;'>" + image_tag('horse_pet2.png' ,height: '25', width: '25') + "</td><td style=' padding-top: 7px ; padding-bottom: 7px  ; text-align:center ;'>#{allhorses}</td></tr> "
+			end
+
+			if parrots_names.present?
+
+				allparrots = parrots_names.join(' , ')
+
+				ultimatehtmltosendback +=  "<tr><td style='text-align:right ; width: 30% ;'>" + image_tag('parrot_pet2.png' ,height: '25', width: '25') + "</td><td style='padding-top: 7px ; padding-bottom: 7px  ; text-align:center ;'>#{allparrots}</td></tr> "
+			end
+
+			if fish_names.present?
+
+				allfish =  fish_names.join(' , ')
+
+				ultimatehtmltosendback +=  "<tr><td style='text-align:right ; width: 30% ;'>" + image_tag('fish_pet.png' ,height: '25', width: '25') + "</td><td style=' padding-top: 7px ; padding-bottom: 7px  ; text-align:center ;'>#{allfish}</td></tr> "
+
+			end
+
+		end #ultimate if for checking whether or not you have pets
+
+		return ultimatehtmltosendback.html_safe
+		
+	end #for helper method
+
 end

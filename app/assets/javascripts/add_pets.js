@@ -1,7 +1,10 @@
 // this first statement just says don't execute any of this jquery code until the DOM has fully loaded .
 // all jquery code is placed inside the braces.
 
-$(document).ready(function() {
+
+// $(document).ready(function(){ }) DAENT WORK WELL WITH TURBOLINKS
+// NOTE TO FUTURE SELF!!!!!!! : READ ON THIS LATER
+$(document).on('ready page:load', function() {
 
 	pets = []; //this is an array in js can be array of anything  it is a global variable. in our case it will be an array of objects
 
