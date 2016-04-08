@@ -53,6 +53,11 @@ gem 'bcrypt', '~> 3.1.7'
   # FOR USING ALL OF FONT AWESOME ICONS BECAUSE BOOTSTRAP HAS FEW ICONS 
   gem "font-awesome-rails"
 
+  # this gem lets you get a possessive form of a string
+  # “Brian”.possessive # => Brian's 
+  # used in edit_profile_dashboard panels
+  gem "possessive"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

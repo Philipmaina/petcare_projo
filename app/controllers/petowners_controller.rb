@@ -205,6 +205,9 @@ class PetownersController < ApplicationController
 
 
 	def dashboard
+
+		
+		@petowner = Petowner.find( params[:id] )
 		
 	end
 

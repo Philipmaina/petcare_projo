@@ -290,4 +290,34 @@ module ApplicationHelper
 	
 	end
 
+
+	def custom_date_of_birth(object)
+
+		if object.date_of_birth.blank?
+
+			return "?"
+
+		else
+
+			return object.date_of_birth.to_s(:long)
+			
+		end
+		
+	end
+
+
+	def custom_contact_line_two(object)
+
+		if object.contact_line_two.blank?
+
+			return "?"
+
+		else
+
+			return object.contact_line_two
+
+		end
+		
+	end
+
 end

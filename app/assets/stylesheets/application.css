@@ -97,3 +97,9 @@ body {
   font-family: 'rifficfreebold' ;
   src: url('RifficFree-Bold.ttf');
 }
+
+@font-face {
+
+  font-family: 'marydale' ;
+  src: url('marydale.ttf');
+}
