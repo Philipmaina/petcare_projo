@@ -19,4 +19,11 @@
 #
 
 class PetsController < ApplicationController
+
+	def index
+		# keep in mind petowner has/owns many pets
+		@petowner_who_owns_the_pets = Petowner.find( params[:petowner_id])
+		@pets = @petowner_who_owns_the_pets.pets #get an array of pets objects - we are scoping our query to a particular petowner's pets
+		
+	end
 end

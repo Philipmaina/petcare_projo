@@ -114,10 +114,17 @@ get "/petowners/:id/dashboard/account_details" => "petowners#dashboard_accountde
   resources :sittingservices
   resources :junctionofpetsitterandpettypes
   resources :petsitters
-  resources :pets
+  
   resources :pettypes
   resources :residential_areas
-  resources :petowners
+
+
+
+  resources :petowners do
+
+    resources :pets #this is a nested resource to make url more presentable
+
+  end
 
 
  

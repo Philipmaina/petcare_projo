@@ -1,0 +1,99 @@
+
+
+
+<div class="container-fluid" style="background-color: #eee; ">
+
+	<!-- this will be the first gray space after the header -->
+	<div class="row" style="height: 10px;">
+
+	</div>
+
+	<!-- this will be the container that contains actual content of petsitter, all his details -->
+	<div class="row" style="height: 660px ; background-color: #eee; ">
+
+		<!-- leave 2 columns to the right of the edge -->
+		<div class="col-md-4">
+
+		</div>
+
+		<!-- THIS IS WHERE WE WILL POPULATE PETOWNER'S PET(S)  -->
+		<div class="col-md-4">
+
+
+
+			<!-- _____________________________ -->
+			<!-- |____|________|____|________| -->
+			<!-- |____|________|____|________| -->
+			<!-- |___edit______|____remove___| -->
+
+			<% @pets.each do | pet | %>
+				<div>
+
+					<table>
+
+						<tr>
+							<td style="text-align:left;">Name</td>
+
+							<td style="text-align:right;">
+								<%= pet.pet_name %>
+							</td>
+
+							<td style="text-align:left;">Type</td>
+
+							<td style="text-align:right;">
+								<%= pet.pettype.type_name %>
+							</td>
+						</tr>
+
+						<tr>
+							<td style="text-align:left;">Gender</td>
+
+							<td style="text-align:right;">
+								<%= pet.gender %>
+							</td>
+
+							<td style="text-align:left;">Years</td>
+
+							<td style="text-align:right;">
+								<%= pet.years_pet_lived %>
+							</td>
+
+						</tr>
+
+						<tr>
+
+							<td colspan='2' style="text-align:center;">
+
+								Edit
+
+							</td>
+
+							<td colspan='2' style="text-align:center;">
+
+								Remove
+
+							</td>
+
+
+
+						</tr>
+
+
+					</table>
+
+				</div>
+
+			<% end %>
+
+		</div>
+
+
+
+
+		<div class="col-md-4">
+
+		</div>
+
+	</div>
+
+</div>
