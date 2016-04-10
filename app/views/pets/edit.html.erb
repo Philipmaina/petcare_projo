@@ -1,0 +1,112 @@
+
+	
+
+<div class="container-fluid" style="background-color: #eee; ">
+
+	<!-- this will be the first gray space after the header -->
+	<div class="row" style="height: 10px;">
+
+	</div>
+
+	<!-- this will be the container that contains actual content of petsitter, all his details -->
+	<div class="row" style="height: 660px ; background-color: #eee; padding-top: 15px ; ">
+
+		<!-- leave 2 columns to the right of the edge -->
+		<div class="col-md-4" >
+
+		</div>
+
+		<!-- THIS IS WHERE WE WILL POPULATE PETOWNER'S PET(S)  -->
+		<div class="col-md-4" style="background-color:white; border: 1px solid #00acc1 ; padding: 30px 10px 20px 10px ;">
+
+			<div style="text-align:center  ; padding-top: 30px; font-family: marydale ; font-size: 30px ; color: #008c9d ; font-weight: bold ;">
+
+				Editing 
+
+				&nbsp <!-- space character in html  -->
+
+				<%= @pet_to_be_edited.pet_name.possessive %>
+				<!-- e.g Bobby's -->
+
+				&nbsp <!-- space character in html  -->
+
+				Details
+
+
+
+
+			</div>
+
+			<hr style="padding-bottom: 10px ;">
+
+			<!-- before in form_for we would just pass a single object but the form in this case needs both objects in order to CREATE THE URL THAT ITS GOING TO POST THE FORM TO -->
+			<%= form_for([@petowner_who_owns_the_pets , @pet_to_be_edited]) do |f| %>
+
+				<div class="form-group">
+					
+					<%= f.label :pet_name , "Name"  %>
+					<%= f.text_field :pet_name , class:"form-control" , autofocus: true %>
+
+				</div>
+
+				<div class="form-group">
+					
+					<%= f.label :years_pet_lived , "Years"  %>
+					<%= f.number_field :years_pet_lived , max: 35 , min: 0 , class:"form-control"  %>
+					
+				</div>
+
+				<div class="form-group">
+					
+					<%= f.label :gender , "Gender"  %>
+					<!-- select helper takes name of attribute then we give it options that it will give user as dropdown  -->
+					<!-- select helper takes two options hashes, one for select, and the second for html options. So all you need is to give default empty options as first param after list of items and then add your class to html_options. -->
+					<%= f.select :gender , ["Male", "Female"] ,{} ,{ class:"form-control" } %>
+					
+				</div>
+
+				<div class="form-group">
+
+					
+					<%= f.label :pettype_id , "Type"  %>
+					
+					<!-- the fourth parameter of option_from_collection_for_select should be an integer and is what we'll be the  preselected option(we give the id hence why integer is required ) -->
+					<%= f.select :pettype_id , options_from_collection_for_select(@all_pets_in_system , 'id' , 'type_name' , @pet_to_be_edited.pettype_id) , {}  , class:"form-control" %>
+
+
+					<!-- the select helper generates the select tag, the first parameter is the name of the attribute we want the select tag for while the second parameter is the list of options it will give as a dropdown - usually an array would do the job , BUT not in our case -->
+
+					<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper within select helper helps in generating the option tags themselves but generates those option tags from a collection of objects from a certain model say ResidentialArea which is what we want -->
+
+					<!-- THE OPTIONS_FROM_COLLECTION_FOR_SELECT helper takes as first argument collection of objects from a model then second argument is the name of the attribute of the object which will give the value of the option tag and the third argument is the name of the attribute of the object which will give the name/text of the option tag to be seen by user -->
+
+					<!-- the fourth parameter of the select tag not the option tags within is what will allow us to use the BOOTSTRAP CLASS for form controls -->
+						
+				</div>
+
+
+				<p class="text-center">
+					<%= f.button :submit, class:"btn btn-success" do %>
+						Save and Update <span class="glyphicon glyphicon-hand-right"></span> 
+					<% end %>
+				</p>
+
+			<% end %>
+		
+
+		</div>
+
+
+		<div class="col-md-4">
+
+
+
+		</div>
+
+	</div>
+
+
+
+</div>
+
+

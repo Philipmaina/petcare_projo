@@ -1,5 +1,35 @@
 
+<style type="text/css">
+	
+	/*this is to make the column text not to be close to each other esp between the second and third column*/
+	.table_for_each_pet_details tr td{
+    	padding: 6px ;
+	}
 
+	a.link_for_edit_pet{
+		color: #00b200 ;
+		text-decoration: none;
+	}
+	a.link_for_edit_pet:hover{
+		border-bottom: 1px solid #00b200;
+	}
+
+	a.link_for_removing_pet{
+
+		color: #ff3232;
+		text-decoration: none ;
+	}
+
+	a.link_for_removing_pet:hover{
+
+		border-bottom: 1px solid #ff3232;
+	}
+
+
+
+
+
+</style>
 
 <div class="container-fluid" style="background-color: #eee; ">
 
@@ -17,9 +47,15 @@
 		</div>
 
 		<!-- THIS IS WHERE WE WILL POPULATE PETOWNER'S PET(S)  -->
-		<div class="col-md-4">
+		<div class="col-md-4" style="background-color:white; border: 1px solid #00acc1 ;">
 
+			<div style="text-align:center  ; padding-top: 30px; font-family: marydale ; font-size: 30px ; color: #008c9d ; font-weight: bold ;">
 
+				All your pet(s)
+				
+			</div>
+
+			<hr>
 
 			<!-- _____________________________ -->
 			<!-- |____|________|____|________| -->
@@ -27,50 +63,60 @@
 			<!-- |___edit______|____remove___| -->
 
 			<% @pets.each do | pet | %>
-				<div>
+				<div style="background-color: #e5f6f8 ; border: 1px solid #008c9d ;">
 
-					<table>
+					<table class="table_for_each_pet_details">
 
 						<tr>
 							<td style="text-align:left;">Name</td>
 
-							<td style="text-align:right;">
+							<td style="text-align:right; font-weight:bolder ;">
 								<%= pet.pet_name %>
 							</td>
 
 							<td style="text-align:left;">Type</td>
 
-							<td style="text-align:right;">
+							<td style="text-align:right; font-weight:bolder ;">
 								<%= pet.pettype.type_name %>
 							</td>
 						</tr>
 
-						<tr>
+						<tr style="border-bottom: 1px solid #008c9d ; ">
 							<td style="text-align:left;">Gender</td>
 
-							<td style="text-align:right;">
+							<td style="text-align:right; font-weight:bolder ;">
 								<%= pet.gender %>
 							</td>
 
 							<td style="text-align:left;">Years</td>
 
-							<td style="text-align:right;">
+							<td style="text-align:right; font-weight:bolder ;">
 								<%= pet.years_pet_lived %>
 							</td>
 
 						</tr>
 
-						<tr>
+						
+						<tr style="background-color:#eee; ">
 
-							<td colspan='2' style="text-align:center;">
+							<td colspan='2' style="text-align:center; color:#00b200;">
 
-								Edit
+								<i class="fa fa-pencil"></i>
+
+								<%= link_to edit_petowner_pet_path(@petowner_who_owns_the_pets.id , pet.id) , :class=>"link_for_edit_pet" do %>
+									Edit
+								<% end %>
 
 							</td>
 
-							<td colspan='2' style="text-align:center;">
+							<td colspan='2' style="text-align:center;color:#ff3232;">
 
-								Remove
+								<i class="fa fa-times-circle"></i>
+
+								<%= link_to petowner_pet_path(@petowner_who_owns_the_pets.id , pet.id) ,  method: :delete , data: {confirm: 'Are you sure ?'} , :class=>"link_for_removing_pet" do %>
+									Remove
+								<% end %>
+
 
 							</td>
 
@@ -82,6 +128,8 @@
 					</table>
 
 				</div>
+
+				<br/>
 
 			<% end %>
 

@@ -7,6 +7,23 @@ class SessionsController < ApplicationController
 
 	def create
 
+		# ----------THIS IS IN CASE SOMEONE IS ALREADY LOGGED IN WE WANT TO CHUCK THEIR STUFF FROM SESSION before even doing anything
+
+		if session.key?(:petsitter)
+
+			session.delete(:petsitter)
+			
+		elsif session.key?(:petowner)
+
+			session.delete(:petowner)
+
+		end
+
+		# -------------------------------------------------------------------
+
+
+			
+
 		# WE HAVE TO VERIFY THAT THE SUBMITTED EMAIL AND PASSWORD MATCH A USER IN EITHER TABLE
 		# IF WE FIND A MATCHING USER WE STORE HIS UNIQUE ID IN SESSION HASH
 		email = params[:personal_email]

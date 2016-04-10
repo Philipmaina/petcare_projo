@@ -310,19 +310,21 @@ class PetsittersController < ApplicationController
 	private
 
 		# SO WHAT WE CAN DO IS GET THE VALUE OF THE ID IN REQUEST PARAMS AS FROM URL AND COMPARE WITH THE SESSION VALUE FOR PETSITTER KEY - WE ARE SOMEWHAT GOING TO DO THAT BUT IN AN ELEGANT WAY BY COMPARING PETSITTER OBJECTS 
-		def require_correct_petsitter
+	    def require_correct_petsitter
 
-			# because this controller inherits/subclasses from app controller and i have in app controller defined current_petsitter means i can use that method here( 3 CHEERS FOR INHERITANCE!!!!!!! )
+	      # because this controller inherits/subclasses from app controller and i have in app controller defined current_petsitter means i can use that method here( 3 CHEERS FOR INHERITANCE!!!!!!! )
 
-			@petsitter = Petsitter.find( params[:id] )
+	      @petsitter = Petsitter.find( params[:id] )
 
-			unless current_petsitter == @petsitter
+	      unless current_petsitter == @petsitter
 
-				# rememeber we can't redirect to sign in page because they bypassed the first gate which means they are signed in so no need to give them sign in page - also we don't warn them because it means they knew what they were doing - TRYING TO BREAK INTO S/ONE ELSE'S ACCOUNT AND CHANGE STUFF
-				redirect_to root_path
-			end
+	        # rememeber we can't redirect to sign in page because they bypassed the first gate which means they are signed in so no need to give them sign in page - also we don't warn them because it means they knew what they were doing - TRYING TO BREAK INTO S/ONE ELSE'S ACCOUNT AND CHANGE STUFF
+	        redirect_to root_path
+	      end
 
-	
-		end
+	  
+	    end
+
+
 
 end

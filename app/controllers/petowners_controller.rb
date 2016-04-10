@@ -239,16 +239,16 @@ class PetownersController < ApplicationController
 
 		def require_correct_petowner
 
-			# checked if signed in petowner is the same as the one whose details are currently being updated,edited or deleted.
+	      # checked if signed in petowner is the same as the one whose details are currently being updated,edited or deleted.
 
-			@petowner = Petowner.find( params[:id] )
+	      @petowner = Petowner.find( params[:id] )
 
-			# do something else blahblah...
-			unless current_petowner == @petowner
-				redirect_to root_path
-			end
-			
-		end
+	      # do something else blahblah...
+	      unless current_petowner == @petowner
+	        redirect_to root_path
+	      end
+	      
+	    end
 
 
 
