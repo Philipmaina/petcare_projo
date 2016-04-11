@@ -56,6 +56,7 @@ class Petsitter < ActiveRecord::Base
   has_many :pettypes, through: :junctionofpetsitterandpettypes
   has_many :sittingservices , through: :junctionofservicesandpetsitters
   has_many :bookings
+  has_many :notificationforpetsitters
   # ----------------------------------------
 
   # ~~~~~~~~~~~~~~~~~~~~~~VALIDATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

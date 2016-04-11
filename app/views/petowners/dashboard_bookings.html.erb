@@ -1,4 +1,12 @@
 
+<style type="text/css">
+	table#tbl_for_booking_tabs{ 
+		border-collapse: separate; border-spacing: 35px; 
+	}
+
+
+</style>
+
 <div class="container-fluid" style="background-color: #eee;">
 
 	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
@@ -10,7 +18,61 @@
 
 		</div>
 
-		<div class="col-md-8" style="height: 95% ; background-color:white ;">
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 50px 10px 20px 20px ;">
+
+			<table>
+
+				<tr>
+					<td>
+
+						<table style="width: 45% ;" id="tbl_for_booking_tabs">
+
+							<!-- this row will have the upcoming confirmed requests tab(btn)-->
+							<tr>
+								<td>
+									<button type="button" class="btn btn-info btn-arrow-right ">Upcoming/confirmed booking(s)</button>
+								</td>
+							</tr>
+
+							<!-- this row will have the pending booking request tab -->
+							<tr>
+								<td>
+									<button type="button" class="btn btn-info btn-arrow-right">Pending confirmation booking(s)</button>
+								</td>
+							</tr>
+
+							<!-- this row will have the past bookings that had been confirmed and came to fruition -->
+							<tr>
+								<td>
+									<button type="button" class="btn btn-info btn-arrow-right">Past pet stay(s)/booking(s)</button>
+								</td>
+							</tr>
+
+							<!-- this row will have archived requests - those requests which were pending but because the petsitter has not yet confirmed and the start date of the booking has reached we pu them as archived -->
+							<tr>
+								<td>
+									<button type="button" class="btn btn-info btn-arrow-right">Archived booking(s)</button>
+								</td>
+							</tr>
+
+
+						</table>
+
+
+
+					</td>
+
+					<td>
+
+
+
+
+					</td>
+
+				</tr>
+
+
+			</table>
 
 
 		</div>

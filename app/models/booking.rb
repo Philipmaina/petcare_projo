@@ -30,5 +30,37 @@ class Booking < ActiveRecord::Base
   belongs_to :petsitter
   belongs_to :residential_area
   belongs_to :sittingservice
+
+
+  has_many :notificationforpetsitters #it's good practice to reciprocate the r/ship BUT IT IS VERY IMPORTANT TO NOTE THAT THERE CAN ONLY BE ONE NOTIFICATION FOR A BOOKING - IT IS LIKE WE'RE CHEATING BUT LEGALLY 
+  # A NOTIFICATION MUST ALWAYS BE TIED TO(BELONG TO) A BOOKING FOR THE NOTIFICATION TO MAKE SENSE.
+  # NOTE TO FUTURE SELF: SEE HOW TO USE HAS_ONE R/SHIP
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+# -----REMEMBER WE WANT TO CREATE A NOTIFICATION IMMEDIATELY A BOOKING IS SAVED
+# ------------------------------CALLBACKS---------------------------------------
+  # Callbacks are methods that get called at certain moments of an object's life cycle. 
+  # WITH CALLBACKS IT IS POSSIBLE TO WRITE CODE THAT WILL RUN WHENEVER AN ACTIVE RECORD OBJECT IS CREATED, SAVED, UPDATED, DELETED, VALIDATED, OR LOADED FROM THE DATABASE.
+
+  # Once the active record object saved some method will be fired in that scenario we have to use the after_save callback.
+  after_save :notification_booking_petsitter_creation
+
+
+# ------------------------------------------------------------------------------
+
+  def notification_booking_petsitter_creation
+
+  	notification_object = self.notificationforpetsitters.new
+
+  	notification_object.petsitter = self.petsitter
+  	notification_object.type_of_notification = "Booking"
+  	notification_object.save
+  	
+  end
+
+
 end

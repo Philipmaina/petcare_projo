@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403002732) do
+ActiveRecord::Schema.define(version: 20160410232910) do
 
   create_table "bookings", force: :cascade do |t|
     t.date     "start_date"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20160403002732) do
 
   add_index "junctionofservicesandpetsitters", ["petsitter_id"], name: "index_junctionofservicesandpetsitters_on_petsitter_id"
   add_index "junctionofservicesandpetsitters", ["sittingservice_id"], name: "index_junctionofservicesandpetsitters_on_sittingservice_id"
+
+  create_table "notificationforpetsitters", force: :cascade do |t|
+    t.integer  "petsitter_id"
+    t.integer  "booking_id"
+    t.boolean  "read_status",          default: false
+    t.string   "type_of_notification"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "notificationforpetsitters", ["booking_id"], name: "index_notificationforpetsitters_on_booking_id"
+  add_index "notificationforpetsitters", ["petsitter_id"], name: "index_notificationforpetsitters_on_petsitter_id"
 
   create_table "petowners", force: :cascade do |t|
     t.string   "first_name"

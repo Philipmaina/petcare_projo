@@ -32,7 +32,6 @@ class BookingsController < ApplicationController
 	# most things validated frontend FOR NOW !!!
 	def create_booking
 
-		fail
 
 		 # {"utf8"=>"✓",
  		 # "type_of_sitting_service"=>"1",
@@ -47,8 +46,7 @@ class BookingsController < ApplicationController
 		dropoff_date = params[:dropoffdate].to_date
 		pickup_date = params[:pickupdate].to_date
 
-
-
+		string_of_pettypes_to_store_in_db = array_of_pets_to_be_booked_for.join(" , ")  #this string is what we'll store in actual pets_booked_for column
 
 
 		petsitter_object = Petsitter.find(petsitter_id)
@@ -80,10 +78,36 @@ class BookingsController < ApplicationController
 		end
 
 
-		
+
+		# we can get the petowner from the session data
+		# this is because for you to book you must be a signed in petowner
+
+		@petowner_who_is_booking = current_petowner # this will be the petowner object booking
+
+
+		# this is to get the total_price 
+		# firstly we get the price charge of the petsitter at the moment (the very second this booking happens) we can't wait for later because the petsitter may edit the price and we don't want a conflict where a petowner thought they were paying this but are presented with a different price
+		# we then multiply with the count_of_charging_days_or_nights 
+		total_price_of_stay = petsitter_object.night_charges * count_of_charging_days_or_nights
 
 
 
+
+		# ------------creating the booking object-------------------------
+
+		@booking = @petowner_who_is_booking.bookings.new #petowner_id will be immediately filled
+
+		@booking.sittingservice = sittingservice_object
+		@booking.residential_area = residential_area_object
+		@booking.petsitter = petsitter_object
+		@booking.start_date = dropoff_date
+		@booking.end_date = pickup_date
+		@booking.pets_booked_for = string_of_pettypes_to_store_in_db
+		@booking.no_of_night_days_for_pet_stay = count_of_charging_days_or_nights
+		@booking.total_price_of_stay = total_price_of_stay
+		@booking.save
+
+		redirect_to pet_owner_dashboard_path(@petowner_who_is_booking.id) , notice: " Successfully booked for a pet stay "
 
 
 	end
