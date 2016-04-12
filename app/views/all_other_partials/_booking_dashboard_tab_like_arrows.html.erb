@@ -1,0 +1,47 @@
+
+
+
+	<table style="width: 45% ;" id="tbl_for_booking_tabs">
+
+
+		<!-- this row will have the upcoming confirmed requests tab(btn)-->
+		<tr>
+			<td>
+				<%= form_tag(upcoming_bookings_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Upcoming/confirmed booking(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+
+		<!-- this row will have the pending booking request tab -->
+		<tr>
+			<td>
+				<%= form_tag(pending_bookings_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Pending confirmation booking(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+
+		<!-- this row will have the past bookings that had been confirmed and came to fruition -->
+		<tr>
+			<td>
+				<%= form_tag(past_pet_stays_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Past pet stay(s)/booking(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+
+		<!-- this row will have archived requests - those requests which were pending but because the petsitter has not yet confirmed and the start date of the booking has reached we pu them as archived -->
+		<tr>
+			<td>
+				<%= form_tag(archived_bookings_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Archived booking request(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+
+	</table>

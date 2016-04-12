@@ -1,0 +1,23 @@
+// we need to generate javascript code that is going to update the right portion of our bookings page to have the pending bookings
+// we are rendering javascript so we need to put it inside quotes in html action and we also need to escape whatever rendered html comes back to get valid javascript so we use j 
+// ANOTHER EXPLANATION OF J : it is there to prevent evil users who may submit the form with malicious javascript which would otherwise be executed.
+$("#table_where_booking_tbl_filled_rows_gets_placed").html("<% if @bookings.blank? %> <tr><td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> You have no pending bookings. </td></tr> <% else %> <%= j render @bookings %> <% end %>") ;
+
+
+
+
+// that partial is called for every object in the collection 
+// HOW DOES IT KNOW WHAT PARTIAL EXACTLY TO RENDER ? Under the hood, render calls to_partial_path on each of our objects to determine which partial to render
+
+// @bookings[0].to_partial_path returns => "bookings/booking"
+
+
+
+
+// ALL THIS IS JUST A SHORTHAND OF DOING THE .EACH ON THE COLLECTION THEN RENDERING FOR EACH ELEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// <%# @bookings.each do |booking| %>
+//  <%# render partial: 'bookings/booking', locals: { booking: booking } %>
+// <%# end %>
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

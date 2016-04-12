@@ -18,54 +18,28 @@
 
 		</div>
 
-		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 50px 10px 20px 20px ;">
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 30px 10px 20px 20px ;">
 
 			<table>
 
 				<tr>
 					<td>
 
-						<table style="width: 45% ;" id="tbl_for_booking_tabs">
-
-							<!-- this row will have the upcoming confirmed requests tab(btn)-->
-							<tr>
-								<td>
-									<button type="button" class="btn btn-info btn-arrow-right ">Upcoming/confirmed booking(s)</button>
-								</td>
-							</tr>
-
-							<!-- this row will have the pending booking request tab -->
-							<tr>
-								<td>
-									<button type="button" class="btn btn-info btn-arrow-right">Pending confirmation booking(s)</button>
-								</td>
-							</tr>
-
-							<!-- this row will have the past bookings that had been confirmed and came to fruition -->
-							<tr>
-								<td>
-									<button type="button" class="btn btn-info btn-arrow-right">Past pet stay(s)/booking(s)</button>
-								</td>
-							</tr>
-
-							<!-- this row will have archived requests - those requests which were pending but because the petsitter has not yet confirmed and the start date of the booking has reached we pu them as archived -->
-							<tr>
-								<td>
-									<button type="button" class="btn btn-info btn-arrow-right">Archived booking(s)</button>
-								</td>
-							</tr>
-
-
-						</table>
-
-
+						<%= render '/all_other_partials/booking_dashboard_tab_like_arrows' %>
 
 					</td>
 
 					<td>
+						<table id="table_where_booking_tbl_filled_rows_gets_placed">
+
+
+							<!-- this is where stuff will be placed -->
 
 
 
+
+
+						</table>
 
 					</td>
 
@@ -103,6 +77,22 @@
 <script type="text/javascript">
 
 	$("li#tab_for_bookings").addClass("active") ;
+
+
+
+	$("button.booking-tab-btns").click( function() {
+
+		// if any of those buttons we 
+			// i) firstly want to remove the class clicked_decorate on all the buttons including the one clicked
+			// ii) then we want to put back class clicked_decorate on the clicked button
+		
+		$("button.booking-tab-btns").removeClass("clicked_decorate") ;
+		$(this).addClass("clicked_decorate") ;
+
+
+
+
+	});
 
 
 </script>

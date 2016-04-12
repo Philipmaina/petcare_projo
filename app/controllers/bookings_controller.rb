@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
 
 	# we want you to be signed in before you can actually book as it is one of the functional requirements of the app
 	# otherwise there is no way we can get the petowner info to populate in the bookings table esp for the petowner_id field - because we are depending on that session hash to get info of petowner and if it isn't there then we're DOOMED
-	before_action :require_petowner_signin , only: [:create_booking]
+	before_action :require_petowner_signin 
 
 
 	# this is where the form data from confirmation bookings form reaches to allow for creation of a booking
@@ -111,6 +111,83 @@ class BookingsController < ApplicationController
 
 
 	end
+
+
+	# get all bookings which have been agreed/confirmed by petsitters and havent happened yet - close to happening
+	def upcoming_bookings
+		# we want to order the soonest booking at the top of the list even if it is at the past - then we'll remove those past ones( we use asc order )
+		# we remove those that are at the past i.e when start_date <= date today
+		# we also need to check for petsitter_acceptance_confirmation because that will tell us whether the petsitter has agreed to care for our pet(s)
+
+		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
+
+		respond_to  do | format |
+
+			format.js # render a file called upcoming_bookings.js.erb in bookings subdirectory of views
+			
+		end
+
+	end
+
+
+
+	# here we are checking for bookings which are in the future(haven't happened) and the petsitter has yet to confirm whether or not he/she will care for the pets
+	def pending_bookings
+
+
+		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date")
+
+		respond_to  do | format |
+
+			format.js # render a file called pending_bookings.js.erb in bookings subdirectory of views
+			
+		end
+
+
+		
+	end
+
+	# these are bookings that actually happened but are in the past
+	# that means the petsitter_acceptance_confirmation is true but the end_date is less than today(the date today is way ahead of the enddate)
+	def past_pet_stays
+
+		@bookings = Booking.where('end_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date desc")
+		# the order clause is desc because if i had a pet stay that ended 8/4/2016 and another that ended 17/4/2016 and another that ended 4/4/2016 and assuming today is 19/4/2016 - i would want them arranged from 17/4/2016(the first one in list) , then 8/4/2016 , finally 4/4/2016 - WHICH IS DESCENDING ORDER
+
+		respond_to  do | format |
+
+			format.js # render a file called past_pet_stays.js.erb in bookings subdirectory of views
+			
+		end
+		
+	end
+
+
+	# THIS IS FOR THE BOOKINGS THAT NEVER HAPPENED PROBABLY BECAUSE THE SITTER DIDNT RESPOND IN TIME
+	# so the date today is ahead(greater than the start_date ) plus the petsitter_acceptance_confirmation is still false
+	def archived_bookings
+
+		@bookings = Booking.where('start_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date desc")
+
+		respond_to  do | format |
+
+			format.js # render a file called archived_bookings.js.erb in bookings subdirectory of views
+			
+		end
+		
+	end
+
+
+
+
+
+
+	private
+
+		def require_correct_petowner
+			
+		end
+
 
 
 end

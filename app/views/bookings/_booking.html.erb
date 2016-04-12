@@ -1,0 +1,99 @@
+<hr>
+<tr>
+	<td>
+
+		<table>
+			<!-- this row has the title of what sitting service we are booking for -->
+			<tr>
+
+				<td colspan='2' style='text-align:center ;'>
+
+					<%= booking.sittingservice.service_name %>
+					Sitting Details
+
+				</td>
+
+			</tr>
+
+			<!-- this row has the petsitter who the petowner is booking for -->
+			<tr>
+
+				<td colspan='2' style='text-align:center ;' >
+					Petsitter in charge:
+					<%= "  " + booking.petsitter.first_name + " " + booking.petsitter.surname  %>
+
+				</td>
+
+			</tr>
+
+			<!-- this row has the contact_line_one of petsitter plus the email address - now you're allowed to see their info  -->
+			<tr>
+				<td style='text-align:center ;'>
+					Phone no:
+					<%= " " + booking.petsitter.contact_line_one %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					Email: 
+
+					<%= " " + booking.petsitter.personal_email %>
+
+				</td>
+
+			</tr>
+
+			<!-- this row has the FROM cell and TO cell for period of care -->
+			<tr>
+
+				<td style='text-align:center ;'>
+					From:
+					<%= " " + booking.start_date.to_s(:long) %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					To:
+					<%= " " +  booking.end_date.to_s(:long) %>
+
+				</td>
+
+
+			</tr>
+
+			<!-- this row has the WHERE cell and PETS cell   -->
+			<tr>
+				<td style='text-align:center ;'>
+					Where:
+					<%= " " + booking.residential_area.name_of_location %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					Pets:
+					<%= " " + booking.pets_booked_for %>
+				</td>
+
+			</tr>
+
+			<!-- this last row has the total_price_of_pet_stay -->
+			<tr>
+				<td colspan='2' style='text-align:center ;'>
+
+					<%= booking.total_price_of_stay %>
+
+					<hr>
+
+				</td>
+
+			</tr>
+
+
+
+
+		</table>
+
+
+	</td>
+</tr>
+	

@@ -4,6 +4,16 @@ Rails.application.routes.draw do
 
   resources :notificationforpetsitters
   resources :bookings
+  # ----------ADDITIONAL BOOKING ROUTES FOR SOME AJAX STUFF------------------
+  
+  post "/petowners/:id/dashboard/upcoming_bookings" => "bookings#upcoming_bookings" , as: "upcoming_bookings"
+  post "/petowners/:id/dashboard/pending_bookings" => "bookings#pending_bookings" , as: "pending_bookings"
+  post "/petowners/:id/dashboard/past_pet_stays" => "bookings#past_pet_stays" , as: "past_pet_stays"
+  post "/petowners/:id/dashboard/archived_bookings" => "bookings#archived_bookings" , as: "archived_bookings"
+
+  # --------------------------------------------------------------------------
+
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
