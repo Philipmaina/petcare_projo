@@ -11,14 +11,14 @@
 
 	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
 
-	<div class="row" style="position:relative ;height: 550px; background-color: #eee; ">
+	<div class="row" style="position:relative ;height: 620px; background-color: #eee; ">
 
 		<div class="col-md-2">
 
 
 		</div>
 
-		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 30px 10px 20px 20px ;">
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 30px 30px 20px 20px ;">
 
 			<table>
 
@@ -34,6 +34,18 @@
 
 
 							<!-- this is where stuff will be placed -->
+
+							<!-- the if code below here will be overwritten because of the .html function in jquery written in the .js.erb files when we want to ajaxify stuff -->
+
+							<% if @bookings.blank? %> 
+								<tr>
+									<td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> 
+										You have no upcoming bookings 
+									</td>
+								</tr> 
+							<% else %> 
+								<%=  render @bookings %> 
+							<% end %>
 
 
 
@@ -56,27 +68,16 @@
 
 		</div>
 
-
-
-
-
-
-
-
-
 	</div>
-
-
-
-
-
-
 
 </div>
 
 <script type="text/javascript">
 
 	$("li#tab_for_bookings").addClass("active") ;
+
+	// this statement below is so that when we land on this page the first tab is preselected and decorated
+	$("button#default-active-tab").addClass("clicked_decorate") 
 
 
 

@@ -1,12 +1,12 @@
-<hr>
-<tr>
+
+<tr style="border: 1px solid #008c9d; ">
 	<td>
 
-		<table>
+		<table style="background-color:#e5f6f8;">
 			<!-- this row has the title of what sitting service we are booking for -->
-			<tr>
+			<tr style="border-bottom: 1px solid #008c9d;">
 
-				<td colspan='2' style='text-align:center ;'>
+				<td colspan='2' style='text-align:center ; font-family: marydale; font-weight:bolder; font-size:25px ; '>
 
 					<%= booking.sittingservice.service_name %>
 					Sitting Details
@@ -19,8 +19,8 @@
 			<tr>
 
 				<td colspan='2' style='text-align:center ;' >
-					Petsitter in charge:
-					<%= "  " + booking.petsitter.first_name + " " + booking.petsitter.surname  %>
+					<span style="font-weight:bolder;">Petsitter in charge:</span>
+					<%= "   " + booking.petsitter.first_name + " " + booking.petsitter.surname  %>
 
 				</td>
 
@@ -29,14 +29,13 @@
 			<!-- this row has the contact_line_one of petsitter plus the email address - now you're allowed to see their info  -->
 			<tr>
 				<td style='text-align:center ;'>
-					Phone no:
+					<span style="font-weight:bolder;">Phone no:</span>
 					<%= " " + booking.petsitter.contact_line_one %>
 
 				</td>
 
 				<td style='text-align:center ;'>
-					Email: 
-
+					<span style="font-weight:bolder;">Email:</span>
 					<%= " " + booking.petsitter.personal_email %>
 
 				</td>
@@ -47,13 +46,13 @@
 			<tr>
 
 				<td style='text-align:center ;'>
-					From:
+					<span style="font-weight:bolder;">From:</span>
 					<%= " " + booking.start_date.to_s(:long) %>
 
 				</td>
 
 				<td style='text-align:center ;'>
-					To:
+					<span style="font-weight:bolder;">To:</span>
 					<%= " " +  booking.end_date.to_s(:long) %>
 
 				</td>
@@ -64,13 +63,13 @@
 			<!-- this row has the WHERE cell and PETS cell   -->
 			<tr>
 				<td style='text-align:center ;'>
-					Where:
+					<span style="font-weight:bolder;">Where:</span>
 					<%= " " + booking.residential_area.name_of_location %>
 
 				</td>
 
 				<td style='text-align:center ;'>
-					Pets:
+					<span style="font-weight:bolder;">Pets:</span>
 					<%= " " + booking.pets_booked_for %>
 				</td>
 
@@ -79,10 +78,10 @@
 			<!-- this last row has the total_price_of_pet_stay -->
 			<tr>
 				<td colspan='2' style='text-align:center ;'>
+					<span style="font-weight:bolder;">Total Price of Stay: </span>
+					<%= " " + "KES " + booking.total_price_of_stay.to_s %>
 
-					<%= booking.total_price_of_stay %>
-
-					<hr>
+					
 
 				</td>
 

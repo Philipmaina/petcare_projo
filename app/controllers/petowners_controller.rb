@@ -224,6 +224,8 @@ class PetownersController < ApplicationController
 
 	def dashboard_bookings
 
+		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
+
 	end
 
 	def dashboard_accountdetails

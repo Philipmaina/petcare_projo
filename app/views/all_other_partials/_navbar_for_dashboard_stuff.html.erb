@@ -16,6 +16,8 @@
 
 		    <ul class="nav nav-tabs nav-justified ">
 
+		    <!-- created a tab for petowners  -->
+		    <!-- i will probably create a different one for pet sitters -->
 		      <% if session.key?(:petowner) %>
 
 			      <li id="tab_for_home">
@@ -26,7 +28,7 @@
 
 			      <li id="tab_for_edit_profile">
 			      	<%= link_to pet_owner_dashboard_edit_profile_path(current_petowner.id)  do   %>
-			      		Edit profile
+			      		Edit Profile
 			      	<% end %>
 			      </li>
 

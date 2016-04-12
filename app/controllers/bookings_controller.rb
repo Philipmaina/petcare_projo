@@ -107,7 +107,7 @@ class BookingsController < ApplicationController
 		@booking.total_price_of_stay = total_price_of_stay
 		@booking.save
 
-		redirect_to pet_owner_dashboard_path(@petowner_who_is_booking.id) , notice: " Successfully booked for a pet stay "
+		redirect_to pet_owner_dashboard_bookings_path(@petowner_who_is_booking.id) , notice: " Successfully booked for a pet stay!!Check in pending bookings "
 
 
 	end
