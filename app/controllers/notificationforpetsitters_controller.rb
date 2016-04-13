@@ -33,6 +33,15 @@ class NotificationforpetsittersController < ApplicationController
 	end
 
 	def read_booking_notifications 
+
+		petsitter_object = params[:id] #this is sent through the form chini ya maji(because ajax) as request parameters like below
+		#  params = {"utf8"=>"✓", "id"=>"4"} 
+
+
+		# i tack on .notificationforpetsitters to get all notifications of that petsitter because of has_many r/ship
+		# then we want booking notification and those that are unread(read status is false)
+		# ive ordered by id desc because the object with highest id number is the notification that was created soonest - ACTUALLY FOR UNREAD IT WON'T REALLY MATTER BUT SINCE I WANT TO TACK ON ...3hrs ago for example i want them ordered with soonest at the top like in fb
+		@notifications = petsitter_object.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ? ' , "Booking" , true ).order( "id desc" )
 		
 	end
 
