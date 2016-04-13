@@ -53,7 +53,41 @@
 
 			      </li>
 
-			  <% end %>
+			  <% elsif session.key?(:petsitter) %>
+
+			  	  <li id="tab_for_home">
+			      	<%= link_to pet_sitter_dashboard_path(current_petsitter.id)  do   %>
+			      	Home
+			      	<% end %>
+			      </li>
+
+			      <li id="tab_for_edit_profile">
+			      	<%= link_to pet_sitter_dashboard_edit_profile_path(current_petsitter.id)  do   %>
+			      		Edit Profile
+			      	<% end %>
+			      </li>
+
+			      <li id="tab_for_notifications">
+			      	<%= link_to pet_sitter_dashboard_notification_path(current_petsitter.id)  do   %>
+			      	Notifications
+			      	<% end %>
+			      </li>
+
+			      
+
+			      <li id="tab_for_account_details">
+
+			      	<%= link_to pet_sitter_dashboard_account_details_path(current_petsitter.id)  do   %>
+			      	Account Details
+			      	<% end %>
+
+			      </li>
+
+			   <% end %>
+
+
+
+
 
 		    </ul>
 

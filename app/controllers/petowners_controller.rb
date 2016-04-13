@@ -212,23 +212,27 @@ class PetownersController < ApplicationController
 	end
 
 	def dashboard_edit_profile
-
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id]) and instance variables once assigned can be accesed across different methods up until the after an action(method which is an action) runs
 		render 'edit_profile_on_dashboard'
 		
 	end
 
 	def dashboard_notifications
-
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 		
 	end
 
 	def dashboard_bookings
+
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 
 		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
 
 	end
 
 	def dashboard_accountdetails
+
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 		
 	end
 
@@ -243,6 +247,8 @@ class PetownersController < ApplicationController
 
 	      # checked if signed in petowner is the same as the one whose details are currently being updated,edited or deleted.
 
+	      # typically in a ruby class once an instance variable is assigned it can be accessed across different methods in a class.
+	      # however after an action runs instance variables do not live on
 	      @petowner = Petowner.find( params[:id] )
 
 	      # do something else blahblah...

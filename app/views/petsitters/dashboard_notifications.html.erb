@@ -1,4 +1,3 @@
-
 <style type="text/css">
 	table#tbl_for_booking_tabs{ 
 		border-collapse: separate; border-spacing: 35px; 
@@ -24,8 +23,8 @@
 
 				<tr>
 					<td>
-
-						<%= render '/all_other_partials/booking_dashboard_tab_like_arrows' %>
+						<!-- this is where the tab like notification arrows will go -->
+						<%= render '/all_other_partials/notification_tab_like_arrows_petsitters' %>
 
 					</td>
 
@@ -33,19 +32,7 @@
 						<table id="table_where_booking_tbl_filled_rows_gets_placed">
 
 
-							<!-- this is where stuff will be placed -->
-
-							<!-- the if code below here will be overwritten because of the .html function in jquery written in the .js.erb files when we want to ajaxify stuff -->
-
-							<% if @bookings.blank? %> 
-								<tr>
-									<td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> 
-										You have no upcoming bookings 
-									</td>
-								</tr> 
-							<% else %> 
-								<%=  render @bookings %> 
-							<% end %>
+							
 
 
 
@@ -74,10 +61,10 @@
 
 <script type="text/javascript">
 
-	$("li#tab_for_bookings").addClass("active") ;
+	$("li#tab_for_notifications").addClass("active") ;
 
 	// this statement below is so that when we land on this page the first tab is preselected and decorated
-	$("button#default-active-tab").addClass("clicked_decorate") ; 
+	$("button#default-active-tab").addClass("clicked_decorate") ;
 
 
 
@@ -89,11 +76,14 @@
 		
 		$("button.booking-tab-btns").removeClass("clicked_decorate") ;
 		$(this).addClass("clicked_decorate") ;
-
-
-
+		
 
 	});
 
 
+
+
+
+
 </script>
+

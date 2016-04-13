@@ -302,6 +302,20 @@ class PetsittersController < ApplicationController
 	end
 
 	def dashboard
+
+		# remember @petsitter = Petsitter.find( params[:id] )
+		
+	end
+
+	def dashboard_edit_profile
+		
+	end
+
+	def dashboard_notifications
+		
+	end
+
+	def dashboard_accountdetails
 		
 	end
 

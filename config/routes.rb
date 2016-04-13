@@ -14,6 +14,15 @@ Rails.application.routes.draw do
   # --------------------------------------------------------------------------
 
 
+
+  # -------ADDITIONAL PETSITTER NOTIFICATION ROUTES THAT USE AJAX KIDOGO-----
+
+  post "/petsitters/:id/dashboard/unread_booking_notifications" => "notificationforpetsitters#unread_booking_notifications" , as: "unread_petsitter_booking_notifications"
+
+  post "/petsitters/:id/dashboard/read_booking_notifications" => "notificationforpetsitters#read_booking_notifications" , as: "read_petsitter_booking_notifications"
+  post "/petsitters/:id/dashboard/review_notifications" => "notificationforpetsitters#review_notifications" , as: "review_notifications"
+
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
@@ -100,7 +109,18 @@ get "/petowners/:id/dashboard/account_details" => "petowners#dashboard_accountde
   get "/petsitters/:id/charges_plus_calendar" => "petsitters#edit_petsitter_charges_plus_calendar" , as: "edit_petsitter_charges_plus_calendar"
   patch "/petsitters/:id/charges_plus_calendar" => "petsitters#update_petsitter_charges_plus_calendar"
 
+
+
+
+
+
   get "/petsitter/:id/dashboard" => "petsitters#dashboard" , as: "pet_sitter_dashboard" 
+
+  get "/petsitter/:id/dashboard/edit_profile" => "petsitters#dashboard_edit_profile" , as: "pet_sitter_dashboard_edit_profile"
+
+  get "/petsitter/:id/dashboard/notifications" => "petsitters#dashboard_notifications" , as: "pet_sitter_dashboard_notification" 
+ 
+  get "/petsitters/:id/dashboard/account_details" => "petsitters#dashboard_accountdetails" , as: "pet_sitter_dashboard_account_details"
 
 
 

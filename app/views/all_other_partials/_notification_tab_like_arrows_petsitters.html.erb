@@ -1,0 +1,31 @@
+<table style="width: 45% ;" id="tbl_for_booking_tabs">
+
+
+		<!-- this row will have the upcoming confirmed requests tab(btn)-->
+		<tr>
+			<td>
+				<%= form_tag(unread_petsitter_booking_notifications_path(current_petsitter) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" id="default-active-tab">Unread Booking Notification(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<%= form_tag(read_petsitter_booking_notifications_path(current_petsitter) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" >Read Booking Notification(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+		<!-- this row will have the pending booking request tab -->
+		<tr>
+			<td>
+				<%= form_tag(review_notifications_path(current_petsitter) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Review notification(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+
+</table>
