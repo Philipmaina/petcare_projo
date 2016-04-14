@@ -25,37 +25,61 @@ header{
 	width: 100% ;
   
 
-// this nested trail is for the name of a person on the header section once the person successfuly signs in
-  div{
+    // this nested trail is for the name of a person on the header section once the person successfuly signs in
+      div{
 
-    table{
+        table{
 
-      tr{
+          tr{
 
-        td{
+            td{
 
-          div.btn.btn-default.navbar-btn.name_section_log_in{
+              div.btn.btn-default.navbar-btn.name_section_log_in{
 
-            border:none !important ;
-            color: #00acc1; 
-            font-size: 16px ;
+                border:none !important ;
+                color: #00acc1; 
+                font-size: 16px ;
 
-          }
+              }
 
-          div:hover{
+              div:hover{
 
-            text-decoration: none ;
+                text-decoration: none ;
+              }
+
+
+            }
           }
         }
       }
-    }
-  }
-// ------------------------------------------------------------
+    // ------------------------------------------------------------
 
 
 
 }
 
+
+
+// ---THIS IS FOR THE NOTIFICATION ICON THAT APPEARS AT THE TOP OF EVERY PAGE ONCE SIGNED IN----
+td.notification_icon_header{
+
+  a:hover{
+
+    i{
+
+      color: darken( #D3D3D3 , 30%) !important ;
+    }
+
+
+  }
+
+
+}
+
+// -----------------------------------------------------------------------------
+
+
+// ----------------------------FOOTER STUFF---------------------------------
 footer{
 
 	// sass allows nesting of elements within parent elements
@@ -63,6 +87,7 @@ footer{
 		width: 100% ;
 	}
 }
+// -------------------------------------------------------------------------
 
 // ------------------------------FLASHES-----------------------------
 .flash {

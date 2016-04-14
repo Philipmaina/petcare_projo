@@ -47,7 +47,9 @@ class Booking < ActiveRecord::Base
   # WITH CALLBACKS IT IS POSSIBLE TO WRITE CODE THAT WILL RUN WHENEVER AN ACTIVE RECORD OBJECT IS CREATED, SAVED, UPDATED, DELETED, VALIDATED, OR LOADED FROM THE DATABASE.
 
   # Once the active record object saved some method will be fired in that scenario we have to use the after_save callback.
-  after_save :notification_booking_petsitter_creation
+  # WE USE AFTER_CREATE OVER AFTER_SAVE BECAUSE WE WANT THIS TO WORK ONCE ONLY WHEN A NEW BOOKING OBJECT IS CREATED IS WHEN WE WANT THE NOTIFICATION OBJECT TO ALSO BE CREATED. OTHERWISE IF WE USE AFTER_SAVE A NEW NOTIFICATION OBJECT WILL BE SAVED EVEN WHEN YOURE UPDATING SOME ATTRIBUTE OF THE BOOKING OBJECT BECAUSE UPDATE INVOLVES SAVING.
+  # !!!!NOTE TO FUTURE SELF: BE EXTREMELY CAREFUL OF THE ABOVE LATER
+  after_create :notification_booking_petsitter_creation
 
 
 # ------------------------------------------------------------------------------

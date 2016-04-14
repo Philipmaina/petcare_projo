@@ -1,4 +1,6 @@
 <style type="text/css">
+
+	/*the reason for this is to space out the arrow like buttons - not have them one over another*/
 	table#tbl_for_booking_tabs{ 
 		border-collapse: separate; border-spacing: 35px; 
 	}
@@ -32,8 +34,18 @@
 						<table id="table_where_booking_tbl_filled_rows_gets_placed">
 
 
-							
+							<!-- this is where notification stuff will be placed -->
+							<!-- the if code below here will be overwritten because of the .html function in jquery written in the .js.erb files when we want to ajaxify stuff -->
 
+							<% if @notifications.blank? %> 
+								<tr>
+									<td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> 
+										You have no unread booking notifications 
+									</td>
+								</tr> 
+							<% else %> 
+								<%=  render @notifications %> 
+							<% end %>
 
 
 

@@ -320,7 +320,7 @@ module ApplicationHelper
 		
 	end
 
-
+	# --------THE TABLE THAT COMES AFTER ALL YOUR DETAILS IN HOME TAB OF DASHBOARD
 	def pets_table_for_dashboard_page(petowner)
 
 		if petowner.pets.count > 0
@@ -403,5 +403,19 @@ module ApplicationHelper
 		return ultimatehtmltosendback.html_safe
 		
 	end #for helper method
+
+	# --------------------------------------------------------------------
+
+
+	# -----HELPER METHOD FOR CHECKING NOTIFICATIONS WHILE SCROLLING THROUGH THE TABS IN DASHBOARD OF PETSITTER SO IT CAN SHOW ON NOTIFICATION TAB THAT THERE IS A NOTIFICATION IF THERE INDEED IS ONE - WILL ISE METHOD IN PARTIAL
+	def display_notifications_in_tab(object)
+
+		if object.notificationforpetsitters.where('read_status = ? ' , false ).present?
+			return_html ="<span style='color:#ff6666 ; font-weight:bolder;'>" + " &nbsp;<i class='fa fa-exclamation-circle' aria-hidden='true' ></i>" + " (" + object.notificationforpetsitters.where('read_status = ? ' , false ).count.to_s + ")" + "</span>"
+			return return_html.html_safe
+		end
+	
+	end
+	# ------------------------------------------------------------------------
 
 end

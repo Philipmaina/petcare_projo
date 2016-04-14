@@ -1,0 +1,118 @@
+<tr style="border: 1px solid #008c9d; ">
+	<td>
+
+		<table style="background-color:#e5f6f8;">
+			<!-- this row has the title of what sitting service we(petsitters) are being notified about that a petowner has booked -->
+			<tr style="border-bottom: 1px solid #008c9d;">
+
+				<td colspan='2' style='text-align:center ; font-family: marydale; font-weight:bolder; font-size:20px ; '>
+
+					<%= notificationforpetsitter.booking.sittingservice.service_name %>
+					Booking Request
+
+				</td>
+
+			</tr>
+
+			<!-- this row of the notification has the petowner who booked for the petsitter currently checking his/her notification  -->
+			<tr>
+
+				<td colspan='2' style='text-align:center ;' >
+					<span style="font-weight:bolder;">Petowner requesting the booking:</span>
+					<%= "   " + notificationforpetsitter.booking.petowner.first_name + " " + notificationforpetsitter.booking.petowner.surname  %>
+
+				</td>
+
+			</tr>
+
+			<!-- this row has the contact_line_one of petowner plus the email address - now you're allowed to see their info  -->
+			<tr>
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">Phone no:</span>
+					<%= " " + notificationforpetsitter.booking.petowner.contact_line_one %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">Email:</span>
+					<%= " " + notificationforpetsitter.booking.petowner.personal_email %>
+
+				</td>
+
+			</tr>
+
+			<!-- this row has the FROM cell and TO cell for period of care -->
+			<tr>
+
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">From:</span>
+					<%= " " + notificationforpetsitter.booking.start_date.to_s(:long) %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">To:</span>
+					<%= " " +  notificationforpetsitter.booking.end_date.to_s(:long) %>
+
+				</td>
+
+
+			</tr>
+
+			<!-- this row has the WHERE cell and PETS cell   -->
+			<tr>
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">Where:</span>
+					<%= " " + notificationforpetsitter.booking.residential_area.name_of_location %>
+
+				</td>
+
+				<td style='text-align:center ;'>
+					<span style="font-weight:bolder;">Pets:</span>
+					<%= " " + notificationforpetsitter.booking.pets_booked_for %>
+				</td>
+
+			</tr>
+
+			<!-- this last row has the total_price_of_pet_stay -->
+			<tr>
+				<td colspan='2' style='text-align:center ;padding-bottom: 10px; '>
+					<span style="font-weight:bolder;">Estimated earnings: </span>
+					<%= " " + "KES " + notificationforpetsitter.booking.total_price_of_stay.to_s %>
+
+					
+
+				</td>
+
+			</tr>
+
+			<tr>
+				<td style='text-align:center ; padding-bottom: 10px;'>
+
+					<%= link_to notificationforpetsitter_path(notificationforpetsitter.id) , method: :patch do %>
+
+						<button type="button" class="btn btn-success">Accept request</button>
+
+					<% end %>
+					
+				</td>
+
+				<td  style='text-align:center ;padding-bottom: 10px;'>
+
+					<button type="button" class="btn btn-danger">Decline request</button>
+					
+				</td>
+
+			</tr>
+
+			
+
+
+
+
+		</table>
+
+
+	</td>
+</tr>
+	

@@ -312,6 +312,8 @@ class PetsittersController < ApplicationController
 	end
 
 	def dashboard_notifications
+
+		@notifications = @petsitter.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ? ' , "Booking" , false ).order( "id desc" )
 		
 	end
 

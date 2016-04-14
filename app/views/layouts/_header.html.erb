@@ -37,17 +37,13 @@
 
 									<tr>
 
-										<td style="text-align:right;">
-
-											<i class="fa fa-user" style="color: #D3D3D3 ; " ></i>
-
-										</td>
-
-										<td>
+										<td class="notification_icon_header">
 
 											<%= link_to pet_sitter_dashboard_path(current_petsitter.id) , :method => :get do   %>
 
 												<div class="btn btn-default navbar-btn name_section_log_in"  >
+													<i class="fa fa-user" style="color: #D3D3D3 ; " ></i>
+
 													<!-- we never want to run queries inside views, they should just display data given to them. views shouldn't even know of existence of models -->
 													<!-- Petsitter.find( session[:petsitter] ).first_name.downcase in ruby -->
 													<!-- so we could just do the above and it would work but it isn't where that code should be -->
@@ -69,7 +65,40 @@
 
 										</td>
 
-										<!-- this column allows spacing between the name of user and sign out button -->
+										<!-- this column allows spacing between the name of petsitter and notification of petsitter -->
+										<td style="width:5px;">
+
+										</td>
+
+
+										<!-- this column shows notification icon and number of notifications(unread of course) -->
+										<td class="notification_icon_header">
+
+											<%= link_to pet_sitter_dashboard_notification_path(current_petsitter.id) do %>
+
+												<i class="fa fa-bell " aria-hidden="true" style="color: #D3D3D3 ; "></i>
+
+												(
+												<% if current_petsitter.notificationforpetsitters.where('read_status = ? ' , false ).present? %>
+
+													<span style="font-weight:bolder ; color:#ff6666  ;">
+
+														<%= current_petsitter.notificationforpetsitters.where('read_status = ? ' , false ).count %>
+
+													</span>
+
+													
+												<% else %>
+													<span style="color:#5cb85c;">
+														0
+													</span>
+												<% end %>
+												)
+
+											<% end %>
+										</td>
+
+										<!-- this column allows spacing between the notifications of petsitter and sign out button -->
 										<td style="width:5px;">
 
 										</td>

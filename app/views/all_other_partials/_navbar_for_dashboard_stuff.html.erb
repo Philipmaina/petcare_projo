@@ -69,7 +69,9 @@
 
 			      <li id="tab_for_notifications">
 			      	<%= link_to pet_sitter_dashboard_notification_path(current_petsitter.id)  do   %>
-			      	Notifications
+
+				      	Notifications <%= display_notifications_in_tab(current_petsitter) %>
+				      	
 			      	<% end %>
 			      </li>
 
