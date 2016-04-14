@@ -86,29 +86,34 @@
 
 			</tr>
 
-			<tr>
-				<td style='text-align:center ; padding-bottom: 10px;'>
+			<% if notificationforpetsitter.read_status == false %>
+				
+				<tr>
+					<td style='text-align:center ; padding-bottom: 10px;'>
 
-					<%= link_to notificationforpetsitter_path(notificationforpetsitter.id) , method: :patch do %>
+						<%= link_to notificationforpetsitter_path(notificationforpetsitter.id) , method: :patch do %>
 
-						<button type="button" class="btn btn-success">Accept request</button>
+							<button type="button" class="btn btn-success">Accept request</button>
 
-					<% end %>
-					
-				</td>
+						<% end %>
+						
+					</td>
 
-				<td  style='text-align:center ;padding-bottom: 10px;'>
+					<td  style='text-align:center ;padding-bottom: 10px;'>
 
-					<button type="button" class="btn btn-danger">Decline request</button>
-					
-				</td>
+						<%= link_to decline_request_by_petsitter_path(notificationforpetsitter.id)  do %>
 
-			</tr>
+							<button type="button" class="btn btn-danger">Decline request</button>
+
+						<% end %>
+						
+					</td>
+
+				</tr>
+
+			<% end %>
 
 			
-
-
-
 
 		</table>
 

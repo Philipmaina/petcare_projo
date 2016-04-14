@@ -101,6 +101,35 @@ class NotificationforpetsittersController < ApplicationController
 	end
 
 
+	def decline_request
+
+		notification_to_update = Notificationforpetsitter.find( params[:id] )
+
+		# 1)FIRSTLY WE UPDATE THE READ STATUS OF THE NOTIFICATION
+		# 2)THEN WE UPDATE THE petsitter_booking_cancellation TO TRUE
+		# 3)FINALLY WE REDIRECT TO DASHBOARD/NOTIFICATIONS
+
+		# --------------------------1)--------------------------------
+		notification_to_update.read_status = true 
+		notification_to_update.save
+		# -------------------------------------------------------------
+
+		# --------------------------2)---------------------------------
+		booking_object_to_update = notification_to_update.booking
+
+
+		booking_object_to_update.petsitter_booking_cancellation = true
+		booking_object_to_update.save
+		# --------------------------------------------------------------
+
+		# -------------------------3)-----------------------------------
+		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petsitter.id)
+		# --------------------------------------------------------------
+
+		
+	end
+
+
 
 
 

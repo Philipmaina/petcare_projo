@@ -22,6 +22,20 @@ Rails.application.routes.draw do
   post "/petsitters/:id/dashboard/read_booking_notifications" => "notificationforpetsitters#read_booking_notifications" , as: "read_petsitter_booking_notifications"
   post "/petsitters/:id/dashboard/review_notifications" => "notificationforpetsitters#review_notifications" , as: "review_notifications"
 
+  # --------ROUTE FOR DECLINING BOOKING REQUEST BY PETOWNER------------------
+
+  # didn't create one for accepting because i just used show action
+
+  patch "/notificationforpetsitters/:id/decline_request" => "notificationforpetsitters#decline_request" , as: "decline_request_by_petsitter"
+
+
+
+
+
+
+
+  # -------------------------------------------------------------------------
+
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
