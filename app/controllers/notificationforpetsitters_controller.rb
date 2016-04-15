@@ -90,6 +90,24 @@ class NotificationforpetsittersController < ApplicationController
 
 		# -------------------------------------------------------------
 
+
+
+		# ------------ADDITIONAL IMPORTANT NOTE:------------------------
+
+		# ~~~~WE NEED TO CREATE A NOTIFICATION TO PETOWNERS WHENEVER A PETSITTER EITHER DECLINES OR ACCEPTS A BOOKING REQUEST AND IN THIS CASE THE PETSITTER IS ACCEPTING A REQUEST~~~
+		# to create notoficationforpetowners we need these details:
+				# a)petowner
+				# b)booking
+				# c)type of notification
+
+		petowner = booking_object_to_update.petowner
+
+		notification_for_petowner_to_create = petowner.notificationforpetowners.new( booking: booking_object_to_update , type_of_notification: "Booking") 
+		notification_for_petowner_to_create.save
+		
+		# --------------------------------------------------------------------
+
+
 		# -----------------------3)-------------------------------------
 		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petsitter.id)
 		# --------------------------------------------------------------
@@ -122,18 +140,29 @@ class NotificationforpetsittersController < ApplicationController
 		booking_object_to_update.save
 		# --------------------------------------------------------------
 
+
+		# ------------ADDITIONAL IMPORTANT NOTE:------------------------
+
+		# ~~~~WE NEED TO CREATE A NOTIFICATION TO PETOWNERS WHENEVER A PETSITTER EITHER DECLINES OR ACCEPTS A BOOKING REQUEST AND IN THIS CASE THE PETSITTER IS DECLINING A REQUEST~~~
+		# to create notoficationforpetowners we need these details:
+				# a)petowner
+				# b)booking
+				# c)type of notification
+
+		petowner = booking_object_to_update.petowner
+
+		notification_for_petowner_to_create = petowner.notificationforpetowners.new( booking: booking_object_to_update , type_of_notification: "Booking") 
+		notification_for_petowner_to_create.save
+		
+		# --------------------------------------------------------------------
+
+
 		# -------------------------3)-----------------------------------
 		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petsitter.id)
 		# --------------------------------------------------------------
 
 		
 	end
-
-
-
-
-
-
 
 
 

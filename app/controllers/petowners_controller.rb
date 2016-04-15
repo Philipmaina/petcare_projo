@@ -219,14 +219,14 @@ class PetownersController < ApplicationController
 
 	def dashboard_notifications
 		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
-		
+		@notifications = @petowner.notificationforpetowners.where( 'type_of_notification = ? AND read_status = ? ' , "Booking" , false ).order("id desc")
 	end
 
 	def dashboard_bookings
 
 		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 
-		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
+		@bookings = @petowner.bookings.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
 
 	end
 

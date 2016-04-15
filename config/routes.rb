@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :notificationforpetowners
   resources :notificationforpetsitters
   resources :bookings
   # ----------ADDITIONAL BOOKING ROUTES FOR SOME AJAX STUFF------------------
@@ -15,12 +16,24 @@ Rails.application.routes.draw do
 
 
 
-  # -------ADDITIONAL PETSITTER NOTIFICATION ROUTES THAT USE AJAX KIDOGO-----
+  # -------ADDITIONAL PETSITTER NOTIFICATION ROUTES(tabs arrows) THAT USE AJAX KIDOGO-----
 
   post "/petsitters/:id/dashboard/unread_booking_notifications" => "notificationforpetsitters#unread_booking_notifications" , as: "unread_petsitter_booking_notifications"
 
   post "/petsitters/:id/dashboard/read_booking_notifications" => "notificationforpetsitters#read_booking_notifications" , as: "read_petsitter_booking_notifications"
   post "/petsitters/:id/dashboard/review_notifications" => "notificationforpetsitters#review_notifications" , as: "review_notifications"
+
+
+  # ------ADDITIONAL PETOWNER NOTIFICATION ROUTES(tabs arrows) THAT USE AJAX KIDOGO-----
+
+  post "/petowners/:id/dashboard/unread_booking_notifications" => "notificationforpetowners#unread_booking_notifications" , as: "unread_petowner_booking_notifications"
+
+   post "/petowners/:id/dashboard/read_booking_notifications" => "notificationforpetowners#read_booking_notifications" , as: "read_petowner_booking_notifications"
+
+   # -----------------------------------------------------------------------
+
+
+
 
   # --------ROUTE FOR DECLINING BOOKING REQUEST BY PETOWNER------------------
 

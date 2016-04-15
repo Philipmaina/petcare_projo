@@ -15,7 +15,14 @@
 			
 			<div class="col-md-8">
 
-				<table style="float:right; width: 35% ;">
+
+				<!-- this if statement allows for even spacing of the stuff in the header when either no one is signed in or when s/one is signed - we want buttons for sign in and sign up to be close together if no one is signed -->
+				<% if session.key?(:petsitter) || session.key?(:petowner) %>
+				<table style="float:right; width: 41% ;">
+				<% else %>
+				<table style="float:right; width: 25% ;">
+				<% end %>
+
 
 					<tr>
 
@@ -143,27 +150,18 @@
 										</td>
 
 
-										<!-- for spacing between icon and find a sitter button -->
-
-										<td style="width: 6px;">
-
-										</td>
-
+										
 										
 
-										<td style="text-align:right;">
+										<td class="notification_icon_header">
 
-											<i class="fa fa-user" style="color: #D3D3D3 ; "></i>
-
-										</td>
-
-										<td>
-
-											<!-- we can make this name a link to dashboard -->
+											<!-- we can make this name and icon a link to dashboard -->
 
 											<%= link_to pet_owner_dashboard_path(current_petowner.id) , :method => :get do   %>
 							
 												<div class="btn btn-default navbar-btn name_section_log_in" >
+
+													<i class="fa fa-user" style="color: #D3D3D3 ; "></i>
 
 													<!-- Petowner.find( session[:petowner] ).first_name.downcase  --> 
 													<!-- the statement above could work just fine -->
@@ -178,10 +176,45 @@
 
 										</td>
 
-										<!-- this column allows spacing between the name of user and sign out button -->
-										<td style="width:5px;">
+										
+										
 
-										</td>
+
+										<!-- this column shows notification icon and number of notifications(unread of course) -->
+										<td class="notification_icon_header">
+
+											<%= link_to pet_owner_dashboard_notification_path(current_petowner.id) do %>
+
+												<i class="fa fa-bell " aria-hidden="true" style="color: #D3D3D3 ; "></i>
+
+												(
+												<% if current_petowner.notificationforpetowners.where('read_status = ? ' , false ).present? %>
+
+													<span style="font-weight:bolder ; color:#ff6666  ;">
+
+														<%= current_petowner.notificationforpetowners.where('read_status = ? ' , false ).count %>
+
+													</span>
+
+													
+													<% else %>
+														<span style="color:#5cb85c;">
+															0
+														</span>
+													<% end %>
+													)
+
+												<% end %>
+											</td>
+
+											<!-- this column allows spacing between the notifications of petowner and sign out button -->
+											<td style="width:5px;">
+
+											</td>
+											
+
+
+
 
 										<!-- this is the actual sign out button remember can only appear if there is someone currently signed in -->
 										<td>

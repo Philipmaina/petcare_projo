@@ -1,0 +1,26 @@
+
+
+<table style="width: 45% ;" id="tbl_for_booking_tabs">
+
+
+		<!-- this row will have the upcoming confirmed requests tab(btn)-->
+		<tr>
+			<td>
+				<%= form_tag(unread_petowner_booking_notifications_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" id="default-active-tab">Unread  Notification(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<%= form_tag(read_petowner_booking_notifications_path(current_petowner) , remote: true ) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" >Read  Notification(s)</button>
+				<% end %>
+			</td>
+		</tr>
+
+		
+
+
+</table>

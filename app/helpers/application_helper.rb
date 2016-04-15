@@ -409,11 +409,27 @@ module ApplicationHelper
 
 	# -----HELPER METHOD FOR CHECKING NOTIFICATIONS WHILE SCROLLING THROUGH THE TABS IN DASHBOARD OF PETSITTER SO IT CAN SHOW ON NOTIFICATION TAB THAT THERE IS A NOTIFICATION IF THERE INDEED IS ONE - WILL ISE METHOD IN PARTIAL
 	def display_notifications_in_tab(object)
+		if current_petsitter
 
-		if object.notificationforpetsitters.where('read_status = ? ' , false ).present?
-			return_html ="<span style='color:#ff6666 ; font-weight:bolder;'>" + " &nbsp;<i class='fa fa-exclamation-circle' aria-hidden='true' ></i>" + " (" + object.notificationforpetsitters.where('read_status = ? ' , false ).count.to_s + ")" + "</span>"
-			return return_html.html_safe
+			if object.notificationforpetsitters.where('read_status = ? ' , false ).present?
+
+				return_html ="<span style='color:#ff6666 ; font-weight:bolder;'>" + " &nbsp;<i class='fa fa-exclamation-circle' aria-hidden='true' ></i>" + " (" + object.notificationforpetsitters.where('read_status = ? ' , false ).count.to_s + ")" + "</span>"
+				return return_html.html_safe
+
+			end
+			
+		elsif current_petowner
+
+			if object.notificationforpetowners.where('read_status = ? ' , false ).present?
+
+				return_html ="<span style='color:#ff6666 ; font-weight:bolder;'>" + " &nbsp;<i class='fa fa-exclamation-circle' aria-hidden='true' ></i>" + " (" + object.notificationforpetowners.where('read_status = ? ' , false ).count.to_s + ")" + "</span>"
+				return return_html.html_safe
+
+			end
+
 		end
+
+		
 	
 	end
 	# ------------------------------------------------------------------------

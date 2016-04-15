@@ -118,8 +118,9 @@ class BookingsController < ApplicationController
 		# we want to order the soonest booking at the top of the list even if it is at the past - then we'll remove those past ones( we use asc order )
 		# we remove those that are at the past i.e when start_date <= date today
 		# we also need to check for petsitter_acceptance_confirmation because that will tell us whether the petsitter has agreed to care for our pet(s)
-
-		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
+		 # Parameters: {"utf8"=>"✓", "id"=>"9"}
+		petowner_of_concern = Petowner.find( params[:id] )
+		@bookings = petowner_of_concern.bookings.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
 
 		respond_to  do | format |
 
@@ -134,8 +135,8 @@ class BookingsController < ApplicationController
 	# here we are checking for bookings which are in the future(haven't happened) and the petsitter has yet to confirm whether or not he/she will care for the pets
 	def pending_bookings
 
-
-		@bookings = Booking.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date")
+		petowner_of_concern = Petowner.find( params[:id] )
+		@bookings = petowner_of_concern.bookings.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date")
 
 		respond_to  do | format |
 
@@ -150,8 +151,8 @@ class BookingsController < ApplicationController
 	# these are bookings that actually happened but are in the past
 	# that means the petsitter_acceptance_confirmation is true but the end_date is less than today(the date today is way ahead of the enddate)
 	def past_pet_stays
-
-		@bookings = Booking.where('end_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date desc")
+		petowner_of_concern = Petowner.find( params[:id] )
+		@bookings = petowner_of_concern.bookings.where('end_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date desc")
 		# the order clause is desc because if i had a pet stay that ended 8/4/2016 and another that ended 17/4/2016 and another that ended 4/4/2016 and assuming today is 19/4/2016 - i would want them arranged from 17/4/2016(the first one in list) , then 8/4/2016 , finally 4/4/2016 - WHICH IS DESCENDING ORDER
 
 		respond_to  do | format |
@@ -166,8 +167,8 @@ class BookingsController < ApplicationController
 	# THIS IS FOR THE BOOKINGS THAT NEVER HAPPENED PROBABLY BECAUSE THE SITTER DIDNT RESPOND IN TIME
 	# so the date today is ahead(greater than the start_date ) plus the petsitter_acceptance_confirmation is still false
 	def archived_bookings
-
-		@bookings = Booking.where('start_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date desc")
+		petowner_of_concern = Petowner.find( params[:id] )
+		@bookings = petowner_of_concern.bookings.where('start_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date desc")
 
 		respond_to  do | format |
 

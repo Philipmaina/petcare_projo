@@ -1,16 +1,63 @@
 
+<style type="text/css">
+
+	/*the reason for this is to space out the arrow like buttons - not have them one over another*/
+	table#tbl_for_booking_tabs{ 
+		border-collapse: separate; border-spacing: 35px; 
+	}
+
+
+</style>
+
 <div class="container-fluid" style="background-color: #eee;">
 
 	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
 
-	<div class="row" style="position:relative ;height: 550px; background-color: #eee; ">
+	<div class="row" style="position:relative ;height: 620px; background-color: #eee; ">
 
 		<div class="col-md-2">
 
 
 		</div>
 
-		<div class="col-md-8" style="height: 95% ; background-color:white ;">
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 30px 30px 20px 20px ;">
+
+			<table>
+
+				<tr>
+					<td>
+						<!-- this is where the tab like notification arrows will go -->
+						<%= render '/all_other_partials/notification_tab_like_arrows_petowners' %>
+
+					</td>
+
+					<td>
+						<table id="table_where_booking_tbl_filled_rows_gets_placed">
+
+
+							<!-- this is where notification stuff will be placed -->
+							<!-- the if code below here will be overwritten because of the .html function in jquery written in the .js.erb files when we want to ajaxify stuff -->
+
+							<% if @notifications.blank? %> 
+								<tr>
+									<td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> 
+										You have no unread notifications 
+									</td>
+								</tr> 
+							<% else %> 
+								<%=  render @notifications %> 
+							<% end %>
+
+
+
+						</table>
+
+					</td>
+
+				</tr>
+
+
+			</table>
 
 
 		</div>
@@ -19,23 +66,35 @@
 
 
 		</div>
-
 
 	</div>
-
-
-
-
-
-
-
-
 
 </div>
 
 <script type="text/javascript">
 
 	$("li#tab_for_notifications").addClass("active") ;
+
+	// this statement below is so that when we land on this page the first tab is preselected and decorated
+	$("button#default-active-tab").addClass("clicked_decorate") ;
+
+
+
+	$("button.booking-tab-btns").click( function() {
+
+		// if any of those buttons we 
+			// i) firstly want to remove the class clicked_decorate on all the buttons including the one clicked
+			// ii) then we want to put back class clicked_decorate on the clicked button
+		
+		$("button.booking-tab-btns").removeClass("clicked_decorate") ;
+		$(this).addClass("clicked_decorate") ;
+		
+
+	});
+
+
+
+
 
 
 </script>

@@ -34,7 +34,7 @@
 
 			      <li id="tab_for_notifications">
 			      	<%= link_to pet_owner_dashboard_notification_path(current_petowner.id)  do   %>
-			      	Notifications
+			      	Notifications <%= display_notifications_in_tab(current_petowner) %>
 			      	<% end %>
 			      </li> 
 
