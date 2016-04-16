@@ -81,10 +81,17 @@ td.notification_icon_header{
 
 // ----------------------------FOOTER STUFF---------------------------------
 footer{
+  position: absolute;
+  height: 70px;
+  bottom: 0;
+  width: 90%;
+  
+  
 
 	// sass allows nesting of elements within parent elements
 	table#toptable{
 		width: 100% ;
+
 	}
 }
 // -------------------------------------------------------------------------

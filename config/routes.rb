@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/petowners/:id/dashboard/pending_bookings" => "bookings#pending_bookings" , as: "pending_bookings"
   post "/petowners/:id/dashboard/past_pet_stays" => "bookings#past_pet_stays" , as: "past_pet_stays"
   post "/petowners/:id/dashboard/archived_bookings" => "bookings#archived_bookings" , as: "archived_bookings"
+  post "/petowners/:id/dashboard/ongoing_bookings" => "bookings#ongoing_bookings" , as: "ongoing_bookings"
 
   # --------------------------------------------------------------------------
 
@@ -53,6 +54,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
+
+  get '/help_info' => 'application#help_info'
 
   # _________________sessions and login stuff_________________________
   resource :session #singular resource which removes listing route and :id placeholder because we are not any session from db because we are storing in a hash

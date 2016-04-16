@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   	
   end
 
+  def help_info
+    
+  end
+
   def page_for_choosing_type_of_registration
   	
   end

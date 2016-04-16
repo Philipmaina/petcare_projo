@@ -20,7 +20,7 @@
 				<% if session.key?(:petsitter) || session.key?(:petowner) %>
 				<table style="float:right; width: 41% ;">
 				<% else %>
-				<table style="float:right; width: 25% ;">
+				<table style="float:right; width: 35% ;">
 				<% end %>
 
 
@@ -238,6 +238,15 @@
 
 						<% else %>
 
+							<td style="text-align:left;">
+								<!-- though this link will definitely lead to redundancy on the landing page coz youll have two buttons taking you to the same place, however when you navigating through the site later and you're new it helps to have that link there and not force one to go to home page to access that search/browse sitters button -->
+									<%= link_to  search_main_page_path ,  :method => :get  do  %>
+
+										<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
+										
+									<% end %>
+
+							</td>
 							
 							<!-- login button -->
 							<td>

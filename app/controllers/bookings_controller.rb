@@ -112,6 +112,17 @@ class BookingsController < ApplicationController
 
 	end
 
+	# --BUSINESS RULES EXPLAINING UPCOMING,PENDING,ONGOING,PAST PET STAYS AND ARCHIVED BOOKINGS
+
+
+
+		# ------explanation goes here-----------------
+
+
+
+
+
+	# ------------------------------------------------------------------------
 
 	# get all bookings which have been agreed/confirmed by petsitters and havent happened yet - close to happening
 	def upcoming_bookings
@@ -120,7 +131,7 @@ class BookingsController < ApplicationController
 		# we also need to check for petsitter_acceptance_confirmation because that will tell us whether the petsitter has agreed to care for our pet(s)
 		 # Parameters: {"utf8"=>"✓", "id"=>"9"}
 		petowner_of_concern = Petowner.find( params[:id] )
-		@bookings = petowner_of_concern.bookings.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date")
+		@bookings = petowner_of_concern.bookings.where('start_date > ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , true).order("start_date")
 
 		respond_to  do | format |
 
@@ -136,7 +147,7 @@ class BookingsController < ApplicationController
 	def pending_bookings
 
 		petowner_of_concern = Petowner.find( params[:id] )
-		@bookings = petowner_of_concern.bookings.where('start_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date")
+		@bookings = petowner_of_concern.bookings.where('start_date > ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , false).order("start_date")
 
 		respond_to  do | format |
 
@@ -148,11 +159,25 @@ class BookingsController < ApplicationController
 		
 	end
 
+	def ongoing_bookings
+
+		petowner_of_concern = Petowner.find( params[:id] )
+		@bookings = petowner_of_concern.bookings.where('start_date <= ? AND end_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , Time.now.to_date , true).order("start_date")
+
+		respond_to  do | format |
+
+			format.js # render a file called ongoing_bookings.js.erb in bookings subdirectory of views
+			
+		end
+
+		
+	end
+
 	# these are bookings that actually happened but are in the past
 	# that means the petsitter_acceptance_confirmation is true but the end_date is less than today(the date today is way ahead of the enddate)
 	def past_pet_stays
 		petowner_of_concern = Petowner.find( params[:id] )
-		@bookings = petowner_of_concern.bookings.where('end_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , true).order("start_date desc")
+		@bookings = petowner_of_concern.bookings.where('end_date < ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , true).order("start_date desc")
 		# the order clause is desc because if i had a pet stay that ended 8/4/2016 and another that ended 17/4/2016 and another that ended 4/4/2016 and assuming today is 19/4/2016 - i would want them arranged from 17/4/2016(the first one in list) , then 8/4/2016 , finally 4/4/2016 - WHICH IS DESCENDING ORDER
 
 		respond_to  do | format |
@@ -168,7 +193,7 @@ class BookingsController < ApplicationController
 	# so the date today is ahead(greater than the start_date ) plus the petsitter_acceptance_confirmation is still false
 	def archived_bookings
 		petowner_of_concern = Petowner.find( params[:id] )
-		@bookings = petowner_of_concern.bookings.where('start_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now , false).order("start_date desc")
+		@bookings = petowner_of_concern.bookings.where('start_date <= ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , false).order("start_date desc")
 
 		respond_to  do | format |
 
