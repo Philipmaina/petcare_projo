@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'application#index' #this is the default home page(landing page)
 
-  get '/help_info' => 'application#help_info'
+  get '/help_info' => 'application#help_info' , as: "help_info"
 
   # _________________sessions and login stuff_________________________
   resource :session #singular resource which removes listing route and :id placeholder because we are not any session from db because we are storing in a hash

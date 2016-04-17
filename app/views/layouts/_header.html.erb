@@ -1,9 +1,23 @@
+<style type="text/css">
+
+	span#span_for_help_info:hover{
+
+		border: 1px solid #00acc1;
+
+
+	}
+
+
+</style>
+
 
 <div class="container-fluid div_holding_header">
 
 	<div class="row">
 
 		<header>
+
+			
 			
 			<div class="col-md-4">
 				<!-- using a span makes the Care part of the word have a different color. Remember this is one word but we use the span to apply style color to part of the word because unlike block elements, in line elements do not start on new line and only continue where they left off  -->
@@ -16,9 +30,28 @@
 			<div class="col-md-8">
 
 
+
+				<!-- ___________________________________________ -->
+				<!-- |               ____       ____ ____ ____ | -->
+				<!-- |               |__|       |__| |__| |__| | -->
+				<!-- |_________________________________________| -->
+				<!-- we want the middle button to be find a sitter -->
+				<!-- why we do this is to avoid congestion of all links on one corner -->
+				<% unless session.key?(:petsitter) %>
+					<!-- remember we want this FIND A SITTER link button to only come when you're logged in as a petowner -->
+					<span>
+						<%= link_to  search_main_page_path ,  :method => :get  do  %>
+
+							<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
+							
+						<% end %>
+					</span>
+				<% end %>
+
+
 				<!-- this if statement allows for even spacing of the stuff in the header when either no one is signed in or when s/one is signed - we want buttons for sign in and sign up to be close together if no one is signed -->
 				<% if session.key?(:petsitter) || session.key?(:petowner) %>
-				<table style="float:right; width: 41% ;">
+				<table style="float:right; width: 45% ;">
 				<% else %>
 				<table style="float:right; width: 35% ;">
 				<% end %>
@@ -139,20 +172,6 @@
 								<table>
 									<tr>
 
-										<td style="text-align:left;">
-											<!-- remember we want this FIND A SITTER link button to only come when you're logged in as a petowner -->
-												<%= link_to  search_main_page_path ,  :method => :get  do  %>
-
-													<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
-													
-												<% end %>
-
-										</td>
-
-
-										
-										
-
 										<td class="notification_icon_header">
 
 											<!-- we can make this name and icon a link to dashboard -->
@@ -208,7 +227,7 @@
 											</td>
 
 											<!-- this column allows spacing between the notifications of petowner and sign out button -->
-											<td style="width:5px;">
+											<td style="width:8px;">
 
 											</td>
 											
@@ -238,15 +257,6 @@
 
 						<% else %>
 
-							<td style="text-align:left;">
-								<!-- though this link will definitely lead to redundancy on the landing page coz youll have two buttons taking you to the same place, however when you navigating through the site later and you're new it helps to have that link there and not force one to go to home page to access that search/browse sitters button -->
-									<%= link_to  search_main_page_path ,  :method => :get  do  %>
-
-										<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
-										
-									<% end %>
-
-							</td>
 							
 							<!-- login button -->
 							<td>
@@ -277,6 +287,24 @@
 							<!-- ~~~~~~~~~~ -->
 
 						<% end %>
+
+						<td >
+
+
+							<%= link_to help_info_path do %>
+
+								<span class="btn  navbar-btn" style="color: #00acc1  !important ;" id="span_for_help_info">
+
+									<i class="fa fa-question-circle " aria-hidden="true"></i>
+									Help
+
+								</span>
+	
+							<% end %>
+							
+
+						</td>
+
 					</tr>
 
 				</table>
@@ -290,6 +318,9 @@
 	
 
 </div>
+
+
+
 			
 
 
