@@ -1,0 +1,225 @@
+
+<!-- this is to include google fonts for different font-families of the headings of my charts -->
+<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+
+
+/*the reason for this is to space out the arrow like buttons - not have them one over another*/
+	table#tbl_for_booking_tabs{ 
+		border-collapse: separate; border-spacing: 35px; 
+	}
+
+
+	/*-------------this is styling for the list of legend----------*/
+	div#legend ul {
+	  list-style: none;
+	}
+	div#legend ul li {
+	  display: block;
+	  position: relative;
+	  margin-bottom: 4px;
+	  border-radius: 5px;
+	  padding: 2px 8px 2px 28px;
+	  font-size: 14px;
+	  cursor: default;
+	  -webkit-transition: background-color 200ms ease-in-out;
+	  -moz-transition: background-color 200ms ease-in-out;
+	  -o-transition: background-color 200ms ease-in-out;
+	  transition: background-color 200ms ease-in-out;
+	}
+	li span {
+	  display: block;
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  width: 20px;
+	  height: 100%;
+	  border-radius: 5px;
+	}
+	/*-----------------------------------------------------------------*/
+
+
+
+
+
+</style>
+
+<div class="container-fluid" style="background-color: #eee;">
+
+	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
+
+	<div class="row" style="position:relative ;height: 620px; background-color: #eee; ">
+
+		<div class="col-md-2">
+
+
+		</div>
+
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 30px 30px 20px 20px ;">
+
+			<table>
+
+				<tr>
+
+					<!-- this is just navigation arrows that further help in selection -->
+					<td>
+
+						<%= render '/all_other_partials/statistical_dashboard_like_arrows' %>
+
+					</td>
+
+					<!-- WE GET THE LIBRARY OF CHART LOADED TO GET THOSE COOL GRAPHS -->
+					<!-- we include this file of chart.js using a cdn -->
+					<script  src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js "></script>
+
+					<!-- this is where tables and graphs will go -->
+					<td>
+
+						<table>
+
+							<tr>
+								<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 20px;">
+									Total Number Of Pet Owners
+									<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+							</tr>
+
+							<tr>
+								<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 20px; padding-bottom:30px;">
+
+									<%= @total_number_of_petowners %>
+
+							</tr>
+
+							<tr>
+								<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 20px;">
+
+									Population Distribution Of Pet Owners
+									<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+
+								</td>
+
+							</tr>
+
+							<tr>
+
+								<td >
+									<canvas id="skills"></canvas>
+								</td>
+
+
+								<td >
+									<div id="legend">
+
+										<!-- this is where inner html stuff will go -->
+										<!-- it will be like a list item initially <li> but then we style them accordingly -->
+
+									</div>
+								</td>
+
+
+							</tr>
+
+							<tr>
+
+
+
+							</tr>
+
+
+
+						</table>
+						 
+						
+
+						
+						
+						
+					</td>
+
+				</tr>
+
+
+			</table>
+
+
+		</div>
+
+		<div class="col-md-2">
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+	$("li#tab_for_statistics").addClass("active") ;
+
+	// this statement below is so that when we land on this page the first tab is preselected and decorated
+	$("button#default-active-tab").addClass("clicked_decorate") ; 
+
+
+
+	$("button.booking-tab-btns").click( function() {
+
+		// if any of those buttons we 
+			// i) firstly want to remove the class clicked_decorate on all the buttons including the one clicked
+			// ii) then we want to put back class clicked_decorate on the clicked button
+		
+		$("button.booking-tab-btns").removeClass("clicked_decorate") ;
+		$(this).addClass("clicked_decorate") ;
+
+
+
+
+	});
+
+
+
+
+
+
+	var data = [
+	    {
+	        value: '<%=  @number_of_petowners_in_karen %>',
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "Karen"
+	    },
+	    {
+	        value: '<%= @number_of_petowners_in_runda %>' ,
+	        color: "#46BFBD",
+	        highlight: "#5AD3D1",
+	        label: "Runda"
+	    },
+	    {
+	        value: '<%= @number_of_petowners_in_lavington %>',
+	        color: "#FDB45C",
+	        highlight: "#FFC870",
+	        label: "Lavington"
+	    },
+	    {
+	        value: '<%= @number_of_petowners_in_chiromo %>',
+	        color: "#B48EAD",
+	        highlight: "#C69CBE",
+	        label: "Chiromo"
+	    }
+	]
+	var context = document.getElementById('skills').getContext('2d');
+	var skillsChart = new Chart(context).Pie(data);
+
+
+	// ----------this section just gets the legend for the chart-------------
+	// An explanation of symbols used on a map, chart, sketch, etc., commonly printed in tabular form at the side of the map,
+	html_for_legend = skillsChart.generateLegend() ;
+	$("#legend").html(html_for_legend) ;
+	// -----------------------------------------------------------------------
+
+</script>
+

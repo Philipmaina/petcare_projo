@@ -85,11 +85,49 @@
 
 			      </li>
 
+			   <% elsif session.key?(:admin) %>
+
+
+
+			   	  <li id="tab_for_home">
+			   	  	<%= link_to admin_dashboard_path(current_admin.id)  do   %>
+			      		Home
+			      	<% end %>
+			      	
+			      </li>
+
+			      <li id="tab_for_edit_profile">
+
+			      	<%= link_to edit_admin_path(current_admin.id) do %>
+			      	
+			      		Edit Profile
+
+			      	<% end %>
+			      	
+			      </li>
+
+			      <li id="tab_for_statistics">
+			      	
+			      	<%= link_to statistical_analysis_path(current_admin.id) do %>
+				      	Statistical info	
+			      	<% end %>
+
+			      </li>
+
+			      
+
+			      <li id="tab_for_account_details">
+
+			      	
+			      	Add/Edit stuff
+
+			      </li>
+
+
+
+
+
 			   <% end %>
-
-
-
-
 
 		    </ul>
 

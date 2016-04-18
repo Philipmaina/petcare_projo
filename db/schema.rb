@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414221515) do
+ActiveRecord::Schema.define(version: 20160417182623) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "surname"
+    t.integer  "residential_area_id"
+    t.string   "personal_email"
+    t.string   "contact_line_one"
+    t.string   "contact_line_two"
+    t.string   "position_in_company"
+    t.string   "password_digest"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "admins", ["residential_area_id"], name: "index_admins_on_residential_area_id"
 
   create_table "bookings", force: :cascade do |t|
     t.date     "start_date"

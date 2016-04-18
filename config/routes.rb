@@ -2,9 +2,23 @@ Rails.application.routes.draw do
 
 
 
+  resources :admins
   resources :notificationforpetowners
   resources :notificationforpetsitters
   resources :bookings
+
+  # --------------------ADDITIONAL ADMIN CUSTOM ROUTES-----------------------
+  get "/admin/:id/dashboard" => "admins#dashboard" , as: "admin_dashboard"
+  get "/admin/:id/dashboard/statistical_analysis" => "admins#statistical_analysis" , as: "statistical_analysis"
+
+
+  post "/admin/dashboard/statistical_analysis/statistics_on_pet_owners" => "admins#statistics_on_pet_owners" , as: "statistics_on_pet_owners"
+  post "/admin/dashboard/statistical_analysis/statistics_on_pet_sitters" => "admins#statistics_on_pet_sitters" , as: "statistics_on_pet_sitters"
+  post "/admin/dashboard/statistical_analysis/statistics_on_bookings" => "admins#statistics_on_bookings" , as: "statistics_on_bookings"
+
+
+
+
   # ----------ADDITIONAL BOOKING ROUTES FOR SOME AJAX STUFF------------------
   
   post "/petowners/:id/dashboard/upcoming_bookings" => "bookings#upcoming_bookings" , as: "upcoming_bookings"

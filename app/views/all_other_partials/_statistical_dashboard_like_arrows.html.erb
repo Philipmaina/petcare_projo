@@ -1,0 +1,41 @@
+
+
+<table style="width: 45% ;" id="tbl_for_booking_tabs">
+
+
+		<!-- this row will have the upcoming confirmed requests tab(btn)-->
+		<tr>
+			<td>
+				
+				<%= form_tag( statistics_on_pet_owners_path , remote: true) do %>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" id="default-active-tab">Pet owners</button>
+				<% end %>
+				
+			</td>
+		</tr>
+
+
+		<!-- this row will have the pending booking request tab -->
+		<tr>
+			<td>
+				<%= form_tag( statistics_on_pet_sitters_path , remote: true) do %>
+				
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Pet sitters</button>
+				<% end %>
+				
+			</td>
+		</tr>
+
+		<!-- this row will have the ongoing booking request tab -->
+		<tr>
+			<td>
+				<%= form_tag( statistics_on_bookings_path , remote: true) do %>
+				
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">All about bookings</button>
+
+				<% end %>
+				
+			</td>
+		</tr>
+
+</table>

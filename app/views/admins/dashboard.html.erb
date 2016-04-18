@@ -1,0 +1,169 @@
+<div class="container-fluid" style="background-color: #eee;">
+
+	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
+
+
+	<div class="row" style="position:relative ;height: 570px; background-color: #eee; ">
+
+		<div class="col-md-2">
+
+
+		</div>
+
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 20px 5px 10px 15px ;">
+			<!-- there is like a space all round between the div and the table -->
+
+			<!-- we want a table that looks somewhat like this  -->
+			<!-- ______________________________________ -->
+			<!-- |              |                     | -->
+			<!-- |              |                     | -->
+			<!-- |              |                     | -->
+			<!-- |              |                     | -->
+			<!-- |              |                     | -->
+			<!-- |______________|                     | -->
+			<!-- |              |                     | -->
+			<!-- |______________|                     | -->
+			<!-- |              |                     | -->
+			<!-- |______________|_____________________| -->
+
+			<table style="position:relative ;height: 100% ; width: 100% ;">
+
+				<tr>
+
+					<td style="width:35% ;">
+
+						<table style="position:relative ;height: 100% ; width: 100% ;">
+
+							<!-- this first row within the first cell will have the image of the petowner if he has or default pic/icon -->
+							<tr style="background-color: #eee; padding: 5px 5px 15px 5px ;">
+
+								<td style="text-align:center ; ">
+
+									<i class="fa fa-user" style=" position:relative ; font-size: 230px ; width: 90% ; text-align:center; color: #8ad9e1 ;  background-color: white;"></i>
+
+									<br/>
+
+									<!-- this is where the name of the petowner goes -->
+									<div style="position:relative; margin-top: 7px ;font-size:16px; font-weight: bold">
+										<%= @admin_user.first_name + " " + @admin_user.surname %>
+									</div>
+
+
+								</td>	
+
+							</tr>
+
+							<!-- to avoid the row above containing the frame extending till the bottom  -->
+							<tr>
+
+							</tr>
+
+						</table>
+
+
+					</td>
+
+
+					<!-- this will now contain details of the petowner that he/she can see -->
+					<td style="width: 65% ; padding: 15px 5px 10px 5px ; vertical-align: baseline !important;">
+
+						<table>
+
+							<tr >
+								<td colspan="2" style="font-family: marydale ; font-size: 30px ; text-align: center ; color: #008c9d ; font-weight: bold ;">
+									<span>All your details</span>
+									<hr style="margin-top:10px;margin-bottom:10px; ">
+								</td>
+
+							</tr>
+
+							<!-- this row within a cell will have the location where the petowner lives -->
+							<tr >
+								<td style="text-align:right ; width: 30% ;">
+									<i class="fa fa-map-marker" style="font-size: 28px; color: #8ad9e1 ; padding-bottom: 18px ;"></i>
+								</td>
+
+								<td style="padding-bottom: 18px ; text-align:center ;">
+									<%= @admin_user.residential_area.name_of_location %>
+
+								</td>
+
+
+							</tr>
+
+							<!-- this row will have the date of birth -->
+							
+
+							<!-- this row will have the personal email -->
+							<tr>
+								<td style="text-align:right ; width: 30% ; ">
+									<i class="fa fa-envelope" style="font-size: 28px; color: #8ad9e1 ; padding-bottom: 18px ; "></i>
+								</td>
+
+								<td style="padding-bottom: 18px ; text-align:center ;">
+									<%= @admin_user.personal_email %>
+								</td>
+
+							</tr>
+
+							<!-- this row will have the primary contact -->
+							<tr>
+
+								<td style="text-align:right ; width: 30% ; ">
+									<i class="fa fa-phone-square" style="font-size: 28px; color: #8ad9e1 ; padding-bottom: 18px ; "></i>
+								</td>
+
+								<td style="padding-bottom: 18px ; text-align:center  ;">
+									<%= @admin_user.contact_line_one %>
+								</td>
+
+							</tr>
+
+							<!-- this row will have the secondary contact -->
+							<tr>
+
+								<td style="text-align:right ; width: 30% ;">
+									<i class="fa fa-phone-square" style="font-size: 28px; color: #8ad9e1 ; padding-bottom: 18px ; "></i>
+								</td>
+
+								<td style="padding-bottom: 18px  ; text-align:center ;">
+
+									<%= custom_contact_line_two(@admin_user) %>
+									
+								</td>
+
+
+							</tr>
+							
+
+
+						</table>
+
+
+					</td>
+
+				</tr>
+
+			</table>
+
+
+
+
+		</div>
+
+		<div class="col-md-2">
+
+
+		</div>
+
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+
+	$("li#tab_for_home").addClass("active") ;
+
+
+</script>

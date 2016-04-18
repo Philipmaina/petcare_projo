@@ -217,9 +217,16 @@ class ApplicationController < ActionController::Base
       
     end
 
+    def current_admin
+
+      adminobjectview = Admin.find_by( id: session[:admin] )
+      return adminobjectview
+      
+    end
+
 
     # HOW TO MAKE THE METHODS ABOVE AVAILABLE TO ANY VIEW
-    helper_method :current_petsitter , :current_petowner #Declare a controller method as a helper
+    helper_method :current_petsitter , :current_petowner , :current_admin #Declare a controller method as a helper
 
     # ------------------------------------------------------------------
 

@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
 
 		# since we are using one form to login either a petsitter or petowner
 		# we have to look through both tables of petsitter and petowner to see where the user has that email given.
-		@user = ( Petsitter.find_by(personal_email: email ) ) || (Petowner.find_by(personal_email: email) )
+		@user = ( Petsitter.find_by(personal_email: email ) ) || (Petowner.find_by(personal_email: email) ) || Admin.find_by( personal_email: email )
 		# .find_by either returns nil or an object 
 		# nil is like false in an if statement the object is like true
 
@@ -49,7 +49,7 @@ class SessionsController < ApplicationController
 				# log in as petsitter
 				session[:petsitter] = @user.id
 
-				flash[:notice] = "Successfully signed in as #{@user.class.name} and name is #{@user.first_name}"
+				flash[:notice] = "Successfully signed in as petowner"
 
 				redirect_to pet_sitter_dashboard_path(@user.id)
 
@@ -58,9 +58,18 @@ class SessionsController < ApplicationController
 				# log in as petowner
 				session[:petowner] = @user.id
 
-				flash[:notice] = "Successfully signed in as #{@user.class.name} and name is #{@user.first_name}"
+				flash[:notice] = "Successfully signed in as pet owner"
 
 				redirect_to pet_owner_dashboard_path(@user.id)
+
+			elsif @user.class.name == "Admin"
+
+				# log in as admin
+				session[:admin] = @user.id
+
+				flash[:notice] = "Successfully signed in as ADMIN"
+
+				redirect_to admin_dashboard_path(@user.id)
 	
 			end
 
@@ -69,7 +78,7 @@ class SessionsController < ApplicationController
 
 		else
 
-			flash.now[:alert] = "Invalid name or password"
+			flash.now[:alert] = "Invalid email or password combination!"
 			render 'new'
 
 		end
