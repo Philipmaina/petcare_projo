@@ -1,0 +1,138 @@
+<table>
+
+		<tr>
+			<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px;">
+				Total Number Of <%= " " + user %>
+				<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+		</tr>
+
+		<tr>
+			<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px; padding-bottom:30px;">
+
+				<%= total_number_of_users %>
+
+		</tr>
+
+		<tr>
+			<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px;">
+
+				Population Distribution Of <%= " " + user %>
+				<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+
+			</td>
+
+		</tr>
+
+		<tr>
+
+			<td >
+				<canvas id="skills"></canvas>
+			</td>
+
+
+			<td >
+				<div id="legend">
+
+					<!-- this is where inner html stuff will go -->
+					<!-- it will be like a list item initially <li> but then we style them accordingly -->
+
+				</div>
+			</td>
+
+
+		</tr>
+
+
+
+
+		<tr>
+			<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px;padding-top:35px;">
+				Graph of number of registered <%= " " + user + " " %> per month for the current year
+				<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+
+			</td>
+		</tr>
+
+
+
+		<tr>
+	
+			<td colspan='2'>
+				<canvas id="lineChart" width="490" height="200"></canvas>
+			</td>
+
+
+
+		</tr>
+
+
+</table>
+
+<script type="text/javascript">
+	// ~~~~~~~~~~~~~~~~~~~~PIE CHART STUFF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	var data = [
+	    {
+	        value: '<%=  number_of_users_in_karen %>',
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "Karen"
+	    },
+	    {
+	        value: '<%= number_of_users_in_runda %>' ,
+	        color: "#46BFBD",
+	        highlight: "#5AD3D1",
+	        label: "Runda"
+	    },
+	    {
+	        value: '<%= number_of_users_in_lavington %>',
+	        color: "#FDB45C",
+	        highlight: "#FFC870",
+	        label: "Lavington"
+	    },
+	    {
+	        value: '<%= number_of_users_in_chiromo %>',
+	        color: "#B48EAD",
+	        highlight: "#C69CBE",
+	        label: "Chiromo"
+	    }
+	]
+	var context = document.getElementById('skills').getContext('2d');
+	var skillsChart = new Chart(context).Pie(data);
+
+
+	// ----------this section just gets the legend for the chart-------------
+	// An explanation of symbols used on a map, chart, sketch, etc., commonly printed in tabular form at the side of the map,
+	html_for_legend = skillsChart.generateLegend() ;
+	$("#legend").html(html_for_legend) ;
+	// -----------------------------------------------------------------------
+
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~LINE CHART STUFF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// raw - Marks a string as trusted safe- when you don't want Rails to automatically escape tags
+	var dataforlinechart = {
+    labels: <%= raw @string_of_all_months_upto_current_month %>, //this are the labels for horizontal axis
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(0,172,193,1)", //this is the line color - changed it tob same as site color by converting #00acc1 to rgba
+            pointColor: "rgba(247,70,74,1)", //this is the marks or points on the line changed them to red-pink for visibility(like the one for karen in pie chart - just converted to rgba)
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: <%= raw array_of_count_of_users_for_each_month %> //these are the actual values to be plotted , number of petowners per month upto current month
+        }]
+
+    };
+
+
+	var ctx = document.getElementById("lineChart").getContext("2d");
+	var myLineChart = new Chart(ctx).Line(dataforlinechart);
+</script>

@@ -1,0 +1,2 @@
+
+$("td#where_tables_and_graphs_should_go").html("<%= j render partial: 'statistical_info_for_pet_owners' ,locals: { total_number_of_users: @total_number_of_petsitters , number_of_users_in_karen: @number_of_petsitters_in_karen ,    number_of_users_in_runda: @number_of_petsitters_in_runda ,number_of_users_in_lavington: @number_of_petsitters_in_lavington ,number_of_users_in_chiromo: @number_of_petsitters_in_chiromo , array_of_count_of_users_for_each_month: @all_petsitters_within_months , user: 'Pet Sitters' }    %>") ;
