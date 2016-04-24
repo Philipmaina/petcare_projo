@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # --------------------ADDITIONAL ADMIN CUSTOM ROUTES-----------------------
   get "/admin/:id/dashboard" => "admins#dashboard" , as: "admin_dashboard"
   get "/admin/:id/dashboard/statistical_analysis" => "admins#statistical_analysis" , as: "statistical_analysis"
+  get "/admin/:id/dashboard/add_edit_stuff" => "admins#add_edit_stuff" , as: "add_edit_stuff"
 
 
   post "/admin/dashboard/statistical_analysis/statistics_on_pet_owners" => "admins#statistics_on_pet_owners" , as: "statistics_on_pet_owners"

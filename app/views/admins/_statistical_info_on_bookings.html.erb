@@ -1,48 +1,48 @@
 
 
-<table>
+<table >
 
-	<tr>
-		<td style="width:100%;text-align:center;">
+	<tr >
+		<td colspan="2" style="width:100%;text-align:center;">
 
 
 
 			<table>
 
-				<tr>
-					<td >
+				<tr style="border: 1px solid #008c9d;">
+					<td style="background-color:#e5f6f8; width:80%;border-right: 1px solid #008c9d;">
 
 						Total number of booking requests:
 
 					</td>
 
-					<td style="text-align:right;">
+					<td style="text-align:center;width:20%;background-color:#eee;font-weight:bolder;">
 						<%= @all_booking_requests %>
 
 					</td>
 
 				</tr>
 
-				<tr>
-					<td>
+				<tr style="border: 1px solid #008c9d;">
+					<td style="background-color:#e5f6f8;width:80%;border-right: 1px solid #008c9d;">
 						Total number of completed pet stays:
 
 					</td>
 
-					<td style="text-align:right;">
+					<td style="text-align:center;width:20%;background-color:#eee;font-weight:bolder;">
 						<%= @completed_pet_stays %>
 
 					</td>
 
 				</tr>
 
-				<tr>
-					<td>
+				<tr style="border: 1px solid #008c9d;">
+					<td style="background-color:#e5f6f8;width:80%;border-right: 1px solid #008c9d;">
 						Total number of ongoing pet stays/bookings:
 
 					</td>
 
-					<td style="text-align:right;">
+					<td style="text-align:center;width:20%;background-color:#eee;font-weight:bolder;">
 						<%= @ongoing_bookings %>
 					</td>
 
@@ -71,8 +71,8 @@
 	</tr>
 
 	<tr>
-		<td>
-			<canvas id="pie_chart_petowner_bookings"></canvas>
+		<td >
+			<canvas id="pie_chart_petowner_bookings" ></canvas>
 
 		</td>
 
@@ -102,8 +102,8 @@
 
     <tr>
 
-    	<td>
-			<canvas id="pie_chart_petsitter_bookings"></canvas>
+    	<td >
+			<canvas id="pie_chart_petsitter_bookings" ></canvas>
 
 		</td>
 

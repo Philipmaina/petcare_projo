@@ -9,7 +9,18 @@
 		<tr>
 			<td>
 				<%= form_tag(unread_petsitter_booking_notifications_path(current_petsitter) , remote: true ) do %>
-					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" id="default-active-tab">Unread Booking Notification(s)</button>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns" id="default-active-tab">
+						Unread Booking Notification(s)
+
+						<% if current_petsitter.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Booking" , false).present? %>
+
+							<span style='color:#ff6666 ; font-weight:bolder;'>
+								<%= "(" + current_petsitter.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Booking" , false).count.to_s + ")" %>
+							</span>
+							
+						<% end %>
+						
+					</button>
 				<% end %>
 			</td>
 		</tr>
@@ -27,7 +38,21 @@
 		<tr>
 			<td>
 				<%= form_tag(unread_rating_notifications_path(current_petsitter) , remote: true ) do %>
-					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">Unread Rating Notification(s)</button>
+					<button type="submit" class="btn btn-info btn-arrow-right booking-tab-btns">
+						Unread Rating Notification(s)
+
+						<% if current_petsitter.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Rating" , false).present? %>
+
+							&nbsp;
+							<span style='color:#ff6666 ; font-weight:bolder;'>
+								
+								<%= "(" + current_petsitter.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Rating" , false).count.to_s + ")" %>
+								
+							</span>
+
+						<% end %>
+
+					</button>
 				<% end %>
 			</td>
 		</tr>

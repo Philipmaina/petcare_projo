@@ -254,6 +254,65 @@
 							</td>
 
 							
+						<% elsif session.key?(:admin) %>
+
+							<td>
+
+								
+								<table>
+									<tr>
+
+										<td class="notification_icon_header">
+
+											<!-- we can make this name and icon a link to dashboard -->
+
+											<%= link_to admin_dashboard_path(current_admin.id) , :method => :get do   %>
+							
+												<div class="btn btn-default navbar-btn name_section_log_in" >
+
+													<i class="fa fa-user" style="color: #D3D3D3 ; "></i>
+
+													<!-- Petowner.find( session[:petowner] ).first_name.downcase  --> 
+													<!-- the statement above could work just fine -->
+													<!-- but we never want to run queries inside views, they should just display data given to them. views shouldn't even know of existence of models  -->
+
+														<%= current_admin.first_name.downcase %>
+
+												</div>
+
+											<% end %>
+								
+
+										</td>
+
+
+										<!-- this column allows spacing between the notifications of petowner and sign out button -->
+										<td style="width:8px;">
+
+										</td>
+										
+
+
+										<!-- this is the actual sign out button remember can only appear if there is someone currently signed in -->
+										<td>
+											<!-- ACTUALLY NAME FOR ROUTE HELPER FOR DELETING SESSION DOESN'T EXIST BUT IT IS session_path just with a different HTTP verb - delete -->
+											<%= link_to  session_path ,  :method => :delete  do  %>
+
+												<button type="button" class="btn btn-default navbar-btn border-highlight">Sign Out</button>
+												
+											<% end %>
+
+										</td>
+
+
+									</tr>
+
+								</table>
+
+							</td>
+
+
+
 
 						<% else %>
 

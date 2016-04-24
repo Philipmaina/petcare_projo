@@ -195,7 +195,7 @@ class NotificationforpetsittersController < ApplicationController
 		notification_to_update.read_status = true
 		notification_to_update.save
 
-		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petowner.id)
+		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petsitter.id)
 		
 	end
 

@@ -130,7 +130,15 @@ class SessionsController < ApplicationController
 
 			session[:petowner] = nil
 
+		elsif session.key?(:admin)
+
+			session[:admin] = nil
+			
 		end
+
+
+
+		
 		 
 		redirect_to root_url , notice: "You have been logged out"	 
 		
