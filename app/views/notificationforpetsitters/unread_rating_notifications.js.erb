@@ -1,0 +1,10 @@
+// we need to generate javascript code that is going to update the right portion of our notifications page within the dashboard to have the unread rating notifications
+
+
+
+// we are rendering javascript so we need to put it inside quotes in html action and we also need to escape whatever rendered html comes back to get valid javascript so we use j 
+$("#table_where_booking_tbl_filled_rows_gets_placed").html("<% if @notifications.blank? %> <tr><td style='height: 80px ;border-top: 1px solid #eee; border-bottom: 1px solid #eee ;'> You have no unread rating notifications </td></tr> <% else %> <%= j render @notifications %> <% end %>") ;
+
+// that partial is called for every object in the collection 
+// HOW DOES IT KNOW WHAT PARTIAL EXACTLY TO RENDER ? Under the hood, render calls to_partial_path on each of our objects to determine which partial to render
+// @notifications[0].to_partial_path => "notificationforpetsitters/notificationforpetsitter" 

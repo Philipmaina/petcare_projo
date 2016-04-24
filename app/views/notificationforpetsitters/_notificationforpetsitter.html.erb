@@ -1,123 +1,233 @@
+
+
+
+
 <tr style="border: 1px solid #008c9d; ">
 	<td>
 
 		<table style="background-color:#e5f6f8;">
-			<!-- this row has the title of what sitting service we(petsitters) are being notified about that a petowner has booked -->
-			<tr style="border-bottom: 1px solid #008c9d;">
 
-				<td colspan='2' style='text-align:center ; font-family: marydale; font-weight:bolder; font-size:20px ; '>
-
-					<%= notificationforpetsitter.booking.sittingservice.service_name %>
-					Booking Request
-
-				</td>
-
-			</tr>
-
-			<!-- this row of the notification has the petowner who booked for the petsitter currently checking his/her notification  -->
-			<tr>
-
-				<td colspan='2' style='text-align:center ;' >
-					<span style="font-weight:bolder;">Petowner requesting the booking:</span>
-					<%= "   " + notificationforpetsitter.booking.petowner.first_name + " " + notificationforpetsitter.booking.petowner.surname  %>
-
-				</td>
-
-			</tr>
-
-			<!-- this row has the contact_line_one of petowner plus the email address - now you're allowed to see their info  -->
-			<tr>
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">Phone no:</span>
-					<%= " " + notificationforpetsitter.booking.petowner.contact_line_one %>
-
-				</td>
-
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">Email:</span>
-					<%= " " + notificationforpetsitter.booking.petowner.personal_email %>
-
-				</td>
-
-			</tr>
-
-			<!-- this row has the FROM cell and TO cell for period of care -->
-			<tr>
-
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">From:</span>
-					<%= " " + notificationforpetsitter.booking.start_date.to_s(:long) %>
-
-				</td>
-
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">To:</span>
-					<%= " " +  notificationforpetsitter.booking.end_date.to_s(:long) %>
-
-				</td>
+			<% if notificationforpetsitter.type_of_notification == "Booking" %>
 
 
-			</tr>
+				<!-- this row has the title of what sitting service we(petsitters) are being notified about that a petowner has booked -->
+				<tr style="border-bottom: 1px solid #008c9d;">
 
-			<!-- this row has the WHERE cell and PETS cell   -->
-			<tr>
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">Where:</span>
-					<%= " " + notificationforpetsitter.booking.residential_area.name_of_location %>
+					<td colspan='2' style='text-align:center ; font-family: marydale; font-weight:bolder; font-size:20px ; '>
 
-				</td>
+						<%= notificationforpetsitter.booking.sittingservice.service_name %>
+						Booking Request
 
-				<td style='text-align:center ;'>
-					<span style="font-weight:bolder;">Pets:</span>
-					<%= " " + notificationforpetsitter.booking.pets_booked_for %>
-				</td>
-
-			</tr>
-
-			<!-- this last row has the total_price_of_pet_stay -->
-			<tr>
-				<td colspan='2' style='text-align:center ;padding-bottom: 10px; '>
-					<span style="font-weight:bolder;">Estimated earnings: </span>
-					<%= " " + "KES " + notificationforpetsitter.booking.total_price_of_stay.to_s %>
-
-					
-
-				</td>
-
-			</tr>
-
-			<% if notificationforpetsitter.read_status == false %>
-				
-				<tr>
-					<td style='text-align:center ; padding-bottom: 10px;'>
-
-						<%= link_to notificationforpetsitter_path(notificationforpetsitter.id) , method: :patch do %>
-
-							<button type="button" class="btn btn-success">Accept request</button>
-
-						<% end %>
-						
-					</td>
-
-					<td  style='text-align:center ;padding-bottom: 10px;'>
-
-						<%= link_to decline_request_by_petsitter_path(notificationforpetsitter.id)  do %>
-
-							<button type="button" class="btn btn-danger">Decline request</button>
-
-						<% end %>
-						
 					</td>
 
 				</tr>
 
-			<% end %>
+				<!-- this row of the notification has the petowner who booked for the petsitter currently checking his/her notification  -->
+				<tr>
+
+					<td colspan='2' style='text-align:center ;' >
+						<span style="font-weight:bolder;">Petowner requesting the booking:</span>
+						<%= "   " + notificationforpetsitter.booking.petowner.first_name + " " + notificationforpetsitter.booking.petowner.surname  %>
+
+					</td>
+
+				</tr>
+
+				<!-- this row has the contact_line_one of petowner plus the email address - now you're allowed to see their info  -->
+				<tr>
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Phone no:</span>
+						<%= " " + notificationforpetsitter.booking.petowner.contact_line_one %>
+
+					</td>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Email:</span>
+						<%= " " + notificationforpetsitter.booking.petowner.personal_email %>
+
+					</td>
+
+				</tr>
+
+				<!-- this row has the FROM cell and TO cell for period of care -->
+				<tr>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">From:</span>
+						<%= " " + notificationforpetsitter.booking.start_date.to_s(:long) %>
+
+					</td>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">To:</span>
+						<%= " " +  notificationforpetsitter.booking.end_date.to_s(:long) %>
+
+					</td>
+
+
+				</tr>
+
+				<!-- this row has the WHERE cell and PETS cell   -->
+				<tr>
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Where:</span>
+						<%= " " + notificationforpetsitter.booking.residential_area.name_of_location %>
+
+					</td>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Pets:</span>
+						<%= " " + notificationforpetsitter.booking.pets_booked_for %>
+					</td>
+
+				</tr>
+
+				<!-- this last row has the total_price_of_pet_stay -->
+				<tr>
+					<td colspan='2' style='text-align:center ;padding-bottom: 10px; '>
+						<span style="font-weight:bolder;">Estimated earnings: </span>
+						<%= " " + "KES " + notificationforpetsitter.booking.total_price_of_stay.to_s %>
+
+						
+
+					</td>
+
+				</tr>
+
+				<% if notificationforpetsitter.read_status == false %>
+					
+					<tr>
+						<td style='text-align:center ; padding-bottom: 10px;'>
+
+							<%= link_to notificationforpetsitter_path(notificationforpetsitter.id) , method: :patch do %>
+
+								<button type="button" class="btn btn-success">Accept request</button>
+
+							<% end %>
+							
+						</td>
+
+						<td  style='text-align:center ;padding-bottom: 10px;'>
+
+							<%= link_to decline_request_by_petsitter_path(notificationforpetsitter.id)  do %>
+
+								<button type="button" class="btn btn-danger">Decline request</button>
+
+							<% end %>
+							
+						</td>
+
+					</tr>
 
 			
+				<% end %>
+
+
+
+			<% elsif notificationforpetsitter.type_of_notification = "Rating" %>
+				<tr style="border-bottom: 1px solid #008c9d;">
+
+					<td colspan='2' style='text-align:center ; font-family: marydale; font-weight:bolder; font-size:20px ; background-color: #DFF2BF ; color: #4F8A10 ; '>
+						<%= notificationforpetsitter.booking.petowner.first_name + " " + notificationforpetsitter.booking.petowner.surname + " has rated you following your pet hosting" %>
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td colspan='2' style='text-align:center ;font-weight:bolder;padding-bottom: 5px ;font-size:16px;' >
+						<span style="text-decoration: underline;">Details of the pet stay/ratings</span>
+					</td>
+
+				</tr>
+
+
+				<tr>
+
+					<td colspan='2' style='text-align:center ;' >
+						<span style="font-weight:bolder;">Petowner who rated you: </span>
+						<%= "   " + notificationforpetsitter.booking.petowner.first_name + " " + notificationforpetsitter.booking.petowner.surname  %>
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Start of pet stay:</span>
+						<%= " " + notificationforpetsitter.booking.start_date.to_s(:long) %>
+
+					</td>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">End date of pet stay: </span>
+						<%= " " +  notificationforpetsitter.booking.end_date.to_s(:long) %>
+
+					</td>
+
+
+				</tr>
+
+
+				<!-- this row has the WHERE cell and PETS cell   -->
+				<tr>
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Where:</span>
+						<%= " " + notificationforpetsitter.booking.residential_area.name_of_location %>
+
+					</td>
+
+					<td style='text-align:center ;'>
+						<span style="font-weight:bolder;">Pets:</span>
+						<%= " " + notificationforpetsitter.booking.pets_booked_for %>
+					</td>
+
+				</tr>
+
+
+				<tr>
+					<td colspan='2' style='text-align:center ;color:#4F8A10 ;  '>
+						<span style="font-size:20px;font-weight:bolder;font-family: 'Pacifico', cursive;">Rating : &nbsp;&nbsp;</span>
+						<% for d in 1..(notificationforpetsitter.booking.rating_after_complete_pet_stay)  %>
+
+							<i  class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+						<% end %>
+
+					</td>
+				</tr>
+
+				<% if notificationforpetsitter.read_status == false %>
+					
+					<tr>
+						<td colspan='2' style='text-align:center ;padding-bottom: 10px;padding-top:10px; '>
+
+							<%= link_to notificationforpetsitter_update_rating_notification_to_read_path(notificationforpetsitter.id) , method: :patch do %>
+							
+								<button type="button" class="btn btn-success">Mark as Read</button>	
+
+							<% end %>
+
+						</td>
+					</tr>
+
+				<% end %>
+
+			<% end %>
+				
 
 		</table>
 
 
 	</td>
 </tr>
+
+<!-- this is to separate out two or more booking templates, otherwise they'll appear joined   -->
+<tr>
+	<td style="height:15px;">
+
+	</td>
+</tr>
+
 	

@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 	def create
 
 		# ----------THIS IS IN CASE SOMEONE IS ALREADY LOGGED IN WE WANT TO CHUCK THEIR STUFF FROM SESSION before even doing anything
+		# situation where someone else comes to the laptop and finds an already signed in person - they go to sign in page then sign in - if we don't do this we will have two people signed in - so we chuck anything in sessions hash
 
 		if session.key?(:petsitter)
 
@@ -58,9 +59,34 @@ class SessionsController < ApplicationController
 				# log in as petowner
 				session[:petowner] = @user.id
 
-				flash[:notice] = "Successfully signed in as pet owner"
 
-				redirect_to pet_owner_dashboard_path(@user.id)
+				# the above should work for all cases
+				# BUT NOW WE WANT TO CHECK IF THE SIGNING IN PET OWNER HAS HAD BOOKING(S) THAT BECAME A COMPLETED PET STAY(S)(which is satisfied by conditions that today > end date of booking AND petsitter_acceptance = TRUE AND completion_of_pet_stay=FALSE )
+				# IF THEY HAVE ANY , THEN WE WANT TO CHANGE VALUE OF completion_of_pet_stay FIELD TO TRUE AND ALSO PRESENT THE PETOWNER WITH A RATINGS FORM FOR THE BOOKINGS WHICH HAVE BECOME COMPLETED PET STAYS
+				# SO IF THEY HAVE ANY FORM LIKE THAT WE WILL END UP REDIRECTING TO THAT RATINGS FORM
+				if @user.bookings.present? &&  @user.bookings.where('petsitter_acceptance_confirmation = ? AND end_date < ? AND completion_of_pet_stay = ?' , true , Time.now.to_date , false ).present?
+
+					@array_of_all_bookings_that_became_pet_stays = @user.bookings.where('petsitter_acceptance_confirmation = ? AND end_date < ? AND completion_of_pet_stay = ?' , true , Time.now.to_date , false )
+
+
+
+					@array_of_all_bookings_that_became_pet_stays.each do |element_of_booking_array|
+
+					     element_of_booking_array.completion_of_pet_stay = true
+					     element_of_booking_array.save
+
+					end
+					
+					flash.now[:notice] = "Successfully signed in as pet owner"
+					render 'ratings'
+
+					
+				else
+
+					flash[:notice] = "Successfully signed in as pet owner"
+					redirect_to pet_owner_dashboard_path(@user.id)
+					
+				end
 
 			elsif @user.class.name == "Admin"
 

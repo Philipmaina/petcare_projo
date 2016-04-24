@@ -55,9 +55,33 @@ class NotificationforpetsittersController < ApplicationController
 		
 	end
 
-	def review_notifications
+	def unread_rating_notifications
+
+		petsitter_object = Petsitter.find( params[:id] )
+
+		@notifications = petsitter_object.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Rating" , false).order("id desc")
+
+		respond_to  do | format |
+
+			format.js # render a file called unread_rating_notifications.js.erb in notificationforpetsitters subdirectory of views
+		end
 		
 	end
+
+
+	def read_rating_notifications
+
+		petsitter_object = Petsitter.find( params[:id] )
+
+		@notifications = petsitter_object.notificationforpetsitters.where( 'type_of_notification = ? AND read_status = ?' , "Rating" , true).order("id desc")
+
+		respond_to  do | format |
+
+			format.js # render a file called read_rating_notifications.js.erb in notificationforpetsitters subdirectory of views
+		end
+		
+	end
+
 
 
 	# SINCE I DON'T WANT TO WASTE THE ACTIONS THAT ALREADY CAME WITH THE RESOURCE I MIGHT AS WELL USE THIS ONE 
@@ -161,6 +185,17 @@ class NotificationforpetsittersController < ApplicationController
 		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petsitter.id)
 		# --------------------------------------------------------------
 
+		
+	end
+
+	def update_status_of_rating_notification
+
+		# {"_method"=>"patch", "id"=>"1"}
+		notification_to_update = Notificationforpetsitter.find( params[:id] )
+		notification_to_update.read_status = true
+		notification_to_update.save
+
+		redirect_to pet_sitter_dashboard_notification_path(notification_to_update.petowner.id)
 		
 	end
 

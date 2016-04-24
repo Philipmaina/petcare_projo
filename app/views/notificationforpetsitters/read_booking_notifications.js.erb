@@ -7,3 +7,4 @@ $("#table_where_booking_tbl_filled_rows_gets_placed").html("<% if @notifications
 
 // that partial is called for every object in the collection 
 // HOW DOES IT KNOW WHAT PARTIAL EXACTLY TO RENDER ? Under the hood, render calls to_partial_path on each of our objects in the collection to determine which partial to render
+// @notifications[0].to_partial_path => "notificationforpetsitters/notificationforpetsitter" 

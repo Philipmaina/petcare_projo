@@ -1,0 +1,242 @@
+digraph Petcare {
+rankdir = "LR";
+ranksep = "0.5";
+nodesep = "0.4";
+pad = "0.4,0.4";
+margin = "0,0";
+concentrate = "true";
+labelloc = "t";
+fontsize = "13";
+fontname = "Arial Bold";
+node[ shape  =  "Mrecord" , fontsize  =  "10" , fontname  =  "Arial" , margin  =  "0.07,0.05" , penwidth  =  "1.0"];
+edge[ fontname  =  "Arial" , fontsize  =  "7" , dir  =  "both" , arrowsize  =  "0.9" , penwidth  =  "1.0" , labelangle  =  "32" , labeldistance  =  "1.8"];
+label = "PetCare Entity Relationship Dig\n\n";
+m_Admin [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Admin</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_two">contact_line_two <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="first_name">first_name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_one">contact_line_one <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="password_digest">password_digest <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="personal_email">personal_email <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="position_in_company">position_in_company <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="residential_area_id">residential_area_id <font face="Arial Italic" color="grey60">integer ∗ FK</font></td></tr>
+  <tr><td align="left" width="130" port="surname">surname <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Booking [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Booking</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="end_date">end_date <font face="Arial Italic" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="completion_of_pet_stay">completion_of_pet_stay <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="no_of_night_days_for_pet_stay">no_of_night_days_for_pet_stay <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="petowner_id">petowner_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="pets_booked_for">pets_booked_for <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_acceptance_confirmation">petsitter_acceptance_confirmation <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_booking_cancellation">petsitter_booking_cancellation <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_id">petsitter_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="reason_of_booking">reason_of_booking <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="residential_area_id">residential_area_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="sittingservice_id">sittingservice_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="start_date">start_date <font face="Arial Italic" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="total_price_of_stay">total_price_of_stay <font face="Arial Italic" color="grey60">decimal</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Junctionofpetsitterandpettype [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Junctionofpetsitterandpettype</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_id">petsitter_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="pettype_id">pettype_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Junctionofservicesandpetsitter [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Junctionofservicesandpetsitter</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_id">petsitter_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="sittingservice_id">sittingservice_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Notificationforpetowner [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Notificationforpetowner</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="booking_id">booking_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="petowner_id">petowner_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="read_status">read_status <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="type_of_notification">type_of_notification <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Notificationforpetsitter [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Notificationforpetsitter</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="booking_id">booking_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_id">petsitter_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="read_status">read_status <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="type_of_notification">type_of_notification <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Pet [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Pet</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="breed">breed <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="care_handle_instructions">care_handle_instructions <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="default_pet_pic_file_name">default_pet_pic_file_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="gender">gender <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="alternative_pic_file_name">alternative_pic_file_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="months_pet_lived">months_pet_lived <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="pet_name">pet_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="petowner_id">petowner_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="pettype_id">pettype_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="size_of_pet">size_of_pet <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="years_pet_lived">years_pet_lived <font face="Arial Italic" color="grey60">integer</font></td></tr>
+</table>
+>];
+m_Petowner [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Petowner</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_two">contact_line_two <font face="Arial Italic" color="grey60">string U</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="date_of_birth">date_of_birth <font face="Arial Italic" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="first_name">first_name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_one">contact_line_one <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="other_names">other_names <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="password_digest">password_digest <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="personal_email">personal_email <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="profile_pic_file_name">profile_pic_file_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="residential_area_id">residential_area_id <font face="Arial Italic" color="grey60">integer ∗ FK</font></td></tr>
+  <tr><td align="left" width="130" port="surname">surname <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Petsitter [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Petsitter</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_two">contact_line_two <font face="Arial Italic" color="grey60">string U</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="date_of_birth">date_of_birth <font face="Arial Italic" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="day_charges">day_charges <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="default_pic_file_name">default_pic_file_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="first_name">first_name <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="contact_line_one">contact_line_one <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="listing_name">listing_name <font face="Arial Italic" color="grey60">string U</font></td></tr>
+  <tr><td align="left" width="130" port="night_charges">night_charges <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="no_of_pets_owned">no_of_pets_owned <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="no_of_yrs_caring">no_of_yrs_caring <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="other_names">other_names <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="password_digest">password_digest <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="personal_email">personal_email <font face="Arial Italic" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="presence_of_open_area_outside_home">presence_of_open_area_outside_home <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="profile_description">profile_description <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="residential_area_id">residential_area_id <font face="Arial Italic" color="grey60">integer ∗ FK</font></td></tr>
+  <tr><td align="left" width="130" port="surname">surname <font face="Arial Italic" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="type_of_home">type_of_home <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="work_situation">work_situation <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+>];
+m_Pettype [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Pettype</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="type_name">type_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_ResidentialArea [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ResidentialArea</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name_of_location">name_of_location <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Sittingservice [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Sittingservice</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="place_offered">place_offered <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="service_description">service_description <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="service_name">service_name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+m_Unavailabledate [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Unavailabledate</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="id">id <font face="Arial Italic" color="grey60">integer PK</font></td></tr>
+  <tr><td align="left" width="130" port="created_at">created_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+  <tr><td align="left" width="130" port="petsitter_id">petsitter_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
+  <tr><td align="left" width="130" port="unavailable_dates_on">unavailable_dates_on <font face="Arial Italic" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="updated_at">updated_at <font face="Arial Italic" color="grey60">datetime ∗</font></td></tr>
+</table>
+>];
+  m_ResidentialArea -> m_Admin [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Petowner -> m_Booking [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petsitter -> m_Booking [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ResidentialArea -> m_Booking [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Sittingservice -> m_Booking [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Booking -> m_Notificationforpetsitter [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Pettype -> m_Junctionofpetsitterandpettype [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petsitter -> m_Junctionofpetsitterandpettype [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petsitter -> m_Junctionofservicesandpetsitter [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Sittingservice -> m_Junctionofservicesandpetsitter [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petowner -> m_Notificationforpetowner [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Booking -> m_Notificationforpetowner [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Petsitter -> m_Notificationforpetsitter [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Pettype -> m_Pet [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petowner -> m_Pet [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ResidentialArea -> m_Petowner [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ResidentialArea -> m_Petsitter [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Petsitter -> m_Unavailabledate [arrowhead = "normal", arrowtail = "none", weight = "2"];
+}

@@ -1,0 +1,187 @@
+
+
+<table>
+
+	<tr>
+		<td style="width:100%;text-align:center;">
+
+
+
+			<table>
+
+				<tr>
+					<td >
+
+						Total number of booking requests:
+
+					</td>
+
+					<td style="text-align:right;">
+						<%= @all_booking_requests %>
+
+					</td>
+
+				</tr>
+
+				<tr>
+					<td>
+						Total number of completed pet stays:
+
+					</td>
+
+					<td style="text-align:right;">
+						<%= @completed_pet_stays %>
+
+					</td>
+
+				</tr>
+
+				<tr>
+					<td>
+						Total number of ongoing pet stays/bookings:
+
+					</td>
+
+					<td style="text-align:right;">
+						<%= @ongoing_bookings %>
+					</td>
+
+				</tr>
+
+			</table>
+
+
+
+
+		</td>
+
+	</tr>
+
+
+
+
+<!--  -->
+	<tr>
+		<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px;padding-top:15px;">
+			Chart Of Relation Between Pet Owner And Bookings
+			<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+
+		</td>
+
+	</tr>
+
+	<tr>
+		<td>
+			<canvas id="pie_chart_petowner_bookings"></canvas>
+
+		</td>
+
+		<td >
+			<div class="legend">
+
+				<!-- this is where inner html stuff will go -->
+				<!-- it will be like a list item initially <li> but then we style them accordingly -->
+
+			</div>
+		</td>
+
+	</tr>
+
+
+
+
+<!--  -->
+    <tr>
+    	<td colspan='2' class="text-center" style="font-family: 'Fjalla One', sans-serif; font-size: 17px;padding-top:35px;">
+    		Chart Of Relation Between Petsitter And Bookings
+    		<hr style="border-color:black;margin-top:10px;margin-bottom:15px;">
+
+    	</td>
+
+    </tr>
+
+    <tr>
+
+    	<td>
+			<canvas id="pie_chart_petsitter_bookings"></canvas>
+
+		</td>
+
+		<td >
+			<div class="legend">
+
+				<!-- this is where inner html stuff will go -->
+				<!-- it will be like a list item initially <li> but then we style them accordingly -->
+
+			</div>
+		</td>
+
+
+
+
+
+    </tr>
+
+
+</table>
+
+<script type="text/javascript">
+	// ~~~~~~~~~~~~~~~~~~~~PIE CHART STUFF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	var dataforchartpetowners = [
+	    {
+	        value: '<%=  @count_petowners_who_have_requested %>',
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "with booking requests"
+	    },
+	    {
+	        value: '<%= @count_petowners_who_havent_requested %>' ,
+	        color: "#46BFBD",
+	        highlight: "#5AD3D1",
+	        label: "w/out booking requests"
+	    }
+	]
+	var context = document.getElementById('pie_chart_petowner_bookings').getContext('2d');
+	var firstpetownerChart = new Chart(context).Pie(dataforchartpetowners);
+
+
+	// ----------this section just gets the legend for the chart-------------
+	// An explanation of symbols used on a map, chart, sketch, etc., commonly printed in tabular form at the side of the map,
+	html_for_legend = firstpetownerChart.generateLegend() ;
+	$(".legend").html(html_for_legend) ;
+	// -----------------------------------------------------------------------
+
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	var dataforchartpetsitters = [
+	    {
+	        value: '<%=  @count_petsitters_who_have_requested %>',
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "with booking requests"
+	    },
+	    {
+	        value: '<%= @count_petsitters_who_havent_requested %>' ,
+	        color: "#46BFBD",
+	        highlight: "#5AD3D1",
+	        label: "w/out booking requests"
+	    }
+	] ;
+	var contextpetsitterchart = document.getElementById('pie_chart_petsitter_bookings').getContext('2d');
+	var petsitterChart = new Chart(contextpetsitterchart).Pie(dataforchartpetsitters);
+
+
+	// ----------this section just gets the legend for the chart-------------
+	// An explanation of symbols used on a map, chart, sketch, etc., commonly printed in tabular form at the side of the map,
+	html_for_legend_petsitter_chart = petsitterChart.generateLegend() ;
+	$(".legend").html(html_for_legend_petsitter_chart) ;
+
+
+
+
+
+
+
+	
+</script>

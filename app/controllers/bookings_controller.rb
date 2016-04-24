@@ -18,6 +18,7 @@
 #  completion_of_pet_stay            :boolean          default(FALSE)
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
+#  rating_after_complete_pet_stay    :integer
 #
 
 class BookingsController < ApplicationController
@@ -200,6 +201,52 @@ class BookingsController < ApplicationController
 			format.js # render a file called archived_bookings.js.erb in bookings subdirectory of views
 			
 		end
+		
+	end
+
+
+
+
+
+
+	def update_rating_of_booking
+
+		
+		# params = {"utf8"=>"✓",
+			 # "authenticity_token"=>"2rL4zBJBZWb+gzF4FmVuMTAO6GfeX5sS1dJ+bIy4wPm89K+tE5Unw7AAEubsPk7riNSU+P7ZOpbF7zJblY8wqQ==",
+			 # "bookings_that_become_pet_stays"=>{ 
+					 # "1"=>{"id"=>"1", "rating_after_complete_pet_stay"=>"3"},
+					 # "3"=>{"id"=>"3","rating_after_complete_pet_stay"=>"4"}
+					# }
+			# }
+		# THE ABOVE IS WHAT WE GET BUT NOT ESSENTIALLY WHAT WE WANT 
+		# WE WANT AN ARRAY OF HASHES LIKE BELOW
+		#  "bookings_that_become_pet_stays" => [ 
+				# {"id"=>"1", "rating_after_complete_pet_stay"=>"3"}, 
+				# {"id"=>"3", "rating_after_complete_pet_stay"=>"4"}
+			# ] 
+
+		# therefore we first of all get the key "bookings_that_become_pet_stays" and make its value not be a hash of hashes but we take only the values and conver to an array - all we are doing is chucking "1" => and "3" =>
+		params[:bookings_that_become_pet_stays] =  params[:bookings_that_become_pet_stays].values
+
+		params["bookings_that_become_pet_stays"].each do |hash_inside_array|
+
+			# we firstly update rating of a booking/pet stay
+		    booking_to_update_rating = Booking.find( hash_inside_array[:id] )
+		    booking_to_update_rating.rating_after_complete_pet_stay = hash_inside_array[:rating_after_complete_pet_stay]
+
+		    if booking_to_update_rating.save
+
+			    # then immediately after we create a notification for petsitters telling them of the rating they've received
+			    notification = booking_to_update_rating.notificationforpetsitters.new( petsitter: booking_to_update_rating.petsitter , type_of_notification: "Rating" )
+			    notification.save
+
+			    redirect_to pet_owner_dashboard_path(booking_to_update_rating.petowner_id) , notice: "Thanks for being a good sport and rating your pet carer(s) :) :)"
+
+			end
+
+		end
+
 		
 	end
 

@@ -97,6 +97,7 @@ class AdminsController < ApplicationController
 			# Ruby Date class provides a constant array of month names. You can pass month number as index to Date::MONTHNAMES and will get month name as string
 			@string_of_all_months_upto_current_month.push(Date::MONTHNAMES[i])
 
+			# this checks for all accounts which were created on or before the end of the month that the loop is on(remember the loop is cycling through from month 1 to current month)
 		    @all_petowners_within_months.push( Petowner.where( 'created_at <= ?' , Date.new(Date.today.year,i).end_of_month  ).count  )
 
 		end
@@ -224,6 +225,55 @@ class AdminsController < ApplicationController
 
 	# this is when within statistical info you click the tab like arrow all on bookings
 	def statistics_on_bookings
+
+		# ~~~~~~~~~~~~THIS IS FOR THE TABLE OF BOOKINGS~~~~~~~~~~~~~~~~~~~~
+		@all_booking_requests = Booking.all.count #all booking requests whether successful or unsuccessful
+
+		@completed_pet_stays = Booking.where('end_date < ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , true).count
+
+		@ongoing_bookings =  Booking.where('start_date <= ? AND end_date >= ? AND petsitter_acceptance_confirmation = ? ' , Time.now.to_date , Time.now.to_date , true).count
+
+		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		# ~~~~~~~~~~~~~~~~~THIS IS FOR THE FIRST PIE CHART~~~~~~~~~~~~~~~~~~~~~
+		@count_petowners_who_have_requested = 0
+		@count_petowners_who_havent_requested = 0
+		 
+		Petowner.all.each do |petowner_object|
+
+		    if petowner_object.bookings.present?
+		       @count_petowners_who_have_requested += 1
+		    else
+		       @count_petowners_who_havent_requested += 1
+		    end
+
+		end
+		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		# ~~~~~~~~~~~~~THIS IS FOR THE SECOND PIE CHART~~~~~~~~~~~~~~~~~~~~~~~
+		@count_petsitters_who_have_requested = 0
+		@count_petsitters_who_havent_requested = 0
+		 
+		Petsitter.all.each do |petsitter_object|
+
+		    if petsitter_object.bookings.present?
+		       @count_petsitters_who_have_requested += 1
+		    else
+		       @count_petsitters_who_havent_requested += 1
+		    end
+
+		end
+
+		# ~~AND BECAUSE WE REACH HERE FROM AN AJAXIFIED FORM BEING SENT~~
+		respond_to do |format|
+
+			format.js #this will fall through and render admins/statistics_on_bookings.js.erb
+
+		end
+
+
 		
 	end
 

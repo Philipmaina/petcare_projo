@@ -1,0 +1,158 @@
+
+<div class="container-fluid" style="background-color: #eee;">
+
+	<div class="row" style="height: 50px ;" >
+	</div>
+
+
+	<div class="row" >
+
+		<div class="col-md-3">
+
+		</div>
+
+		<!-- sign in form will be here -->
+		<div class="col-md-6" style="background-color: white ; padding-top:20px; padding-bottom:20px ;" >
+
+			<!-- i want to create many objects(@array_of_all_bookings_that_became_pet_stays) on a single form and send that array backend to server -->
+			<!-- params = {
+			    "all_bookings_to_be_rated" = [
+			      {"id" => "1", "rating" => "3"},
+			      {"id" => "3", "rating" => "5"}
+			    ]
+			  } -->
+			  <!-- i want something of that sort  -->
+			  <!-- so i start with a form tag that submits a POST request to update_ratings action in bookings controller -->
+			  <!-- I need to take my array of bookings that was created when signing in in session and iterate over the array to generate fields of ratings for each specific booking in that array -->
+			  <!-- This way i have one form with many sets of fields -->
+			  <!-- CHECK LINK BELOW FOR EXAMPLE -->
+			  <!-- http://vicfriedman.github.io/blog/2015/07/18/create-multiple-objects-from-single-form-in-rails/ -->
+
+
+			  <!-- FIND OUT WHAT RAILS DOES BECAUSE INSTEAD OF CREATING AN ARRAY OF HASHES IT CREATES A HASH OF HASHES LIKE BELOW  -->
+			  <!-- {
+				 "bookings_that_become_pet_stays"=>
+				 { "1"=>{"id"=>"1",
+				 "rating_after_complete_pet_stay"=>"3"},
+				 "3"=>{"id"=>"3",
+				 "rating_after_complete_pet_stay"=>"4"} }  } -->
+
+				<!-- just had to find a fix for myself backend to make it an array -->
+	
+			<%= form_tag(update_rating_of_booking_path) do %>
+
+
+			  <% @array_of_all_bookings_that_became_pet_stays.each do |element_of_booking_array| %>
+			  	<!-- this div contains each booking template/section upto the ratings point -->
+			  	<div style="text-align:center;border: 1px solid #008c9d; padding-top: 15px ; padding-bottom: 15px ;background-color:#e5f6f8;">
+
+				  	<!-- __________________________________________________ -->
+
+				  	
+				  			<span style="font-weight:bold ;">
+				  				Pet sitter to be rated:
+				  			</span>
+				  			 &nbsp;  &nbsp; 
+				  			<%= element_of_booking_array.petsitter.first_name + "  "  + element_of_booking_array.petsitter.surname %>
+				  			<br/>
+
+
+				  			<span style="font-weight:bold ;">
+				  				<%= element_of_booking_array.sittingservice.service_name + "  Sitting Service " %>
+
+				  			</span>
+				  			<br/>
+
+
+
+				  			<span style="font-weight:bold ;">
+				  				Start date of pet care : 
+				  			</span>
+				  			&nbsp;  &nbsp; 
+				  			<%= element_of_booking_array.start_date.to_s(:long) %>
+				  			&nbsp;  &nbsp; &nbsp;  &nbsp; 
+				  			<span style="font-weight:bold ;">
+				  				End date of pet care: 
+				  			</span>
+				  			&nbsp;  &nbsp; 
+				  			<%= element_of_booking_array.end_date.to_s(:long) %>
+				  			<br/>
+
+
+
+
+
+				  			<span style="font-weight:bold ;">
+				  				Pets cared for: 
+				  			</span>
+				  			&nbsp;  &nbsp; 
+				  			<%= element_of_booking_array.pets_booked_for %>
+				  			<br/>
+
+
+
+				  			
+						    <%= fields_for 'bookings_that_become_pet_stays[]', element_of_booking_array do |p| %>
+
+						      	  <%= p.hidden_field :id %>
+
+							      <span style="font-size:17px;color:#f96566;font-weight:bold ;"> Rating </span>
+							      <%= p.number_field :rating_after_complete_pet_stay , min: 0 , max: 5 , :style => "width:100px;" %>
+							      <span style="padding-left:5px ;color:#f96566;font-weight:bold ;font-size:18px;"> / 5 </span>
+						      
+
+						    <% end %> <!-- this end is for field_for -->
+						
+					
+			    	
+						    <br/>
+				      
+				     
+				    <!-- _________________________________________________ -->
+
+				</div>
+
+				<!-- so that there is a break between every booking section otherwise they'll all touch each other -->
+				<br/>
+
+			  <% end %> <!-- this end is for .each on the array of bookings which satisfied criteria -->
+
+
+
+
+			  <!-- this will be the button area - button for either submitting ratings or don't want to rate petsitter -->
+			  <div style="text-align:center; padding-top: 15px; padding-bottom: 5px;">
+
+			  	<button type="submit" class="btn btn-success">Submit Ratings</button>
+
+			  	<%= link_to pet_owner_dashboard_path(@user.id)  do %>
+				  	<button type="button" class="btn btn-danger">Don't wish to rate</button>
+				<% end %>
+
+
+
+			  </div>
+
+			<% end %> <!-- this end is for form for -->
+			
+						
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+	<!-- want a gray row after button to blend to whole gray body container feel -->
+
+	<div class="row" style="background-color: #eee; height: 40px;" >
+
+	</div>
+
+
+
+
+</div>
+
+

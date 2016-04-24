@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   resources :notificationforpetsitters
   resources :bookings
 
+  # ---------an additional route for updating rating of a petsitter----------
+  post "/bookings_that_are_pet_stays/update_rating" => "bookings#update_rating_of_booking" , as: "update_rating_of_booking"
+
+  # --an additional route for updating status of rating notification to read--
+
+  patch "/notificationforpetsitter_update_rating_notification_to_read/:id" => "notificationforpetsitters#update_status_of_rating_notification" , as: "notificationforpetsitter_update_rating_notification_to_read" 
+
   # --------------------ADDITIONAL ADMIN CUSTOM ROUTES-----------------------
   get "/admin/:id/dashboard" => "admins#dashboard" , as: "admin_dashboard"
   get "/admin/:id/dashboard/statistical_analysis" => "admins#statistical_analysis" , as: "statistical_analysis"
@@ -36,7 +43,9 @@ Rails.application.routes.draw do
   post "/petsitters/:id/dashboard/unread_booking_notifications" => "notificationforpetsitters#unread_booking_notifications" , as: "unread_petsitter_booking_notifications"
 
   post "/petsitters/:id/dashboard/read_booking_notifications" => "notificationforpetsitters#read_booking_notifications" , as: "read_petsitter_booking_notifications"
-  post "/petsitters/:id/dashboard/review_notifications" => "notificationforpetsitters#review_notifications" , as: "review_notifications"
+  post "/petsitters/:id/dashboard/unread_rating_notifications" => "notificationforpetsitters#unread_rating_notifications" , as: "unread_rating_notifications"
+
+  post "/petsitters/:id/dashboard/read_rating_notifications" => "notificationforpetsitters#read_rating_notifications" , as: "read_rating_notifications"
 
 
   # ------ADDITIONAL PETOWNER NOTIFICATION ROUTES(tabs arrows) THAT USE AJAX KIDOGO-----

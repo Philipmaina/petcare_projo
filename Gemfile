@@ -58,6 +58,15 @@ gem 'bcrypt', '~> 3.1.7'
   # used in edit_profile_dashboard panels
   gem "possessive"
 
+  # ----------------------------------------------------------------------------
+  gem 'ruby-graphviz', '~> 1.2', '>= 1.2.2'
+  # The rails-erd gem analyzes models and DB schema and uses Graphviz to generate an erd diagram for us - remember one has to install Graphviz in your machine - the line of code above does that
+  gem 'rails-erd'
+  
+  # it takes some options
+  # how to run: rake erd inheritance=true indirect=false prepend_primary=true attributes=foreign_keys,primary_keys,content
+  # ----------------------------------------------------------------------------
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

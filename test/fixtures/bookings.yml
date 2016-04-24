@@ -18,6 +18,7 @@
 #  completion_of_pet_stay            :boolean          default(FALSE)
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
+#  rating_after_complete_pet_stay    :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
