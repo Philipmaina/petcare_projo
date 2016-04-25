@@ -7,6 +7,16 @@
 
 	}
 
+	.yenye-iko-na-links-za-header{
+		position:relative;
+		height: 100% !important;
+	}
+	button#yenye-iko-na-links-za-header{
+
+		margin-top: 18px;
+		margin-bottom: 18px;
+	}
+
 
 </style>
 
@@ -27,7 +37,7 @@
 				</a>
 			</div>
 			
-			<div class="col-md-8">
+			<div class="col-md-8" style="position:relative;height:100%;" >
 
 
 
@@ -39,21 +49,22 @@
 				<!-- why we do this is to avoid congestion of all links on one corner -->
 				<% unless session.key?(:petsitter) %>
 					<!-- remember we want this FIND A SITTER link button to only come when you're logged in as a petowner -->
-					<span>
-						<%= link_to  search_main_page_path ,  :method => :get  do  %>
+					
 
-							<button type="button" class="btn btn-default navbar-btn border-highlight">Find a sitter</button>
+						<%= link_to  search_main_page_path ,  :method => :get   do  %>
+
+							<button type="button" class="btn btn-default navbar-btn border-highlight" id="yenye-iko-na-links-za-header">Find a sitter</button>
 							
 						<% end %>
-					</span>
+					
 				<% end %>
 
 
 				<!-- this if statement allows for even spacing of the stuff in the header when either no one is signed in or when s/one is signed - we want buttons for sign in and sign up to be close together if no one is signed -->
 				<% if session.key?(:petsitter) || session.key?(:petowner) %>
-				<table style="float:right; width: 45% ;">
+				<table style="float:right; width: 45% ;" class="yenye-iko-na-links-za-header">
 				<% else %>
-				<table style="float:right; width: 35% ;">
+				<table style="float:right; width: 35% ;" class="yenye-iko-na-links-za-header">
 				<% end %>
 
 
