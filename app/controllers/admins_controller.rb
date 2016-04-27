@@ -52,24 +52,30 @@ class AdminsController < ApplicationController
 		@total_number_of_petowners = Petowner.all.count
 		# --------------------------------------------------------------------
 
+		# ---CHECK EXPLANATION OF CODE BELOW IN STATISTICS PETSITTER ACTION---
+		@array_to_send_to_values_of_pie_chart = [] # because we need an array of like js objects.
+		ResidentialArea.all.each do | residential_area_obj|
 
-		# --------this info is to help populate the pie chart--------------
-		karen_place = ResidentialArea.find_by( name_of_location: "Karen" )
-		@number_of_petowners_in_karen = karen_place.petowners.count
+	
+			hash_to_include_as_element = {}
+
+			hash_to_include_as_element[:label] = residential_area_obj.name_of_location
+			hash_to_include_as_element[:value] = residential_area_obj.petowners.count
+			hash_to_include_as_element[:color] = "#" + SecureRandom.hex(3) 
+
+			@array_to_send_to_values_of_pie_chart.push(hash_to_include_as_element.to_json.gsub(/\"/, '\'') )
+			
+		end
+
+	
+		@array_to_send_to_values_of_pie_chart = @array_to_send_to_values_of_pie_chart.to_s.gsub('"' , '' )
 
 
-		runda_place = ResidentialArea.find_by( name_of_location: "Runda" )
-		@number_of_petowners_in_runda = runda_place.petowners.count
+		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		lavington_place = ResidentialArea.find_by( name_of_location: "Lavington" )
-		@number_of_petowners_in_lavington = lavington_place.petowners.count
 
-
-		chiromo_place = ResidentialArea.find_by( name_of_location: "Chiromo" )
-		@number_of_petowners_in_chiromo = chiromo_place.petowners.count
-		# ---------------------------------------------------------------------
-
+		
 
 
 
@@ -116,27 +122,29 @@ class AdminsController < ApplicationController
 	# this is when within statistical info you click the tab like arrow pet owners
 	def statistics_on_pet_owners
 
-		# ~~~~~~~~~~~~~THIS IS FOR POPULATING THE PIE CHART~~~~~~~~~~~~~
-
 		@total_number_of_petowners = Petowner.all.count
 
-		karen_place = ResidentialArea.find_by( name_of_location: "Karen" )
-		@number_of_petowners_in_karen = karen_place.petowners.count
 
+		# ---CHECK EXPLANATION OF CODE BELOW IN STATISTICS PETSITTER ACTION---
+		@array_to_send_to_values_of_pie_chart = [] # because we need an array of like js objects.
+		ResidentialArea.all.each do | residential_area_obj|
 
-		runda_place = ResidentialArea.find_by( name_of_location: "Runda" )
-		@number_of_petowners_in_runda = runda_place.petowners.count
+	
+			hash_to_include_as_element = {}
 
+			hash_to_include_as_element[:label] = residential_area_obj.name_of_location
+			hash_to_include_as_element[:value] = residential_area_obj.petowners.count
+			hash_to_include_as_element[:color] = "#" + SecureRandom.hex(3) 
 
-		lavington_place = ResidentialArea.find_by( name_of_location: "Lavington" )
-		@number_of_petowners_in_lavington = lavington_place.petowners.count
+			@array_to_send_to_values_of_pie_chart.push(hash_to_include_as_element.to_json.gsub(/\"/, '\'') )
+			
+		end
 
+	
+		@array_to_send_to_values_of_pie_chart = @array_to_send_to_values_of_pie_chart.to_s.gsub('"' , '' )
 
-		chiromo_place = ResidentialArea.find_by( name_of_location: "Chiromo" )
-		@number_of_petowners_in_chiromo = chiromo_place.petowners.count
 
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
 		# ~~~~~~~~~~~THIS IS FOR POPULATING THE LINE CHART~~~~~~~~~~~~~~~~~~
@@ -171,27 +179,91 @@ class AdminsController < ApplicationController
 
 	# this is when within statistical info you click the tab like arrow pet sitters
 	def statistics_on_pet_sitters
-
-		# ~~~~~~~~~~~~~THIS IS FOR POPULATING THE PIE CHART~~~~~~~~~~~~~
-
 		@total_number_of_petsitters = Petsitter.all.count
+		
 
-		karen_place = ResidentialArea.find_by( name_of_location: "Karen" )
-		@number_of_petsitters_in_karen = karen_place.petsitters.count
-
-
-		runda_place = ResidentialArea.find_by( name_of_location: "Runda" )
-		@number_of_petsitters_in_runda = runda_place.petsitters.count
+		# ~~~~~~~~~~~~~~THIS IS FOR POPULATING THE PIE CHART~~~~~~~~~~~~~
 
 
-		lavington_place = ResidentialArea.find_by( name_of_location: "Lavington" )
-		@number_of_petsitters_in_lavington = lavington_place.petsitters.count
 
+		# From the Chart.js docs: For a pie chart, you must pass in array of objects with a value and an optional color property.the value attribute should be a number while the color property should be a string.
+		# -------we want something that lloks like this because that is what Chart.js accepts as data to populate its pie chart - simply an array of javascript objects
 
-		chiromo_place = ResidentialArea.find_by( name_of_location: "Chiromo" )
-		@number_of_petsitters_in_chiromo = chiromo_place.petsitters.count
+		# [
+		    # {
+		        # value: 5,
+		        # color:"#F7464A",
+		        # label: "Karen"
+		    # },
+		    # {
+		        # value: 7 ,
+		        # color: "#46BFBD",
+		        # label: "Runda"
+		    # }
+	    # ]
+	# ------ or something like below(this is what we will generate) ----------
+		# [
+		    # {
+		        # 'value': 5,
+		        # 'color':'#F7464A',
+		        # 'label': 'Karen'
+		    # },
+		    # {
+		        # 'value': 7 ,
+		        # 'color': '#46BFBD',
+		        # 'label': 'Runda'
+		    # }
+		# ]
+
+		# --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		# we want this data to be made dynamically retrieved instead of hardcoding the names and checking values as below,because here if the residential areas increase in number we have to come back to the code and add the new place which is annoying in the long run
+		# 	var data = [
+		#     {
+		#         "value": '<%=  number_of_users_in_karen %>',
+		#         "color":"#F7464A",
+		#         highlight: "#FF5A5E",
+		#         label: "Karen"
+		#     },
+		#     {
+		#         value: '<%= number_of_users_in_runda %>' ,
+		#         color: "#46BFBD",
+		#         highlight: "#5AD3D1",
+		#         label: "Runda"
+		#     }
+		# ]
+		# -----xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+		@array_to_send_to_values_of_pie_chart = [] # because we need an array of like js objects.
+
+		# the code below is what makes it dynamic because it does for all areas in db even if a new is added.
+		ResidentialArea.all.each do | residential_area_obj|
+
+			# we will create a hash then later convert it to something looking like a json object
+			hash_to_include_as_element = {}
+
+			hash_to_include_as_element[:label] = residential_area_obj.name_of_location
+			hash_to_include_as_element[:value] = residential_area_obj.petsitters.count
+			hash_to_include_as_element[:color] = "#" + SecureRandom.hex(3) #SecureRandom.hex generates a random hexadecimal string and the argument n means the length of that string is twice that of n so like ours will be 6.each character in that string can range from 0-9-a-f 
+
+			# this is where we make that hash appear like a json object only there will be double quotes encapsulating the json like object
+			@array_to_send_to_values_of_pie_chart.push(hash_to_include_as_element.to_json.gsub(/\"/, '\'') )
+			
+		end
+
+		# this is what the array will appear like 
+		# [
+		#     "{'label':'Karen','value':4,'color':'#177cb9'}",
+		#     "{'label':'Runda','value':1,'color':'#2d223c'}",
+		#     "{'label':'Lavington','value':0,'color':'#9e05d1'}",
+		#     "{'label':'Chiromo','value':1,'color':'#cc905d'}"
+		# ]
+		# so all we have to do now is to chuck the double quotes surrounding {}
+		@array_to_send_to_values_of_pie_chart = @array_to_send_to_values_of_pie_chart.to_s.gsub('"' , '' )
+
 
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 
@@ -274,6 +346,12 @@ class AdminsController < ApplicationController
 		end
 
 
+		
+	end
+
+
+	# this is to allow the admin to be presented with stuff they can change like residential_areas,pets we can care for
+	def add_edit_stuff
 		
 	end
 

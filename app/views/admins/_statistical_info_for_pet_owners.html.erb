@@ -70,32 +70,8 @@
 
 <script type="text/javascript">
 	// ~~~~~~~~~~~~~~~~~~~~PIE CHART STUFF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	var data = [
-	    {
-	        value: '<%=  number_of_users_in_karen %>',
-	        color:"#F7464A",
-	        highlight: "#FF5A5E",
-	        label: "Karen"
-	    },
-	    {
-	        value: '<%= number_of_users_in_runda %>' ,
-	        color: "#46BFBD",
-	        highlight: "#5AD3D1",
-	        label: "Runda"
-	    },
-	    {
-	        value: '<%= number_of_users_in_lavington %>',
-	        color: "#FDB45C",
-	        highlight: "#FFC870",
-	        label: "Lavington"
-	    },
-	    {
-	        value: '<%= number_of_users_in_chiromo %>',
-	        color: "#B48EAD",
-	        highlight: "#C69CBE",
-	        label: "Chiromo"
-	    }
-	]
+	var data = <%= raw @array_to_send_to_values_of_pie_chart %> ;
+	
 	var context = document.getElementById('skills').getContext('2d');
 	var skillsChart = new Chart(context).Pie(data);
 

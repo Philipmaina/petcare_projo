@@ -1,0 +1,139 @@
+
+<div class="container-fluid" style="background-color: #eee;">
+
+	<%= render '/all_other_partials/navbar_for_dashboard_stuff' %>
+
+	<div class="row" style="position:relative ;height: 490px; background-color: #eee; ">
+
+		<div class="col-md-2">
+
+
+		</div>
+
+		<div class="col-md-8" style="height: 95% ; background-color:white ; padding: 20px 5px 10px 15px ;">
+
+			<!-- _____________________________________________ -->
+			<!-- |              |            |               | -->
+			<!-- |  ___________ | __________ | ___________   | -->
+			<!-- |  |_________| | |________| | |_________|   | -->
+			<!-- |  |         | | |        | | |         |   | -->
+			<!-- |  |         | | |        | | |         |   | -->
+			<!-- |  |         | | |        | | |         |   | -->
+			<!-- |  |_________| | |________| | |_________|   | -->
+			<!-- |______________|____________|_______________| -->
+
+			<!-- used panels from bootstrap and placed each in a cell  -->
+			<table style="position:relative ;height: 100% ; width: 100% ; border-collapse: separate; border-spacing: 20px;">
+
+				<tr  >
+
+					<td>
+
+
+						<%= link_to residential_areas_path , :style => "text-decoration:none ;"   do %>
+
+							<div class="panel panel-default" style="position:relative; height: 60% ;">
+
+							  <div class="panel-heading" style="text-align:center;">
+							    <h3 class="panel-title" style="font-family: marydale ; color: #8ad9e1 ; font-size: 20px; font-weight:bold ;">Residential Areas</h3>
+							  </div>
+
+							  <div class="panel-body" style="text-align:center ;">
+							    <i class="fa fa-pencil-square-o fa-4x" style="color: #8ad9e1 ; "></i>
+							    <br/>
+							    <span style="font-weight:bold;color: #585858  ;">Add/Edit Locations</span>
+							  </div>
+
+							</div>
+
+						<% end %>
+
+					</td>
+
+
+
+
+					<td>
+
+						<%= link_to pettypes_path , :style => "text-decoration:none ;"   do %>
+
+							<div class="panel panel-default" style="position:relative; height: 60% ;">
+
+							  <div class="panel-heading" style="text-align:center;">
+							    <h3 class="panel-title" style="font-family: marydale ; color: #8ad9e1 ; font-size: 20px; font-weight:bold ;">Types of pets</h3>
+							  </div>
+
+							  <div class="panel-body" style="text-align:center ;">
+							    <i class="fa fa-plus-circle fa-4x" style="color: #8ad9e1 ; "></i>
+							    <br/>
+							    <span style="font-weight:bold;color: #585858  ;">Add/Edit pettype</span>
+							  </div>
+
+							</div>
+
+						<% end %>
+
+					</td>
+
+
+
+
+					<td>
+						
+						<%= link_to sittingservices_path, :style => "text-decoration:none ;"   do %>
+
+
+							<div class="panel panel-default" style="position:relative; height: 60% ;">
+
+							  <div class="panel-heading" style="text-align:center;">
+							    <h3 class="panel-title" style="font-family: marydale ; color: #8ad9e1 ; font-size: 20px; font-weight:bold ;">Sitting services</h3>
+							  </div>
+
+							  <div class="panel-body" style="text-align:center ;">
+							    <i class="fa fa-pencil-square-o fa-4x" style="color: #8ad9e1 ; "></i>
+							    <br/>
+							    <span style="font-weight:bold;color: #585858  ;">
+							    
+							    	Add/Edit pet sitting services
+
+							    </span>
+							  </div>
+
+							</div>
+
+
+						<% end %>
+
+					</td>
+
+				</tr>
+
+			</table>
+
+
+		</div>
+
+		<div class="col-md-2">
+
+
+		</div>
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+<script type="text/javascript">
+
+	$("li#tab_for_add_edit_stuff").addClass("active") ;
+
+
+</script>
