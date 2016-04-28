@@ -97,6 +97,7 @@ $(document).on('ready page:load', function() {
 
 		// this will be the a tag that caused this code to run
 		// .closest() begins search with current element itself and travels up the DOM tree(like looking at parents and parent's parents) until it finds a match for the supplies selector and stops there. remember closest return zero object if nothing is found or one object which is the first object that will be seen. doesn't return many
+		// .index() will return the position of the first element within the set of matched elements in relation to its siblings - so like first sibling which is first tr tag will be index 0 , second sibling if it exists which in our case will be second tr tag will be index 1
 		var index_of_deleted_row = $(this).closest("tr").index() ;
 		
 		// we do parent() twice because the a tag is a grand child of tr tag we want to remove

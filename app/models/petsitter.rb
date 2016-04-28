@@ -93,6 +93,10 @@ class Petsitter < ActiveRecord::Base
    
    # since it's a dropdown list for type of home and a radio button group(converted to look like toggle buttons) we dont need validations.
 
+   # _____5) step 5 validations__________________________________________
+   
+   # since i have a slider for the price and a popup calendar for choosing the dates unavailable- i have already frontend validated for now
+
 
 
 

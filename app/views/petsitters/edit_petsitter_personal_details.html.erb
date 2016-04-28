@@ -18,24 +18,157 @@
 
 	</div>
 
-	<div class="row" >
-		<center>
-			<h4>
-				<strong>
-					Pet Sitter
-				</strong>
-			</h4>
-		</center>
-	</div>
+
+
+
 
 	<!-- create 2nd row in our grid system to hold the step we are in -->
-	<div class="row">
-		<h5 class="text-center"> 
-			<strong> Step 2 </strong>
-			<br/>
-			Personal details 
-		</h5>
+	<div class="row text-center">
+
+		<div class="col-md-3">
+		</div>
+
+
+		<!-- ~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_ -->
+
+		<div class="col-md-6 ">
+			<!-- i want two circles one inside the other -->
+			<!-- then in the area between the two circles i want to create a color so it appears like a border or FRAME for that matter just a circular frame  -->
+			<!-- we will do this by a div within another div and make the edges of the div a bit smoother till they are circular by using border #00acc1 ;radius -->
+			<!-- they both have to have square dimensions is why we choose 80 by 80 and 60 by 60 -->
+			<!-- the padding 10px of outer div is as shown below in dig  -->
+			<!-- __________________ -->
+			<!-- | _____10_____   | -->
+			<!-- |  |          |  | -->
+			<!-- |10| 60       |10| -->
+			<!-- |  |          |  | -->
+			<!-- |  |_____60___|  | -->
+			<!-- |______10________| -->
+			<!-- the other 5px padding in the inner div is not as important because it just helps avoid having the text step # too close to the borders -->
+
+			<!-- INLINE-BLOCK ELEMENTS ARE LIKE INLINE ELEMENTS BUT THEY CAN HAVE A WIDTH AND A HEIGHT. that is why we are having a dummy extreme outer div that has text-align center and the div which follows which is outer(the one with 80 by 80) is made an inline element using inline block and HENCE WE CAN HORIZONTALLY CENTER THE DIV OTHERWISE INGEKATAA -->
+			
+			<div style="text-align:center;">
+				
+				<div  class="text-center" style="display: inline-block;background-color:#bdbdbd;width:80px ;height:80px ;padding: 10px 10px 10px 10px ;width:80px ;border-radius:50%; ">
+
+					<div style="padding: 5px 5px 5px 5px ;width:60px ;height:60px ; text-align:center;background-color:white;vertical-align:middle;border-radius:50%; font-family: 'marydale' ;font-weight:bolder;font-size:19px;">
+
+						Step 
+						<br/>
+						1
+
+					</div>
+
+				</div>
+
+				<!-- i'll create many(3) circles like this for step 1 through to step 3 but then step 1's border is the only one coloured green the rest are colored grey to show that we are in step 1  -->
+				<!-- the div that is just below this comment is for the line colored gray separating the two circles -->
+
+				<div style="display: inline-block;width:25px;height:5px;background-color:#bdbdbd ;vertical-align:center;">
+
+				</div>
+
+				 <!-- ________________2nd step circle_____________________ -->	<div  class="text-center" style="display: inline-block;background-color:#5cb85c ;width:80px ;height:80px ;padding: 10px 10px 10px 10px ;width:80px ;border-radius:50%; ">
+
+					<div style="padding: 5px 5px 5px 5px ;width:60px ;height:60px ; text-align:center;background-color:white;vertical-align:middle;border-radius:50%; font-family: 'marydale' ;font-weight:bolder;font-size:19px;">
+
+						Step 
+						<br/>
+						2
+
+					</div>
+
+				</div>
+				<!-- _____________________________________________________ -->
+
+				<!-- ___________line separating circle steps________________ -->
+
+				<div style="display: inline-block;width:25px;height:5px;background-color:#bdbdbd ;vertical-align:center;">
+
+				</div>
+				<!-- _______________________________________________________ -->
+
+				<!-- ________________3rd step circle_______________________ -->
+				<div  class="text-center" style="display: inline-block;background-color:#bdbdbd;width:80px ;height:80px ;padding: 10px 10px 10px 10px ;width:80px ;border-radius:50%; ">
+
+					<div style="padding: 5px 5px 5px 5px ;width:60px ;height:60px ; text-align:center;background-color:white;vertical-align:middle;border-radius:50%; font-family: 'marydale' ;font-weight:bolder;font-size:19px;">
+
+						Step 
+						<br/>
+						3
+
+					</div>
+
+				</div>
+				<!-- ___________________________________________________ -->
+
+				<!-- ___________line separating circle steps________________ -->
+
+				<div style="display: inline-block;width:25px;height:5px;background-color:#bdbdbd ;vertical-align:center;">
+
+				</div>
+				<!-- _______________________________________________________ -->
+
+				<!-- ________________4th step circle_______________________ -->
+				<div  class="text-center" style="display: inline-block;background-color:#bdbdbd;width:80px ;height:80px ;padding: 10px 10px 10px 10px ;width:80px ;border-radius:50%; ">
+
+					<div style="padding: 5px 5px 5px 5px ;width:60px ;height:60px ; text-align:center;background-color:white;vertical-align:middle;border-radius:50%; font-family: 'marydale' ;font-weight:bolder;font-size:19px;">
+
+						Step 
+						<br/>
+						4
+
+					</div>
+
+				</div>
+				<!-- ___________________________________________________ -->
+
+				<!-- ___________line separating circle steps________________ -->
+
+				<div style="display: inline-block;width:25px;height:5px;background-color:#bdbdbd ;vertical-align:center;">
+
+				</div>
+				<!-- _______________________________________________________ -->
+
+				<!-- ________________5th step circle_______________________ -->
+				<div  class="text-center" style="display: inline-block;background-color:#bdbdbd;width:80px ;height:80px ;padding: 10px 10px 10px 10px ;width:80px ;border-radius:50%; ">
+
+					<div style="padding: 5px 5px 5px 5px ;width:60px ;height:60px ; text-align:center;background-color:white;vertical-align:middle;border-radius:50%; font-family: 'marydale' ;font-weight:bolder;font-size:19px;">
+
+						Step 
+						<br/>
+						5
+
+					</div>
+
+				</div>
+				<!-- ___________________________________________________ -->
+
+				
+			</div>
+
+
+
+			<h4 class="text-center" style="font-family: 'marydale' ;font-weight:bolder;font-size:19px;margin-top:0px ;"> 
+				<br/>
+				Personal details 
+			</h4>
+
+		</div>
+
+		<!-- ~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_ -->
+
+		<div class="col-md-3">
+		</div>
+		
+
+		
 	</div>
+
+
+
+
 
 	<!-- 3 COLUMN LAYOUT -->
 	<!-- Create one deep row that has 3 columns in a ratio 3:6:3/1:2:1 -->
@@ -51,7 +184,7 @@
 			<%= form_for( @petsitter , :url => { controller: 'petsitters' , action: 'update_petsitter_personal_details' } , html: { method: "patch"} ) do |f| %>
 
 				<!-- we dont want in our form_errors partial to put a specific object like @petowner or @petsitter. instead we want to put a variable and that variable gets filled in with whatever is sent. so in our case we put user variable in actual partial then for this page of petownersnew1ststepform we pass @petowner to replace every occurrence of user or the @petowner gets placed in user variable -->
-				<%= render partial: '/all_other_partials/form_errors' , :locals => { user: @petsitter } %>
+				<%= render partial: '/all_other_partials/form_errors' , :locals => { object: @petsitter } %>
 
 				<div class="panel panel-default border_style">
 					<div class="panel-body">

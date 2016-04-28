@@ -73,7 +73,18 @@
 					<p id="sign_in_btn_actual_page" >
 
 					 	 <%= submit_tag "Sign In" , class:"btn sign_in_page_sign_in_btn" %>
-					 </p>
+					</p>
+
+
+					<p class="text-center" style="padding-top:15px;">
+						Not a member ? 
+						<%= link_to page_for_choosing_type_of_registration_path ,  :method => :get  do  %> 
+
+							Sign Up now!!
+
+						<% end %>
+
+					</p>
 
 
 					 
