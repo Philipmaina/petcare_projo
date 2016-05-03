@@ -1,0 +1,50 @@
+
+<div class="container">
+
+	<!-- create first empty row in our grid/graph system of bootstrap -->
+	<div class="row" style="height:30px;">
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-3">
+
+		</div>
+
+		<div class="col-md-6">
+
+
+			<h3 class="text-center" style="font-family: 'marydale' ;font-weight:bolder;">
+				Editing Details of <%= " " +  @pettype_obj.type_name + " pet type" %>
+			</h3>
+
+			<hr>
+
+			<%= form_for(@pettype_obj) do |f| %>
+
+				<%= render partial: '/all_other_partials/form_errors' , :locals => { object: @pettype_obj } %>
+
+				<div class="form-group text-center">
+
+					<%= f.label :type_name , "Name of location" %>
+					<%= f.text_field :type_name , class: "form-control text-center" %>
+					<br/>
+					<br/>
+					<%= f.submit  "Update Changes" , class: "btn btn-lg btn-success" %>
+
+				</div>
+
+
+
+			<% end %>
+
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+</div>

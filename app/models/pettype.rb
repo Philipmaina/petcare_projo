@@ -12,7 +12,7 @@ class Pettype < ActiveRecord::Base
 
 	# --------------VALIDATIONS------------------
 
-
+	validates :type_name , presence: true , uniqueness: true 
 
 
 

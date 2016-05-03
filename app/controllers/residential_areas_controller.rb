@@ -14,7 +14,7 @@ class ResidentialAreasController < ApplicationController
 
 		@all_locations = ResidentialArea.all
 
-		@residential_area_obj = ResidentialArea.new
+		
 		
 	end
 
