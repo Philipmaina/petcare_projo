@@ -1,0 +1,183 @@
+<style type="text/css">
+	
+	/*this is to make the column text not to be close to each other esp between the second and third column*/
+	a.link_for_edit_pet{
+		color: #00b200 ;
+		text-decoration: none;
+	}
+	a.link_for_edit_pet:hover{
+		border-bottom: 1px solid #00b200;
+	}
+
+	a.link_for_removing_pet{
+
+		color: #ff3232;
+		text-decoration: none ;
+	}
+
+	a.link_for_removing_pet:hover{
+
+		border-bottom: 1px solid #ff3232;
+	}
+
+	.hide{
+
+		display: none;
+	}
+
+
+
+
+
+</style>
+
+<div class="container">
+
+	<!-- create first empty row in our grid/graph system of bootstrap -->
+	<div class="row" style="height:30px;">
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-3">
+
+		</div>
+
+		<div class="col-md-6">
+
+
+			<h3 class="text-center" style="font-family: 'marydale' ;font-weight:bolder;">
+				Residential Areas
+			</h3>
+
+			<hr>
+			
+			<p class="text-center">
+				<a class="btn btn-lg btn-success" id="add_location_button">
+					Add Location
+				</a>
+			</p>
+			<br>
+
+			<div id="div_to_be_hidden" class="text-center hide" style="border: 2px solid black ;padding: 10px 10px 15px 10px ;">
+				
+				<p class="text-right close-button">
+					<a class="btn btn-danger btn-sm" id="close_form_btn">
+						&times;		
+					</a>
+				</p>
+
+				<!-- the form automatically uses HTTP verb POST so don't need to exclusively mention -->
+				<!-- will post to create action in residential area controller -->
+				
+
+				<%= form_tag(residential_areas_path, remote:true , id: "actual_form_for_filling_location") do %>
+
+
+					
+
+					<div class="form-group">
+						<!-- THIS IS ONLY FIELD THAT IS NOT REQUIRED IN THIS FORM FOR STEP 1 -->
+						<%= label_tag :name_of_location , "Name of location to be added"  %>
+						<%= text_field_tag :name_of_location , nil , class: "form-control text-center" %>
+					</div>
+
+					<%= submit_tag  "Add Location" , class: "btn btn-lg btn-success" %>
+
+				<% end %>
+
+			</div>
+
+
+			<table class="table table-bordered table-striped table-condensed" style="position:relative;margin-top:20px;" id="table_of_all_locations">
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th colspan="2" class="text-center" > Actions </th>
+				</tr>
+
+				<tbody>
+
+					<% i = 1 %>
+					<% @all_locations.each do | location | %>
+
+						<tr>
+							<td><%= i %></td>
+							<td><%= location.name_of_location %></td>
+							<td style="text-align:center; color:#00b200;">
+
+								<i class="fa fa-pencil"></i>
+
+								<%= link_to edit_residential_area_path(location.id) , :class=>"link_for_edit_pet" do %>
+									Edit
+								<% end %>
+
+							</td>
+
+							<td style="text-align:center;color:#ff3232;">
+
+								<i class="fa fa-times-circle"></i>
+
+								<%= link_to residential_area_path(location.id) ,  method: :delete , data: {confirm: 'Are you sure ?'} , :class=>"link_for_removing_pet" do %>
+									Remove
+								<% end %>
+
+
+							</td>
+						</tr>
+						<% i += 1 %>
+
+					<% end %>
+
+				</tbody>
+
+			</table>
+
+
+
+				
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+
+		$("a#add_location_button").click( function() {
+
+			$("div#div_to_be_hidden").removeClass("hide") ;
+			$("a#add_location_button").addClass("hide") ;
+
+			// ___________________________________________________________
+
+			// we want to check whether section element exists as from the partial
+			// we are having trouble where if an error occurs during form submission either because someone sent something blank or not unique, after the error is displayed as it should through the partial...when we close the form and click Add Location button again the form appears but it has the error from the partial still there which is VERYY BLOODY ANNOYING.
+			// Try to check the length of the selector, if it returns you something then the element must exists else not.
+			if( $('section#topheader_form_errors').length ) // use this if you are using id to check
+			{
+			     // it exists
+			     $("section#topheader_form_errors").remove() ;
+			}
+
+			// ___________________________________________________________
+
+
+		});
+
+		$("a#close_form_btn").click( function() {
+
+			$("div#div_to_be_hidden").addClass("hide") ;
+			$("a#add_location_button").removeClass("hide") ;
+
+		});
+
+
+
+
+
+	</script>

@@ -10,7 +10,7 @@
 
 class ResidentialArea < ActiveRecord::Base
 	# ------------------VALIDATIONS----------------------
-
+	validates :name_of_location , presence: true , uniqueness: true 
 
 
 

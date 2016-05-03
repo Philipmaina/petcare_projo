@@ -9,4 +9,9 @@
 #
 
 class PettypesController < ApplicationController
+
+	def index
+		
+	end
+	
 end
