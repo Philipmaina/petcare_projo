@@ -1,0 +1,18 @@
+$("div#div_to_be_hidden").removeClass("hide");
+
+// this is to remove previous flash messages if they exist - so that they don't stack up on each other 
+if ( $("p.flash").length ) 
+{
+	$("p.flash").remove() ;
+};
+
+
+
+$("div.col-md-6").prepend("<% if flash[:notice] %><p class='flash notice'><%= j flash[:notice] %></p><% end %>");
+
+$("form#actual_form_for_filling_sittingservice").html("<%= j render partial: '/all_other_partials/form_errors' , :locals => { object: @sittingservice_obj } %><div class='form-group'><%= j label_tag :service_name , 'Sitting service to be added'  %><%= j text_field_tag :service_name , nil , class: 'form-control text-center' %></div><div class='form-group'><%= j label_tag :place_offered  , 'Place service is offered ' %><%= j text_field_tag :place_offered , nil , class: 'form-control text-center' %></div><%= j submit_tag  'Add Sitting service' , class: 'btn btn-lg btn-success' %>") ;
+
+
+// escape_javascript or j calls gsub on whatever you pass it which doesn't make sense for a number.give it a string instead
+// also the link_to do thing esp the do part doesnt work so well with the j function
+$("table#table_of_all_sittingservices").html("<tr><th>#</th><th>Service name</th><th>Place offered</th><th colspan='2' class='text-center' > Actions </th></tr><tbody><% i = 1 %><% @all_sittingservices.each do | sittingservice | %><tr><td><%= j i.to_s %></td><td><%= j sittingservice.service_name %></td><td><%= j sittingservice.place_offered  %></td><td style='text-align:center; color:#00b200;'><i class='fa fa-pencil'></i><%= j link_to(' Edit' , edit_sittingservice_path(sittingservice.id) , class: 'link_for_edit_pet') %></td><td style='text-align:center;color:#ff3232;'><i class='fa fa-times-circle'></i><%= j link_to( ' Remove' , sittingservice_path(sittingservice.id) ,  method: :delete , data: {confirm: 'Are you sure ?'} , class: 'link_for_removing_pet' ) %></td></tr><% i += 1 %><% end %></tbody>") ;

@@ -11,6 +11,19 @@
 #
 
 class Sittingservice < ActiveRecord::Base
+
+	# --------------------VALIDATIONS-----------------------
+
+	validates :service_name , presence: true , uniqueness: true
+	validates :place_offered , presence: true  
+
+
+
+
+
+	# ------------------------------------------------------
+
+
 	# --------------R/SHIPS----------------
 	has_many :junctionofservicesandpetsitters
 	has_many :petsitters , through: :junctionofservicesandpetsitters

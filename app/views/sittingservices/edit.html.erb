@@ -1,0 +1,63 @@
+<div class="container">
+
+	<!-- create first empty row in our grid/graph system of bootstrap -->
+	<div class="row" style="height:30px;">
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-3">
+
+		</div>
+
+		<div class="col-md-6">
+
+
+			<h3 class="text-center" style="font-family: 'marydale' ;font-weight:bolder;">
+				Editing Details of <%= " " +  @sittingservice_obj.service_name + " sitting service" %>
+			</h3>
+
+			<hr>
+
+			<%= form_for(@sittingservice_obj) do |f| %>
+
+				<div class="text-center">
+					<%= render partial: '/all_other_partials/form_errors' , :locals => { object: @sittingservice_obj } %>
+
+
+				</div>
+				
+
+				<div class="form-group text-center">
+
+					<%= f.label :service_name , "Service name" %>
+					<%= f.text_field :service_name , class: "form-control text-center" %>
+					<br/>
+		
+				</div>
+
+				<div class="form-group text-center">
+
+					<%= f.label :place_offered , "Place offered" %>
+					<%= f.text_field :place_offered , class: "form-control text-center" %>
+					<br/>
+					<br/>
+
+					<%= f.submit  "Update Changes" , class: "btn btn-lg btn-success" %>
+		
+				</div>
+
+				
+
+			<% end %>
+
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+
+	</div>
+
+</div>
