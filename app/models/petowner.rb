@@ -19,6 +19,7 @@
 
 class Petowner < ActiveRecord::Base
 
+  mount_uploader :profile_pic_file_name, ThumbnailstuffUploader
   # -------------ADDED ATTRIBUTES WHICH AREN'T IN DB TABLE------------
 
   attr_accessor :registration_step # we create a new attribute 
@@ -58,6 +59,13 @@ class Petowner < ActiveRecord::Base
   validates_uniqueness_of :contact_line_one , :message => "chosen is already in use." , if: :basic_details? , unless: 'contact_line_one.blank?'
 
   validates_uniqueness_of :personal_email , :message => "chosen already in use", if: :basic_details? , unless: 'personal_email.blank?'
+
+  # the \S+ MEANS WE WANT A NON-WHITE SPACE CHARACTER ONE OR MORE OF THOSE .
+  # the @ just means as is implied we need an @ symbol
+  # the \. means we need a fullstop
+  # THE REGEX FORMAT HAS FLAWS BECAUSE OF NUMBERS
+  # NOTE TO FUTURE SELF: BY THE TIME YOU FULLY LEARN REGEX , RAILS VERSION 20 WILL HAVE BEEN SHIPPED OUT
+  validates_format_of :personal_email , :with => /\S+@\S+\.\S+/ , :message => "format is invalid" , if: :basic_details? , unless: 'personal_email.blank?'
 
   # _______2) step 2 validations_________________________________________
 

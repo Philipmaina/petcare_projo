@@ -109,7 +109,7 @@
 
 						<td  style='text-align:center ;padding-bottom: 10px;'>
 
-							<%= link_to decline_request_by_petsitter_path(notificationforpetsitter.id)  do %>
+							<%= link_to decline_request_by_petsitter_path(notificationforpetsitter.id) , method: :patch   do %>
 
 								<button type="button" class="btn btn-danger">Decline request</button>
 

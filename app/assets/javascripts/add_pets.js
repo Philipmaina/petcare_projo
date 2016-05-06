@@ -31,6 +31,14 @@ $(document).on('ready page:load', function() {
 
 		$("#add_pet_button").toggleClass("visibleness"); //AND BECAUSE FORM IS HIDDEN WE CAN NOW SHOW ADD PETSBUTTON TO ALLOW USER TO RECLICK FOR FORM TO REDISPLAY IF THEY WANT.
 
+		//we reset the values to nothing just incase they had sthing there - maybe someone filled in something and then midway decided to close form 
+		// so when they reopen we don't want anything(the previous filled data) there
+		$("#add_pet input[name=name]").val(""); 
+		$("#add_pet input[name=years]").val("");
+
+		// also incase someone filled in the form then submitted and got a validation error of name and it displayed then decided to close the form- when they open the form again that section thing with the validation error should be gone.
+		$("section#topheader_form_errors").remove();
+
 	});
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -44,6 +52,18 @@ $(document).on('ready page:load', function() {
 		// so we stop and intercept that normal action and perform our own custom stuff(we want our own code to be executed)
 		event.preventDefault() ;
 
+
+
+		// --IF THERE WERE ANY FORM VALIDATION ERRORS(IN OUR CASE MISSING NAME)
+		// --WE WANT TO REMOVE THE FLASHY SECTION THING ABOVE THE FORM THAT INFORMS USER OF VALIDATION ERROR , SO THAT WE DON'T HAVE THAT SECTION REMAINING THERE WHEN WE WANT TO FILL OUR NEXT PET AND ACCUMULATING ALTOGETHER 
+		//--OTHERWISE WE WOULD HAVE MANY SECTIONS WITH THE FORM ERROR OF NAME JUST PILING ,OF COURSE IF USER KEEPS MAKING MISTAKE OF NOT INCLUDING NAME
+		// Use .remove() when you want to remove the element itself, as well as everything inside it. - which is what we want to do remove the whole section thing and everything in it
+		$("section#topheader_form_errors").remove();
+
+
+
+
+
 		// SO WE WANT TO GET THAT FORM DATA AND CREATE A ROW IN OUR TABLE
 
 		var pet = {}; //empty object in js - remember this pet variable can only be accessed in this function that is attached to submit event
@@ -56,6 +76,7 @@ $(document).on('ready page:load', function() {
 		
 
 		// In JS we have truthy and falsy values that are usually evaluated using Boolean function.All values are truthy unless they have 0 , "" , null , undefined.
+		// WE ARE DOING FRONTEND VALIDATION FOR THE NAME TO ENSURE PRESENCE BECAUSE WE CAN'T DO BACKEND BECAUSE WE'VE COUNTERED THE NORMAL FORM SUBMISSION AND JUST EVERYTHING IS A BIT DIFFERENT.
 
 		if (pet.name) { //if pet.name has a string the value is truthy
 
@@ -71,6 +92,12 @@ $(document).on('ready page:load', function() {
 			$("#add_pet input[name=name]").val(""); //we reset the values to nothing
 			$("#add_pet input[name=years]").val("");
 
+
+		}
+		else {
+			// if name of pet wasn't filled we want to enforce that by showing a validation error - remember we can't do normal validation for rails
+			//prepend() - Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.
+			$("div#add_pet").prepend("<section id='topheader_form_errors'><ul><li>Name of pet can't be blank</li></ul></section>");
 
 		}
 		

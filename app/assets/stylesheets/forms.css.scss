@@ -7,7 +7,7 @@ $errors-text-color: #DC3D3D;
 
 
 
-
+// #FFCCBA;
 // ------------------form errors-------------------------------------------
 // _______1) error of highlighting the fields_____________________________
 // THIS IS IN CASE THERE ARE VALIDATION ERRORS AND ONE IS REDISPLAING THE FORM - IT HELPS HIGHLIGHT THE FIELDS WITH ERRORS BY PUTTING THE ERROR FIELD LABELS A KIND OF RED COLOR AND THE BACKGROUND COLOR OF THE FIELDS THEMSELVES IN A CREAM COLOR
@@ -28,7 +28,9 @@ section#topheader_form_errors{
 
   margin: 1em 0;
   padding: 1em;
-  background: $errors-background-color;
+  color: $errors-text-color;
+  font-weight: bold ;
+  background: $errors-background-color ;
 	
 }
 

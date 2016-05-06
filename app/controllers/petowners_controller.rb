@@ -120,7 +120,7 @@ class PetownersController < ApplicationController
 
 		@petowner = Petowner.find( params[:id] )
 
-		registration_step = "personal_details"
+		@petowner.registration_step = "personal_details"
 
 		petowner_second_step_params = params.require(:petowner).permit( :date_of_birth  , :contact_line_two , :profile_pic_file_name )
 

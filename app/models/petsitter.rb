@@ -32,8 +32,7 @@ class Petsitter < ActiveRecord::Base
   mount_uploader :default_pic_file_name , ThumbnailstuffUploader
 
   # ----------------attributes created----------------------
-  attr_accessor :registration_step
-
+  attr_accessor :registration_step 
 
 
   # ----RAILS GIVES METHODS AND VALIDATIONS FOR STORING PASSWORDS---
@@ -75,6 +74,13 @@ class Petsitter < ActiveRecord::Base
 
   validates_uniqueness_of :personal_email , :message => "chosen is already in use", if: :basic_details? , unless: 'personal_email.blank?'
 
+  # the \S+ MEANS WE WANT A NON-WHITE SPACE CHARACTER ONE OR MORE OF THOSE .
+  # the @ just means as is implied we need an @ symbol
+  # the \. means we need a fullstop
+  # THE REGEX FORMAT HAS FLAWS BECAUSE OF NUMBERS
+  # NOTE TO FUTURE SELF: BY THE TIME YOU FULLY LEARN REGEX , RAILS VERSION 20 WILL HAVE BEEN SHIPPED OUT
+  validates_format_of :personal_email , :with => /\S+@\S+\.\S+/ , :message => "format is invalid" , if: :basic_details? , unless: 'personal_email.blank?'
+
 
   # ________2) step 2 validations_________________________________________
   validates_uniqueness_of :contact_line_two , :message => "entered is already in use. " , if: :personal_details?
@@ -83,7 +89,7 @@ class Petsitter < ActiveRecord::Base
   validates_uniqueness_of :listing_name , :message => "has been chosen by another user.Please choose another." , if: :personal_details?
 
   # this field in the form can be left blank but if user decides to write they might write something between 35 - 280 characters , we want it like this because this description is to be read by petowners and it will help them know petsitter better
-  validates_length_of :profile_description , :minimum => 35 , :maximum => 280 , :allow_blank => true , :too_long => "Please summarize your description...it's just a bit too long" , :too_short => "Please write a little more about yourself...that's just a bit too short" , if: :personal_details?
+  validates_length_of :profile_description , :minimum => 40 , :maximum => 600 , :allow_blank => true , :too_long => ":please summarize your description...it's just a bit too long(maximum of 600 characters)" , :too_short => ":please write a little more about yourself...that's just a bit too short(minimum of 40 characters)" , if: :personal_details?
 
    # _______3) step 3 validations________________________________________
    
