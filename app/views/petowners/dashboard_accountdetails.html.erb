@@ -9,7 +9,201 @@
 
 		</div>
 
-		<div class="col-md-8" style="height: 95% ; background-color:white ;">
+		<div class="col-md-8 " style="height: 95% ; background-color:white ; padding: 20px 150px 20px 150px ;">
+			<!-- we have a table then one row hold the div with the change email thing while the next div holds the change your password thing -->
+			<!-- there are also small height rows which will allow for separation of content  -->
+			<!-- ________________________ -->
+			<!-- |  __________________  | -->
+			<!-- |  |                |  | -->
+			<!-- |  |________________|  | -->
+			<!-- |______________________| -->
+			<!-- |______________________| -->
+			<!-- |  __________________  | -->
+			<!-- |  |                |  | -->
+			<!-- |  |________________|  | -->
+			<!-- |______________________| -->
+			<!-- |______________________| -->
+			<!-- |                      | -->
+			<!-- |                      | -->
+			<!-- |______________________| -->
+
+			<table>
+
+				<tr>
+
+					<td style="border: 1px solid #008c9d;background-color:#e5f6f8;padding: 10px 10px 10px 60px ; ">
+
+						<div>
+							<!-- within the div i create another table to arrange stuff well - note i havent indicated this on the diagram above -->
+							<%= form_tag( update_email_and_password_from_account_path(@petowner.id) ) do %>
+								<!-- this styling is to make the textboxes shorter and not occupy entire length -->
+								<table style="position:relative;width: 60% ;">
+									<tr>
+
+										<td>
+											<h4>
+												Change your email
+											</h4>
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td>
+											Current email: <%= @petowner.personal_email %>
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td>
+											<div class="form-group">
+
+												<%= text_field_tag :personal_email , "New email" , class: "form-control"  %>
+											</div>
+
+
+										</td>
+
+									</tr>
+
+									<tr>
+										
+										<td>
+
+											<div class="form-group">
+
+												<%= text_field_tag :confirm_personal_email , "Confirm email" , class: "form-control"  %>
+											</div>
+
+
+										</td>
+
+									</tr>
+
+
+									<tr>
+										
+										<td>
+
+											<p class="text-left">
+												<%= submit_tag "Save changes" , class:"btn btn-success"  %>
+											</p>
+
+
+										</td>
+
+									</tr>
+
+
+								</table>
+							<% end %>
+
+						</div>
+
+					</td>
+
+
+				</tr>
+
+				<!-- this allows for spacing between the divs above for email change and below for password change -->
+				<tr>
+					<td style="padding-bottom:20px;"></td>
+				</tr>
+
+
+				<tr>
+
+					<td style="border: 1px solid #008c9d;background-color:#e5f6f8;padding: 10px 10px 10px 60px ; ">
+
+						<div>
+
+							<!-- within the div i create another table to arrange stuff well - note i havent indicated this on the diagram above -->
+							<%= form_tag( update_email_and_password_from_account_path(@petowner.id) ) do %>
+								<!-- this styling is to make the textboxes shorter and not occupy entire length -->
+								<table style="position:relative;width: 60% ;">
+									<tr>
+
+										<td>
+											<h4>
+												Change your password
+											</h4>
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td>
+											<div class="form-group">
+
+												<%= text_field_tag :personal_email , "New password" , class: "form-control"  %>
+											</div>
+
+
+										</td>
+
+									</tr>
+
+									<tr>
+										
+										<td>
+
+											<div class="form-group">
+
+												<%= text_field_tag :confirm_personal_email , "Confirm new password" , class: "form-control"  %>
+											</div>
+
+
+										</td>
+
+									</tr>
+
+
+									<tr>
+										
+										<td>
+
+											<p class="text-left">
+												<%= submit_tag "Save changes" , class:"btn btn-success"  %>
+											</p>
+
+
+										</td>
+
+									</tr>
+
+
+								</table>
+							<% end %>
+
+
+						</div>
+
+					</td>
+
+
+				</tr>
+
+
+				<tr>
+
+					<td >
+
+						<div>
+
+						</div>
+
+
+					</td>
+
+				</tr>
+
+
+
+			</table>
 
 
 		</div>

@@ -204,6 +204,9 @@ class PetownersController < ApplicationController
 	end
 
 
+
+
+
 	def dashboard
 
 		
@@ -234,6 +237,18 @@ class PetownersController < ApplicationController
 
 		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 		
+	end
+
+
+	# i could have just used the update basic details method but problem is it redirects to personal details which in this case when we are at the dashboard is not what we want.
+	def update_email_and_password_from_account
+
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
+
+		
+
+
+
 	end
 
 

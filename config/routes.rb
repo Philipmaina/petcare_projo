@@ -131,6 +131,8 @@ get "/petowners/:id/dashboard/bookings" => "petowners#dashboard_bookings" , as: 
 
 get "/petowners/:id/dashboard/account_details" => "petowners#dashboard_accountdetails" , as: "pet_owner_dashboard_account_details"
 
+post "/petowners/:id/dashboard/update_email_and_password_from_account" => "petowners#update_email_and_password_from_account" , as: "update_email_and_password_from_account"
+
 
 
 
