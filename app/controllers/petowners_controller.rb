@@ -245,9 +245,70 @@ class PetownersController < ApplicationController
 
 		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
 
-		
+		if params[:commit] == "Save email changes"
 
 
+			if params[:personal_email].blank? || params[:confirm_personal_email].blank?
+
+				flash[:alert] = "!! Please make sure all email addresses are present before saving changes !!" 
+
+
+			else
+
+				if params[:personal_email] == params[:confirm_personal_email]
+
+					# change in db to update the new email
+					@petowner.personal_email = params[:personal_email]
+					@petowner.save
+
+					flash[:notice] = "!! You have successfully updated your email address !!"
+	
+				else
+
+					flash[:alert] = "!! Email and email confirmation do not match. Try again !!"
+
+
+				end
+
+
+			end
+
+			
+			
+		elsif params[:commit] == "Save password changes"
+
+			if params[:password].blank? || params[:confirm_password].blank?
+
+				flash[:alert] = "!! Please make sure both password and password confirmation are present before saving changes !!" 
+
+
+			else
+
+				if params[:password] == params[:confirm_password]
+
+					# change in db to update the new email
+					@petowner.password = params[:password]
+					@petowner.save
+
+					flash[:notice] = "!! You have successfully updated your password !!"
+	
+				else
+
+					flash[:alert] = "!! Password and Password confirmation do not match. Try again !!"
+
+
+				end
+
+			end
+
+
+
+		end
+
+
+
+
+		redirect_to pet_owner_dashboard_account_details_path(@petowner.id)
 
 	end
 

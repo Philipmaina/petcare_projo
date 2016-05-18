@@ -178,6 +178,9 @@ post "/petowners/:id/dashboard/update_email_and_password_from_account" => "petow
  
   get "/petsitters/:id/dashboard/account_details" => "petsitters#dashboard_accountdetails" , as: "pet_sitter_dashboard_account_details"
 
+  post "/petsitters/:id/dashboard/update_email_and_password_from_account" => "petsitters#update_email_and_password_from_account" , as: "update_petsitter_email_and_password_from_account"
+
+
 
 
   # __ROUTE ONCE YOU CLICK A PETSITTER THAT A [ETOWNER] HAD QUERRIED FOR______

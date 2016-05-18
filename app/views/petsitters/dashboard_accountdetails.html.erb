@@ -35,7 +35,7 @@
 
 						<div>
 							<!-- within the div i create another table to arrange stuff well - note i havent indicated this on the diagram above -->
-							<%= form_tag( update_email_and_password_from_account_path(@petowner.id) ) do %>
+							<%= form_tag( update_petsitter_email_and_password_from_account_path(@petsitter.id) ) do %>
 								<!-- this styling is to make the textboxes shorter and not occupy entire length -->
 								<table style="position:relative;width: 60% ;">
 									<tr>
@@ -52,7 +52,7 @@
 
 										<td style="font-size:13px;">
 											<i>
-												Current email: <%= @petowner.personal_email %>
+												Current email: <%= @petsitter.personal_email %>
 											</i>
 										</td>
 
@@ -123,7 +123,7 @@
 						<div>
 
 							<!-- within the div i create another table to arrange stuff well - note i havent indicated this on the diagram above -->
-							<%= form_tag( update_email_and_password_from_account_path(@petowner.id) ) do %>
+							<%= form_tag( update_petsitter_email_and_password_from_account_path(@petsitter.id) ) do %>
 								<!-- this styling is to make the textboxes shorter and not occupy entire length -->
 								<table style="position:relative;width: 60% ;">
 									<tr>
@@ -201,7 +201,7 @@
 
 						<div>
 
-							<%= link_to petowner_path(@petowner.id) , method: :delete , data: { confirm: "Are you sure?" } do %>
+							<%= link_to petsitter_path(@petsitter.id) , method: :delete , data: { confirm: "Are you sure?" } do %>
 
 								<button type="button" class="btn btn-danger">Delete Account</button>
 

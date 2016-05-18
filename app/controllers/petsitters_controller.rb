@@ -322,6 +322,83 @@ class PetsittersController < ApplicationController
 	end
 
 
+	# ------------------------------------------------------------------------
+	# i could have just used the update basic details method but problem is it redirects to personal details which in this case when we are at the dashboard is not what we want.
+	def update_email_and_password_from_account
+
+		# remember i could put here @petowner = Petowner.find( params[:id] ) but because require_correct_petowner has to run before any action, we already have this line of code in that method @petowner = Petowner.find( params[:id])
+
+		if params[:commit] == "Save email changes"
+
+
+			if params[:personal_email].blank? || params[:confirm_personal_email].blank?
+
+				flash[:alert] = "!! Please make sure all email addresses are present before saving changes !!" 
+
+
+			else
+
+				if params[:personal_email] == params[:confirm_personal_email]
+
+					# change in db to update the new email
+					@petsitter.personal_email = params[:personal_email]
+					@petsitter.save
+
+					flash[:notice] = "!! You have successfully updated your email address !!"
+	
+				else
+
+					flash[:alert] = "!! Email and email confirmation do not match. Try again !!"
+
+
+				end
+
+
+			end
+
+			
+			
+		elsif params[:commit] == "Save password changes"
+
+			if params[:password].blank? || params[:confirm_password].blank?
+
+				flash[:alert] = "!! Please make sure both password and password confirmation are present before saving changes !!" 
+
+
+			else
+
+				if params[:password] == params[:confirm_password]
+
+					# change in db to update the new email
+					@petsitter.password = params[:password]
+					@petsitter.save
+
+					flash[:notice] = "!! You have successfully updated your password !!"
+	
+				else
+
+					flash[:alert] = "!! Password and Password confirmation do not match. Try again !!"
+
+
+				end
+
+			end
+
+
+
+		end
+
+
+
+
+		redirect_to pet_sitter_dashboard_account_details_path(@petsitter.id)
+
+	end
+
+	# -------------------------------------------------------------------------
+
+
+
 	# ------other private methods that can't be routed to directly----
 	private
 

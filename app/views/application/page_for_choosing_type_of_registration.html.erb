@@ -1,7 +1,7 @@
 
 <!-- all bootstrap elements should exist under/inside a class container -->
 
-<div class="container">
+<div class="container-fluid" style="background-color:#eee;height:550px;">
 	<!-- create first empty row in our grid/graph system of bootstrap -->
 	<div class="row" style="height:50px;">
 
@@ -15,11 +15,11 @@
 
 		<div class="col-md-8 ">
 
-			<h3 class="text-center">
+			<h2 class="text-center">
 				Sign Up
-			</h3>
+			</h2>
 
-			<p class="text-center">
+			<p class="text-center" style="font-size:18px;">
 				Choose the account you want to create
 				
 				<br/>
@@ -37,9 +37,20 @@
 				<br/>
 				<br/>
 
-				<%= link_to  new_petsitter_basic_predetails_path ,  :method => :get ,class:"btn btn-primary" do  %> 
+				<%= link_to  new_petsitter_basic_predetails_path ,  :method => :get ,class: "btn btn-primary" do  %> 
 						I want to be a pet sitter and offer my services 
 				<% end %>
+
+				<br/>
+				<br/>
+
+				<span class="text-center" style="font-size:15px;">
+					Already a member?
+					<%= link_to new_session_path do %>
+						 Sign In now
+					<% end %>
+				</span>
+				
 
 			</p>
 		</div>

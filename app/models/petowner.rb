@@ -67,6 +67,20 @@ class Petowner < ActiveRecord::Base
   # NOTE TO FUTURE SELF: BY THE TIME YOU FULLY LEARN REGEX , RAILS VERSION 20 WILL HAVE BEEN SHIPPED OUT
   validates_format_of :personal_email , :with => /\S+@\S+\.\S+/ , :message => "format is invalid" , if: :basic_details? , unless: 'personal_email.blank?'
 
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # \A[a-zA-Z]+([a-zA-Z]|\d)*@[a-z]+\.[a-z]+\z
+  # \A this means the start of the string - where your email starts 
+  # so i want to have the first portion of the email to have only letters and digits and no weird symbols 
+  # also i dont want to start with numbers , if numbers should appear they shoulld be huko katikati si mwanzo
+  # a-zA-Z]+ - this means i want letters within the range of a-z or capital A-Z and i want one or more of those letters - why we start out with this is because we are considering starting with atleast a letter before numbers start appearing
+  # ([a-zA-Z]|\d)* - this means after either a letter/letters are read from above case, we can allow for either a letter or a digit to be read ZERO OR MORE OF THOSE(*)
+  # @ - @ SYMBOL SHOULD APPEAR
+  # [a-z]+ - then after the @ symbol, we can have one or more letters(in this case only letters no digits )
+  # \. - this means we expect a dot , we have to escape with \ because . alone in regex means any any single character and thats not what we want
+  # [a-z]+\z - this means that you can finally have letters a-z as many of them then end string 
+  # NOTE THIS TAKES CARE OF .com or .net .gov BUT NOT .co.uk
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   # _______2) step 2 validations_________________________________________
 
   validates_uniqueness_of :contact_line_two , :message => "entered is already in use." , if: :personal_details?
