@@ -34,11 +34,11 @@
 	<!-- this will be the container that has the form that a pet owner will use to query for pet sitters -->
 	<div class="row">
 		<!-- leave 2 columns to the right of the edge -->
-		<div class="col-md-2">
+		<div class="col-md-1">
 
 		</div>
 
-		<div class="col-md-8">
+		<div class="col-md-10">
 			<!-- ive added another div to allow me to tinker with this div without tampering with the div of class="col-md-8" coz they must start to conflict -->
 			<div class="holder_of_form_for_query" style="background-color:white; border: 1px solid #00acc1 ; padding: 8px 8px 8px 8px ;">
 				<!-- can't put a form inside a table but can put it in a td or tr tag -->
@@ -282,7 +282,7 @@
 		</div>
 
 		<!-- leave 2 columns to the left of the edge -->
-		<div class="col-md-2">
+		<div class="col-md-1">
 
 		</div>
 
@@ -302,11 +302,11 @@
 	<!-- just like a faint line separating them like a <hr> tag -->
 	<div class="row">
 
-		<div class="col-md-2">
+		<div class="col-md-1">
 
 		</div>
 
-		<div class="col-md-8" style="text-align:center">
+		<div class="col-md-10" style="text-align:center; overflow-y:auto;">
 
 			
 
@@ -317,134 +317,141 @@
 				<% i = 0 %>
 
 				<table style="width: 100 % ;">
-					<tbody>
+					<tbody>	
+						<!-- ___________________________ -->
+						<!-- | PETSITTER1  | PETSITTER2| -->
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+						<!-- | PETSITTER3  | PETSITTER4| -->
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+						<!-- if there are odd number of petsitters found that match the criteria we still need even number of cells because we have a two column table -->
+						<!-- so say we have 3 petsitters found we need two rows where the first row has the first two petsitters in the array , the second row has one petsitter cell and the other cell exists but is BLANK -->
+
+						
 						<% while i <= ( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.size - 1 ) do %>
 
 							<tr>
 
 								<% for a in 0..1 do %>
 
-									<% if (i <= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.size - 1) %>
-										
-			
-									<!-- the td just below will represent the table cells of the main outer table -->
-									<!-- THE CONCEPT IS TO CREATE TO 2 COLUMNS(CELLS) FOR EVERY ROW WHERE FOR EACH CELL WE WILL DISPLAY THE DETAILS OF ONE PETSITTER  -->
-									<!-- THIS IS WHY WE LOOP FROM 0 TO 1 THEN FROM 2 TO 3 THEN FROM 4 TO 5 -->
-									<!-- ___________________________ -->
-									<!-- | PETSITTER1  | PETSITTER2| -->
-									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-									<!-- | PETSITTER3  | PETSITTER4| -->
-									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-									<!-- remember we are trying to make each cell a link to the show page of the petsitter to see more details(<a>) -->
-									<td style="width: 40% ; ">
+									<!-- THIS PART IS WHAT PRINTS THE LAST EMPTY CELL ONLY WHEN WE HAVE ODD NUMBER OF PETSITTERS  -->
+									<!-- so say we have 3 petsitters  -->
+									<!-- we start by checking if i is odd which it isnt coz its 0 so we immediately skip to else and print cell with petsitter details -->
+									<!-- i then increases to 1 but we are still in for loop so we check if i is odd and it is but we have not surpassed the end of array/end of list of petsitters so this if fails and we skip to else part where petsitter details is printed on cell -->
+									<!-- i increases to 2 then we break out of for loop because a was going from0 to 1 -->
+									<!-- so we test while loop and i is equal to number of petsitters -1 so a new row is created  -->
+									<!--we enter for loop, i is even so we skip to else part and we print cell with petsitter details -->
+									<!-- i increases to 3 and now i is odd and we have surpassed end of array which is 2(0,1,2) so NOW WE PRINT EMPTY CELL -->
+									<% if (i.odd?) && (i > @final_array_with_all_petsitter_objects_that_satisfy_all_criteria.size - 1) %>
 
-										<%= link_to show_page_petsitter_querry_path(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].id) do %>
+										<td style="padding: 5px 5px 5px 5px ;">
 
-											<!-- EACH CELL HOWEVER IS ALSO LIKE A TABLE IN ITSELF  -->
-											<!-- _______________________ -->
-											<!-- |          |__________| -->
-											<!-- |          |__________|-->
-											<!-- |__________|__________| -->
-											<!-- make the background white otherwise it takes default colo of container which is grayish , also put a border around this, when hovered on it should change color -->
-											<table style="border: 1px solid #7f9294;  background-color: white ; height: 140px ;" >
-												<tr class="whole_a_tag_with_matched_sitter_from_query">
+										</td>
 
-													<!-- this section will have image of petsitter -->
-													<td style="width: 48% ; text-align: center ;">
+									<% else %>
 
-														<i class="fa fa-user fa-3x"></i>
+										<!-- remember we are trying to make each cell a link to the show page of the petsitter to see more details(<a>) -->
+										<td style="padding: 5px 5px 5px 5px ;">
 
+											<%= link_to show_page_petsitter_querry_path(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].id) do %>
 
-													</td>
+												<!-- EACH CELL HOWEVER IS ALSO LIKE A TABLE IN ITSELF  -->
+												<!-- _______________________ -->
+												<!-- |          |__________| -->
+												<!-- |          |__________|-->
+												<!-- |__________|__________| -->
+												<!-- make the background white otherwise it takes default colo of container which is grayish , also put a border around this, when hovered on it should change color -->
+												<table style="border: 1px solid #7f9294;  background-color: white ; height: 140px ;" >
+													<tr class="whole_a_tag_with_matched_sitter_from_query">
 
-													<td style="width: 60% ;">
-														<table>
-															<!-- this first row will have petsitter formal names -->
-															<tr>
-																<td style="color: #323232; font-size: 20px ; font-weight: bolder ; ">
-																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].first_name %> 
-																&nbsp;
-																<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].surname[0] %>. 
+														<!-- this section will have image of petsitter -->
+														<td style="width: 48% ; text-align: center ;">
 
-																</td>
-
-																<!-- at the very corner of this row we should have another cell that shows price rate of petsitter - same row as names -->
-																<td style="width:20%; " >
-
-																	<!-- we've used a custom helper -->
-																	<%= custom_price_rate(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i]) %>
-
-																</td>
-														<!-- _____________ -->
-														<!-- |     |___|_| -->
-														<!-- |     |_____| -->
-														<!-- |_____|_____| -->
+															<i class="fa fa-user fa-3x"></i>
 
 
-															</tr>
+														</td>
 
-															<!-- this second row will have the listing name -->
-															<tr>
-																<td style="font-size: 18px ;">
-																
+														<td style="width: 60% ;">
+															<table>
+																<!-- this first row will have petsitter formal names -->
+																<tr>
+																	<td style="color: #323232; font-size: 20px ; font-weight: bolder ; ">
+																	<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].first_name %> 
+																	&nbsp;
+																	<%= @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i].surname[0] %>. 
 
-																<%= custom_listing_name( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %> 
+																	</td>
 
-																</td>
-															</tr>
+																	<!-- at the very corner of this row we should have another cell that shows price rate of petsitter - same row as names -->
+																	<td style="width:20%; " >
+
+																		<!-- we've used a custom helper -->
+																		<%= custom_price_rate(@final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i]) %>
+
+																	</td>
+															<!-- _____________ -->
+															<!-- |     |___|_| -->
+															<!-- |     |_____| -->
+															<!-- |_____|_____| -->
 
 
-															<!-- this third row will contain all the pets the petsitter can care for. Remember when querrying in app controller we did an OR statement for pets where we present a petsitter who can care for even one of the pets presented not necessarily all-->
-															<tr>
-																<td style="color: #323232; font-size: 12px ; font-weight: bold ;">
+																</tr>
 
-																	<%= custom_petscare_for(  @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %>
-
-																</td>
-															</tr>
-
-															<!-- this fourth row will have the truncated profile description -->
-															<tr>
-																<td style="color: #7f9294;">
-
-																	<%= custom_prof_descr( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %>
+																<!-- this second row will have the listing name -->
+																<tr>
+																	<td style="font-size: 18px ;">
 																	
 
-																</td>
-															</tr>
+																	<%= custom_listing_name( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %> 
 
-														</table>
-													</td>
+																	</td>
+																</tr>
 
-												</tr>
-											</table>
 
-										<% end %>
-									</td>
+																<!-- this third row will contain all the pets the petsitter can care for. Remember when querrying in app controller we did an OR statement for pets where we present a petsitter who can care for even one of the pets presented not necessarily all-->
+																<tr>
+																	<td style="color: #323232; font-size: 12px ; font-weight: bold ;">
 
-									<td style="width: 4% ;">
+																		<%= custom_petscare_for(  @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %>
 
-									</td>
+																	</td>
+																</tr>
 
-									<% elsif %>
+																<!-- this fourth row will have the truncated profile description -->
+																<tr>
+																	<td style="color: #7f9294;">
 
-										<% break %>
+																		<%= custom_prof_descr( @final_array_with_all_petsitter_objects_that_satisfy_all_criteria[i] ) %>
+																		
+
+																	</td>
+																</tr>
+
+															</table>
+														</td>
+
+													</tr>
+												</table>
+
+											<% end %>
+										</td>
+
 
 									<% end %>
+									<!-- the end above is for the else -->
 
 									<% i = i + 1 %>
+
+								<% end %>  
+								<!-- the end statement is for the for loop -->
+
+							</tr>
 									
-								<% end %>
-
-							</tr>
-
-							<!-- i create another tr tag just for spacing purposes so that after the row that has 2 petsitters on each cell, there is a row below that is coloured gray like background making a space btwn two rows which have petsitters -->
-							<tr style="height: 5px ; background-color: #eee; ">
-
-							</tr>
 
 						<% end %>
+						<!-- this end is for the while loop -->
+						<!-- remember while loop is what makes us move to the next row -->
 
 					</tbody>
 				</table>
@@ -454,7 +461,7 @@
 
 		</div>
 
-		<div class="col-md-2">
+		<div class="col-md-1">
 
 		</div>
 
